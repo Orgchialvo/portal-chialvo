@@ -4,92 +4,123 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portal Productores — Organización Chialvo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a1a; }
+:root {
+  --maiz: #E8B84B;
+  --maiz-dark: #C9991E;
+  --maiz-light: #FDF3D9;
+  --black: #111111;
+  --gray-900: #1C1C1E;
+  --gray-700: #3A3A3C;
+  --gray-500: #636366;
+  --gray-300: #C7C7CC;
+  --gray-100: #F2F2F7;
+  --white: #FFFFFF;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-100); color: var(--black); -webkit-font-smoothing: antialiased; }
 
-  .topbar { background: #fff; border-bottom: 1px solid #e5e5e5; padding: 14px 20px; position: sticky; top: 0; z-index: 10; }
-  .topbar-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
-  .topbar-logo { width: 36px; height: 36px; border-radius: 8px; background: #1a1a2e; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-  .topbar-text h1 { font-size: 15px; font-weight: 700; color: #1a1a1a; line-height: 1.2; }
-  .topbar-text p { font-size: 11px; color: #999; font-weight: 400; }
+.topbar { background: var(--black); padding: 0 24px; height: 60px; display: flex; align-items: center; position: sticky; top: 0; z-index: 100; }
+.topbar-inner { max-width: 900px; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 12px; }
+.topbar-logo { width: 36px; height: 36px; border-radius: 10px; background: var(--maiz); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.topbar-text h1 { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.2; }
+.topbar-text p { font-size: 11px; color: var(--gray-300); }
 
-  .hero { background: #1a1a2e; color: #fff; padding: 28px 20px; }
-  .hero-inner { max-width: 860px; margin: 0 auto; }
-  .hero h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
-  .hero p { font-size: 14px; color: #aab; line-height: 1.6; max-width: 600px; }
+.hero { background: var(--gray-900); padding: 32px 24px 28px; border-bottom: 3px solid var(--maiz); }
+.hero-inner { max-width: 900px; margin: 0 auto; }
+.hero-chip { display: inline-flex; align-items: center; background: rgba(232,184,75,0.15); border: 1px solid rgba(232,184,75,0.3); color: var(--maiz); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; }
+.hero h2 { font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.hero p { font-size: 14px; color: #AAA; line-height: 1.7; max-width: 580px; }
 
-  .nav { background: #fff; border-bottom: 1px solid #e5e5e5; padding: 0 20px; }
-  .nav-inner { max-width: 860px; margin: 0 auto; display: flex; gap: 0; overflow-x: auto; }
-  .nav-btn { padding: 13px 20px; font-size: 14px; font-weight: 400; color: #666; border: none; background: transparent; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.15s; }
-  .nav-btn.active { color: #1a1a2e; border-bottom-color: #1a1a2e; font-weight: 600; }
-  .nav-btn:hover:not(.active) { color: #1a1a1a; }
+.nav-wrap { background: var(--white); border-bottom: 1px solid var(--gray-100); box-shadow: var(--shadow-sm); }
+.nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; display: flex; overflow-x: auto; }
+.nav-btn { padding: 16px 20px; font-size: 13px; font-weight: 500; color: var(--gray-500); border: none; background: transparent; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; font-family: inherit; }
+.nav-btn.active { color: var(--black); border-bottom-color: var(--maiz); font-weight: 700; }
+.nav-btn:hover:not(.active) { color: var(--black); }
 
-  .content { padding: 20px; max-width: 860px; margin: 0 auto; }
+.content { padding: 24px; max-width: 900px; margin: 0 auto; }
 
-  .search-wrap { margin-bottom: 14px; }
-  .search-box { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 12px 16px; }
-  .search-box input { border: none; background: transparent; font-size: 15px; color: #1a1a1a; flex: 1; outline: none; }
-  .search-box input::placeholder { color: #bbb; }
+.search-wrap { margin-bottom: 20px; }
+.search-box { display: flex; align-items: center; gap: 12px; background: var(--white); border: 1.5px solid var(--gray-300); border-radius: var(--radius); padding: 13px 18px; box-shadow: var(--shadow-sm); transition: border-color 0.2s, box-shadow 0.2s; }
+.search-box:focus-within { border-color: var(--maiz); box-shadow: 0 0 0 3px rgba(232,184,75,0.15); }
+.search-box input { border: none; background: transparent; font-size: 15px; color: var(--black); flex: 1; outline: none; font-family: inherit; }
+.search-box input::placeholder { color: var(--gray-300); }
+.results-label { font-size: 12px; color: var(--gray-500); margin-bottom: 12px; font-weight: 500; min-height: 18px; }
 
-  .results-label { font-size: 12px; color: #999; margin-bottom: 10px; }
-  .section-title { font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 0.8px; margin: 20px 0 8px; }
-  .section-desc { font-size: 13px; color: #666; margin-bottom: 14px; line-height: 1.5; padding: 12px 14px; background: #fff; border-radius: 10px; border-left: 3px solid #1a1a2e; }
+.sec-header { display: flex; align-items: center; gap: 10px; margin: 24px 0 12px; }
+.sec-header-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.sec-header-icon.fin { background: var(--maiz-light); }
+.sec-header-icon.sin { background: #EEF2FF; }
+.sec-header-text h3 { font-size: 14px; font-weight: 700; color: var(--black); }
+.sec-header-text p { font-size: 12px; color: var(--gray-500); }
 
-  .card { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; }
-  .card:hover { border-color: #bbb; transform: translateY(-1px); }
-  .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
-  .card-title { font-size: 15px; font-weight: 600; color: #1a1a1a; }
-  .badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; background: #e8f0fe; color: #1a56db; white-space: nowrap; flex-shrink: 0; }
-  .badge.fin { background: #f0fdf4; color: #166534; }
-  .card-desc { font-size: 13px; color: #666; line-height: 1.5; margin-bottom: 8px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 5px; }
-  .tag { font-size: 11px; padding: 3px 9px; border-radius: 20px; background: #f5f5f3; color: #666; border: 1px solid #e5e5e5; }
-  .tag.match { background: #fef9c3; color: #854d0e; border-color: transparent; }
+.card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 8px; }
+@media (max-width: 580px) { .card-grid { grid-template-columns: 1fr; } }
 
-  .back-btn { font-size: 13px; color: #666; background: none; border: none; cursor: pointer; padding: 0; margin-bottom: 16px; display: flex; align-items: center; gap: 4px; }
-  .back-btn:hover { color: #1a1a1a; }
-  .detail-wrap { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 24px; }
-  .detail-badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; background: #f0fdf4; color: #166534; display: inline-block; margin-bottom: 10px; }
-  .detail-badge.sin { background: #e8f0fe; color: #1a56db; }
-  .detail-title { font-size: 21px; font-weight: 700; margin-bottom: 16px; line-height: 1.3; }
-  .step { display: flex; gap: 12px; margin-bottom: 16px; }
-  .step-num { width: 26px; height: 26px; border-radius: 50%; background: #1a1a2e; color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-  .step-text { font-size: 14px; color: #1a1a1a; line-height: 1.7; flex: 1; }
-  .step-text strong { font-weight: 600; }
-  .step-img { width: 100%; border-radius: 8px; border: 1px solid #e5e5e5; margin: 10px 0 16px; display: block; }
-  .info-box { background: #f0f9ff; border-left: 3px solid #0ea5e9; border-radius: 0 8px 8px 0; padding: 12px 14px; margin: 12px 0; font-size: 13px; color: #0c4a6e; line-height: 1.6; }
-  .warn-box { background: #fffbeb; border-left: 3px solid #f59e0b; border-radius: 0 8px 8px 0; padding: 12px 14px; margin: 12px 0; font-size: 13px; color: #92400e; line-height: 1.6; }
-  .data-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 16px; margin: 12px 0; font-size: 13px; line-height: 1.8; color: #1a1a1a; }
-  .data-box strong { font-weight: 600; color: #1a1a2e; }
-  .infografia { width: 100%; border-radius: 10px; margin: 16px 0; display: block; border: 1px solid #e5e5e5; }
-  .divider { border: none; border-top: 1px solid #f0f0f0; margin: 20px 0; }
+.tcard { background: var(--white); border-radius: var(--radius); padding: 18px; cursor: pointer; transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s; box-shadow: var(--shadow-sm); border: 1.5px solid transparent; display: flex; flex-direction: column; gap: 10px; }
+.tcard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--maiz); }
+.tcard-top { display: flex; align-items: flex-start; gap: 12px; }
+.tcard-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.tcard-icon.fin { background: var(--maiz-light); }
+.tcard-icon.sin { background: #EEF2FF; }
+.tcard-info { flex: 1; min-width: 0; }
+.tcard-title { font-size: 14px; font-weight: 700; color: var(--black); line-height: 1.4; margin-bottom: 4px; }
+.tcard-badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 20px; letter-spacing: 0.3px; }
+.tcard-badge.fin { background: var(--maiz-light); color: var(--maiz-dark); }
+.tcard-badge.sin { background: #EEF2FF; color: #3730A3; }
+.tcard-desc { font-size: 12px; color: var(--gray-500); line-height: 1.55; }
+.tcard-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.tcard-tag { font-size: 10px; padding: 2px 7px; border-radius: 20px; background: var(--gray-100); color: var(--gray-500); border: 1px solid var(--gray-300); }
+.tcard-tag.match { background: var(--maiz-light); color: var(--maiz-dark); border-color: var(--maiz); font-weight: 600; }
 
-  .novedad-card { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 18px; margin-bottom: 12px; }
-  .novedad-date { font-size: 11px; color: #999; margin-bottom: 4px; }
-  .novedad-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .novedad-body { font-size: 14px; color: #444; line-height: 1.7; }
-  .novedad-reqs { margin: 10px 0 0 18px; }
-  .novedad-reqs li { font-size: 13px; color: #555; margin-bottom: 4px; line-height: 1.5; }
+.back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--gray-500); background: var(--white); border: 1.5px solid var(--gray-300); border-radius: var(--radius-sm); padding: 8px 14px; cursor: pointer; margin-bottom: 18px; transition: all 0.15s; font-family: inherit; }
+.back-btn:hover { color: var(--black); border-color: var(--black); }
+.detail-card { background: var(--white); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-sm); }
+.detail-top { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--gray-100); }
+.detail-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+.detail-icon.fin { background: var(--maiz-light); }
+.detail-icon.sin { background: #EEF2FF; }
+.detail-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; margin-bottom: 4px; }
+.detail-badge.fin { background: var(--maiz-light); color: var(--maiz-dark); }
+.detail-badge.sin { background: #EEF2FF; color: #3730A3; }
+.detail-title { font-size: 20px; font-weight: 700; color: var(--black); line-height: 1.3; }
+.step { display: flex; gap: 14px; margin-bottom: 16px; }
+.step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--black); color: var(--white); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.step-text { font-size: 14px; color: var(--gray-700); line-height: 1.7; flex: 1; }
+.step-text strong { color: var(--black); font-weight: 600; }
+.step-img { width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--gray-100); margin: 8px 0 18px; display: block; box-shadow: var(--shadow-sm); }
+.info-box { background: #EEF2FF; border-left: 3px solid #6366F1; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 16px; margin: 12px 0; font-size: 13px; color: #3730A3; line-height: 1.6; }
+.warn-box { background: var(--maiz-light); border-left: 3px solid var(--maiz); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 16px; margin: 12px 0; font-size: 13px; color: var(--maiz-dark); line-height: 1.6; }
+.data-box { background: var(--gray-100); border: 1px solid var(--gray-300); border-radius: var(--radius-sm); padding: 14px 16px; margin: 10px 0; font-size: 13px; line-height: 1.8; }
+.data-box strong { font-weight: 700; }
+.infografia { width: 100%; border-radius: var(--radius-sm); margin: 16px 0; display: block; box-shadow: var(--shadow-sm); }
+.divider { border: none; border-top: 1px solid var(--gray-100); margin: 20px 0; }
 
-  .cal-month { font-size: 16px; font-weight: 700; margin-bottom: 14px; }
-  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-bottom: 20px; }
-  .cal-day-name { font-size: 11px; color: #999; text-align: center; padding: 4px 0; font-weight: 600; }
-  .cal-day { min-height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #666; }
-  .cal-day.other { color: #ddd; }
-  .cal-day.has-event { background: #1a1a2e; color: #fff; font-weight: 700; cursor: pointer; }
-  .event-item { background: #fff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
-  .event-date-badge { background: #1a1a2e; color: #fff; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 12px; font-weight: 700; min-width: 46px; line-height: 1.3; }
-  .event-title { font-size: 14px; font-weight: 600; color: #1a1a1a; }
-  .event-desc { font-size: 12px; color: #888; margin-top: 2px; }
+.novedad-card { background: var(--white); border-radius: var(--radius); padding: 20px; margin-bottom: 14px; box-shadow: var(--shadow-sm); border-left: 4px solid var(--maiz); }
+.novedad-date { font-size: 11px; color: var(--gray-500); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.novedad-title { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+.novedad-body { font-size: 14px; color: var(--gray-700); line-height: 1.7; }
+.novedad-reqs { margin: 10px 0 0 18px; }
+.novedad-reqs li { font-size: 13px; color: var(--gray-700); margin-bottom: 5px; line-height: 1.5; }
 
-  .empty-state { padding: 3rem 0; text-align: center; font-size: 14px; color: #bbb; }
-  .hidden { display: none !important; }
-
-  @media (max-width: 600px) {
-    .hero h2 { font-size: 18px; }
-    .detail-title { font-size: 18px; }
-  }
+.cal-header { margin-bottom: 16px; }
+.cal-month-badge { display: inline-block; background: var(--black); color: var(--maiz); font-size: 15px; font-weight: 700; padding: 6px 14px; border-radius: var(--radius-sm); }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 24px; background: var(--white); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow-sm); }
+.cal-day-name { font-size: 11px; color: var(--gray-500); text-align: center; padding: 6px 0; font-weight: 700; text-transform: uppercase; }
+.cal-day { min-height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--gray-500); font-weight: 500; }
+.cal-day.other { color: var(--gray-300); }
+.cal-day.has-event { background: var(--maiz); color: var(--black); font-weight: 700; }
+.event-item { background: var(--white); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 10px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-sm); }
+.event-date-badge { background: var(--black); color: var(--maiz); border-radius: 10px; padding: 8px 12px; text-align: center; font-size: 13px; font-weight: 700; min-width: 50px; line-height: 1.4; flex-shrink: 0; }
+.event-title { font-size: 14px; font-weight: 700; }
+.event-desc { font-size: 12px; color: var(--gray-500); margin-top: 3px; }
+.empty-state { padding: 3rem 0; text-align: center; font-size: 14px; color: var(--gray-300); }
+.hidden { display: none !important; }
 </style>
 </head>
 <body>
@@ -106,12 +137,13 @@
 
 <div class="hero">
   <div class="hero-inner">
-    <h2>Portal Productores</h2>
+    <div class="hero-chip">Portal Productores</div>
+    <h2>Organización Chialvo</h2>
     <p>En este sitio encontrarás novedades, tutoriales, recursos y demás herramientas útiles para mejorar tu trabajo diario como Productor de nuestra Organización.</p>
   </div>
 </div>
 
-<div class="nav">
+<div class="nav-wrap">
   <div class="nav-inner">
     <button class="nav-btn active" onclick="showSection('tutoriales')">Tutoriales</button>
     <button class="nav-btn" onclick="showSection('novedades')">Novedades</button>
@@ -120,195 +152,168 @@
 </div>
 
 <div class="content">
-
   <div id="sec-tutoriales">
     <div class="search-wrap">
       <div class="search-box">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="#bbb" stroke-width="1.5"/><path d="M10.5 10.5L14 14" stroke="#bbb" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <input type="text" id="searchInput" placeholder="Buscá por tema: transferencia, choque, cobranza..." oninput="renderTutorials(this.value)"/>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="#C7C7CC" stroke-width="1.5"/><path d="M10.5 10.5L14 14" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <input type="text" id="searchInput" placeholder="Buscá por tema: transferencia, choque, factura..." oninput="renderTutorials(this.value)"/>
       </div>
     </div>
-    <div class="results-label" id="resultsLabel">Todos los tutoriales</div>
+    <div class="results-label" id="resultsLabel"></div>
     <div id="tutorialList"></div>
   </div>
-
   <div id="sec-detail" class="hidden">
-    <button class="back-btn" onclick="backToList()">← Volver a tutoriales</button>
-    <div class="detail-wrap" id="detailContent"></div>
+    <button class="back-btn" onclick="backToList()">← Volver</button>
+    <div class="detail-card" id="detailContent"></div>
   </div>
-
-  <div id="sec-novedades" class="hidden">
-    <div id="novedadesList"></div>
-  </div>
-
-  <div id="sec-calendario" class="hidden">
-    <div id="calendarioContent"></div>
-  </div>
-
+  <div id="sec-novedades" class="hidden"><div id="novedadesList"></div></div>
+  <div id="sec-calendario" class="hidden"><div id="calendarioContent"></div></div>
 </div>
 
 <script>
 const TUTORIALES = [
   {
-    id: 1,
-    title: "Datos para pagar seguros por transferencia",
+    id: 1, icon: '🏦',
+    title: "Datos para pagar por transferencia",
     section: "Finanzas",
     desc: "CBU y alias habilitados para abonar seguros por transferencia bancaria.",
     tags: ["transferencia", "CBU", "alias", "pago", "banco", "cheque", "depósito"],
-    renderDetail: function() {
-      return `
-        <span class="detail-badge">Finanzas</span>
-        <div class="detail-title">Datos para pagar seguros por transferencia</div>
-        <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px">Recordá que los medios habilitados para abonar los seguros mediante transferencias son los siguientes:</p>
-        <div class="data-box">
-          <strong>🏦 Banco Macro</strong><br>
-          Sancor Cooperativa de Seguros Limitada<br>
-          CBU: 2850376730000059607406<br>
-          Alias: JAGUAR.RUINA.MECHA
-        </div>
-        <div class="data-box">
-          <strong>🏦 Banco del Sol</strong><br>
-          Sancor Cooperativa de Seguros Limitada<br>
-          CBU: 3100003900020001619984<br>
-          Alias: SANCORSEGUROS.BDS.AR
-        </div>
-        <div class="warn-box">
-          <strong>⚠️ Atención:</strong> NO está habilitada la vieja cuenta del Banco de Santa Fe.
-        </div>
-        <hr class="divider">
-        <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:10px"><strong>Pago con cheque:</strong> El nombre correcto de la empresa para la emisión es:</p>
-        <div class="data-box" style="font-size:15px;text-align:center">
-          <strong>"Sancor Cooperativa de Seguros Ltda."</strong>
-        </div>
-        <div class="warn-box">
-          <strong>⚠️ No utilizar:</strong> Sancor Seguros, Sancor Seguros SA, Sancor SA, ni cualquier otra variante — el banco rechazará el pago.
-        </div>
-      `;
-    }
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon fin">🏦</div><div><div class="detail-badge fin">Finanzas</div><div class="detail-title">Datos para pagar seguros por transferencia</div></div></div>
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:16px">Recordá que los medios habilitados para abonar los seguros mediante transferencias son los siguientes:</p>
+      <div class="data-box"><strong>🏦 Banco Macro</strong><br>Sancor Cooperativa de Seguros Limitada<br>CBU: 2850376730000059607406<br>Alias: JAGUAR.RUINA.MECHA</div>
+      <div class="data-box"><strong>🏦 Banco del Sol</strong><br>Sancor Cooperativa de Seguros Limitada<br>CBU: 3100003900020001619984<br>Alias: SANCORSEGUROS.BDS.AR</div>
+      <div class="warn-box"><strong>⚠️ Atención:</strong> NO está habilitada la vieja cuenta del Banco de Santa Fe.</div>
+      <hr class="divider">
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:10px"><strong>Pago con cheque:</strong> El nombre correcto de la empresa para la emisión es:</p>
+      <div class="data-box" style="font-size:15px;text-align:center;font-weight:700">"Sancor Cooperativa de Seguros Ltda."</div>
+      <div class="warn-box"><strong>⚠️ No utilizar:</strong> Sancor Seguros, Sancor Seguros SA, Sancor SA, ni cualquier otra variante — el banco rechazará el pago.</div>`; }
   },
   {
-    id: 2,
+    id: 2, icon: '🔄',
     title: "Recuperar clientes por falta de pago",
     section: "Finanzas",
-    desc: "Guía de acción para evitar que tus clientes se queden sin seguro por deuda pendiente.",
-    tags: ["deuda", "falta de pago", "anulada", "recuperar", "débito automático", "cuota", "reactivar", "vencimiento"],
-    renderDetail: function() {
-      return `
-        <span class="detail-badge">Finanzas</span>
-        <div class="detail-title">Recuperar clientes por falta de pago</div>
-        <div class="info-box"><strong>Requisito central:</strong> Todo beneficio exige adhesión a Débito Automático y despacho por WhatsApp.</div>
-        <img src="img_recuperar_clientes.jpeg" class="infografia" alt="Guía de acción recuperar clientes"/>
-        <hr class="divider">
-        <p style="font-size:14px;font-weight:700;margin-bottom:12px">Clientes con póliza vigente (deuda pendiente)</p>
-        <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Condonación de 1 cuota:</strong> Aplicable si el cliente adeuda 2 cuotas y adhiere a Débito Automático.</div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Deuda mayor a 2 cuotas:</strong> Se debe consultar opciones para evaluar excepciones antes de proceder.</div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Sin adhesión a Débito:</strong> El cliente debe abonar la deuda completa para mantener la cobertura.</div></div>
-        <hr class="divider">
-        <p style="font-size:14px;font-weight:700;margin-bottom:12px">Pólizas ya anuladas (recuperación)</p>
-        <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Reactivación con solo 1 cuota:</strong> Permite cambiar la causa de anulación cobrando una única cuota pendiente.</div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Requisitos de reingreso:</strong> Nueva póliza con Débito Automático y sin reincidencias en el último año.</div></div>
-      `;
-    }
+    desc: "Guía para evitar que tus clientes se queden sin seguro por deuda pendiente.",
+    tags: ["deuda", "falta de pago", "anulada", "recuperar", "débito automático", "cuota", "reactivar"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon fin">🔄</div><div><div class="detail-badge fin">Finanzas</div><div class="detail-title">Recuperar clientes por falta de pago</div></div></div>
+      <div class="info-box"><strong>Requisito central:</strong> Todo beneficio exige adhesión a Débito Automático y despacho por WhatsApp.</div>
+      <img src="img_recuperar_clientes.jpeg" class="infografia" alt="Guía recuperar clientes"/>
+      <hr class="divider">
+      <p style="font-size:14px;font-weight:700;margin-bottom:12px;color:#111">Clientes con póliza vigente (deuda pendiente)</p>
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Condonación de 1 cuota:</strong> Aplicable si el cliente adeuda 2 cuotas y adhiere a Débito Automático.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Deuda mayor a 2 cuotas:</strong> Consultar opciones para evaluar excepciones antes de proceder.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Sin adhesión a Débito:</strong> El cliente debe abonar la deuda completa para mantener la cobertura.</div></div>
+      <hr class="divider">
+      <p style="font-size:14px;font-weight:700;margin-bottom:12px;color:#111">Pólizas ya anuladas (recuperación)</p>
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Reactivación con solo 1 cuota:</strong> Permite cambiar la causa de anulación cobrando una única cuota pendiente.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Requisitos de reingreso:</strong> Nueva póliza con Débito Automático y sin reincidencias en el último año.</div></div>`; }
   },
   {
-    id: 3,
+    id: 3, icon: '📅',
     title: "Eliminar interés por desfasaje administrativo",
     section: "Finanzas",
     desc: "Cómo usar el campo Fecha de Pago para omitir intereses cuando el cliente pagó antes del vencimiento.",
     tags: ["interés", "desfasaje", "fecha de pago", "vencimiento", "lote", "cobranzas", "recibo", "remesa"],
-    renderDetail: function() {
-      return `
-        <span class="detail-badge">Finanzas</span>
-        <div class="detail-title">Eliminar interés por desfasaje administrativo</div>
-        <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px">Se describe cómo utilizar el campo <strong>Fecha de Pago</strong> para omitir el cobro de interés cuando el cliente abonó antes del vencimiento adicional pero el lote se cargó con posterioridad.</p>
-        <div class="info-box"><strong>Ejemplo:</strong> Póliza 30110387 de auto — primer vencimiento adicional al 05/01/2024 (vencimiento original 22/12/2023).</div>
-        <div class="step"><div class="step-num">1</div><div class="step-text">Ingresá al Portal de Cobranzas y generá un lote. El sistema devuelve el premio original del recibo más el importe del interés generado.</div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-text">Moviéndote hacia la derecha vas a ver la columna <strong>INTERÉS</strong> con el total generado.</div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-text">Si el cliente abonó <strong>antes</strong> del vencimiento adicional (por ejemplo el 03/01/2024), una vez que agregás el recibo al lote, volvé a seleccionarlo. Eso habilita el campo <strong>FECHA DE PAGO</strong>.</div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-text">En ese campo colocá la fecha en la que el cliente efectivamente pagó. El sistema modifica el importe y coloca el premio original sin interés.</div></div>
-        <div class="step"><div class="step-num">5</div><div class="step-text">Verificá que la columna INTERÉS muestre cero y que la fecha de pago sea la correcta.</div></div>
-        <div class="step"><div class="step-num">6</div><div class="step-text">Confirmá el lote y remesalo. El pago impacta en la póliza y bloquea la NC generada por el interés.</div></div>
-        <div class="warn-box"><strong>Importante:</strong> Los medios de cobro válidos para este campo son: boletas de depósito, transferencias, e-cheq corriente y certificados de retención. La fecha del medio de pago debe coincidir con la fecha indicada en la carga del recibo.</div>
-        <div class="info-box">Si el cliente tuviese los 2 vencimientos adicionales generados y abonó antes del 1° vencimiento, actuá de la misma manera. Si abonó antes del 2° vencimiento, contemplá en el saldo total el interés del 1° vto.</div>
-      `;
-    }
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon fin">📅</div><div><div class="detail-badge fin">Finanzas</div><div class="detail-title">Eliminar interés por desfasaje administrativo</div></div></div>
+      <div class="info-box"><strong>Ejemplo:</strong> Póliza 30110387 — primer vencimiento adicional al 05/01/2024 (vencimiento original 22/12/2023).</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Ingresá al Portal de Cobranzas y generá un lote. El sistema devuelve el premio original más el importe del interés generado.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Moviéndote hacia la derecha vas a ver la columna <strong>INTERÉS</strong> con el total generado.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Si el cliente abonó antes del vencimiento adicional, una vez que agregás el recibo al lote, volvé a seleccionarlo. Eso habilita el campo <strong>FECHA DE PAGO</strong>.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Colocá la fecha en que el cliente efectivamente pagó. El sistema modifica el importe y coloca el premio original sin interés.</div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-text">Verificá que la columna INTERÉS muestre cero y que la fecha de pago sea la correcta.</div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-text">Confirmá el lote y remesalo. El pago impacta en la póliza y bloquea la NC generada por el interés.</div></div>
+      <div class="warn-box"><strong>Medios válidos:</strong> boletas de depósito, transferencias, e-cheq corriente y certificados de retención. La fecha del medio debe coincidir con la indicada en la carga del recibo.</div>`; }
   },
   {
-    id: 4,
+    id: 4, icon: '📄',
     title: "Descarga de comprobantes por envío digital",
     section: "Finanzas",
     desc: "Cómo descargar facturas y comprobantes desde el portal de cobranzas.",
-    tags: ["factura", "comprobante", "descarga", "envío digital", "portal", "intermediarios", "refacturación"],
-    renderDetail: function() {
-      return `
-        <span class="detail-badge">Finanzas</span>
-        <div class="detail-title">Descarga de comprobantes por envío digital</div>
-        <div class="step"><div class="step-num">1</div><div class="step-text">Ingresá al Portal de Cobranzas.</div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-text">Seleccioná <strong>Intermediarios</strong> → <strong>Gestión de Envíos Digitales</strong>.</div></div>
-        <img src="img_descarga_1.png" class="step-img" alt="Paso 2 - Gestión de envíos digitales"/>
-        <div class="step"><div class="step-num">3</div><div class="step-text">Andá hasta el final de la página y encontrá el apartado <strong>Documentación</strong>. Hacé click en <strong>Descarga Individual</strong>.</div></div>
-        <img src="img_descarga_2.png" class="step-img" alt="Paso 3 - Descarga individual"/>
-        <div class="step"><div class="step-num">4</div><div class="step-text">Buscá por número de referencia, seleccioná <strong>Factura</strong> como tipo de documento y hacé click en <strong>Ver</strong>.</div></div>
-        <img src="img_descarga_3.png" class="step-img" alt="Paso 4 - Buscar por referencia"/>
-        <div class="step"><div class="step-num">5</div><div class="step-text">Seleccioná la <strong>última refacturación</strong> y elegí como documento <strong>Factura</strong>.</div></div>
-        <img src="img_descarga_4.png" class="step-img" alt="Paso 5 - Seleccionar última refacturación"/>
-        <div class="info-box">Siempre seleccioná la refacturación más reciente para obtener el comprobante actualizado.</div>
-      `;
-    }
+    tags: ["factura", "comprobante", "descarga", "envío digital", "intermediarios", "refacturación"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon fin">📄</div><div><div class="detail-badge fin">Finanzas</div><div class="detail-title">Descarga de comprobantes por envío digital</div></div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Ingresá al Portal de Cobranzas.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Seleccioná <strong>Intermediarios → Gestión de Envíos Digitales</strong>.</div></div>
+      <img src="img_descarga_1.png" class="step-img" alt="Gestión de envíos digitales"/>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Andá al final de la página, buscá <strong>Documentación</strong> y hacé click en <strong>Descarga Individual</strong>.</div></div>
+      <img src="img_descarga_2.png" class="step-img" alt="Descarga individual"/>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Buscá por número de referencia, seleccioná <strong>Factura</strong> y hacé click en <strong>Ver</strong>.</div></div>
+      <img src="img_descarga_3.png" class="step-img" alt="Buscar por referencia"/>
+      <div class="step"><div class="step-num">5</div><div class="step-text">Seleccioná la <strong>última refacturación</strong> y elegí como documento <strong>Factura</strong>.</div></div>
+      <img src="img_descarga_4.png" class="step-img" alt="Última refacturación"/>
+      <div class="info-box">Siempre seleccioná la refacturación más reciente para obtener el comprobante actualizado.</div>`; }
   },
   {
-    id: 5,
+    id: 7, icon: '🔍',
+    title: "Búsqueda por número de comprobante",
+    section: "Finanzas",
+    desc: "Cómo encontrar una póliza desde el número de recibo, factura o comprobante.",
+    tags: ["comprobante", "recibo", "factura", "nota de débito", "SICORE", "ARCA", "consultar saldos"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon fin">🔍</div><div><div class="detail-badge fin">Finanzas</div><div class="detail-title">Búsqueda por número de comprobante</div></div></div>
+      <div class="info-box">Podés buscar por: recibos, facturas, notas de débito, notas de crédito, facturas electrónicas (caución, ej: 000500075733) y comprobantes SICORE-ARCA.</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Ingresá al Portal de Cobranzas.</div></div>
+      <img src="img_cobranzas_3.png" class="step-img" alt="Portal Cobranzas"/>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Seleccioná <strong>Consultar Saldos</strong>.</div></div>
+      <img src="img_cobranzas_2.png" class="step-img" alt="Consultar Saldos"/>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Filtrá por cliente y desplegá las <strong>opciones avanzadas</strong>.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Ingresá el número en el campo <strong>Nro. Comprobante</strong>. El sistema indica a qué póliza pertenece.</div></div>
+      <img src="img_cobranzas_1.png" class="step-img" alt="Campo Nro. Comprobante"/>`; }
+  },
+  {
+    id: 8, icon: '📋',
+    title: "Búsqueda de deuda — pólizas anuladas",
+    section: "Finanzas",
+    desc: "Cómo buscar pólizas anuladas por falta de pago y cargar recibos para reactivar.",
+    tags: ["anulada", "deuda", "falta de pago", "reactivar", "cobranza", "referencia", "DNI", "CUIT"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon fin">📋</div><div><div class="detail-badge fin">Finanzas</div><div class="detail-title">Búsqueda de deuda — pólizas anuladas</div></div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Ingresá al Portal de Cobranzas y seleccioná <strong>Pago Sancor</strong>.</div></div>
+      <img src="img_cobranzas_3.png" class="step-img" alt="Portal Cobranzas"/>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Hacé click en la pestaña <strong>Pólizas Anuladas</strong>.</div></div>
+      <img src="img_cobranzas_2.png" class="step-img" alt="Pólizas Anuladas"/>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Por referencia: seleccioná ramo, elegí <strong>Referencia</strong> e ingresá el número.<br>Por cliente: dejá <strong>Cliente</strong> e ingresá el DNI o CUIT.</div></div>
+      <img src="img_cobranzas_1.png" class="step-img" alt="Búsqueda"/>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Seleccioná <strong>2 cuotas</strong> para cambiar la causa de anulación.</div></div>
+      <div class="warn-box">La búsqueda aplica solo a pólizas anuladas por falta de pago.</div>`; }
+  },
+  {
+    id: 5, icon: '📺',
     title: "Aparatos y equipos electrónicos",
     section: "Siniestros",
-    desc: "Instrucciones para presentar documentación de daños en aparatos electrónicos.",
-    tags: ["heladera", "televisor", "aire acondicionado", "electrodoméstico", "pantalla", "equipo", "daño", "reparación"],
-    renderDetail: function() {
-      return `
-        <span class="detail-badge sin">Siniestros</span>
-        <div class="detail-title">Aparatos y equipos electrónicos</div>
-        <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Informe técnico</strong> donde se detallen las causas del daño y presupuesto de reparación. Si no tiene reparación, debe constar en el Informe Técnico.</div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-text">Fotos del aparato dañado donde se pueda ver <strong>marca, modelo y estado</strong>.</div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-text">Fotos de los componentes dañados desmontados (el técnico puede incluirlas en el Informe).</div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-text">Fotos de los componentes nuevos montados.</div></div>
-        <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Comprobante de CBU</strong> del titular de la póliza. Si no tiene cuenta bancaria, ofrecer la alternativa de abrir una en Banco del Sol.</div></div>
-        <div class="warn-box"><strong>Aclaración importante:</strong> Cada siniestro es diferente y en algunos casos puede ser solicitada documentación extra, acreditar daños o retirar los equipos para verificación. Recordar no descartar los equipos y elementos dañados hasta la liquidación del siniestro.</div>
-      `;
-    }
+    desc: "Documentación necesaria para presentar daños en aparatos electrónicos.",
+    tags: ["heladera", "televisor", "aire acondicionado", "electrodoméstico", "pantalla", "daño", "reparación"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon sin">📺</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Aparatos y equipos electrónicos</div></div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Informe técnico</strong> con las causas del daño y presupuesto de reparación. Si no tiene reparación, debe constar en el Informe Técnico.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Fotos del aparato dañado donde se pueda ver <strong>marca, modelo y estado</strong>.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Fotos de los componentes dañados desmontados (el técnico puede incluirlas en el Informe).</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Fotos de los componentes nuevos montados.</div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Comprobante de CBU</strong> del titular. Si no tiene cuenta, ofrecer abrir una en Banco del Sol.</div></div>
+      <div class="warn-box"><strong>Aclaración:</strong> Cada siniestro es diferente. Pueden solicitarse documentos adicionales. No descartar los equipos dañados hasta la liquidación.</div>`; }
   },
   {
-    id: 6,
+    id: 6, icon: '🩹',
     title: "Accidentes personales",
     section: "Siniestros",
     desc: "Cobertura de accidentes laborales con reintegro para profesionales y trabajadores.",
     tags: ["golpe", "caída", "accidente laboral", "lesión", "fractura", "choque", "accidente personal"],
-    renderDetail: function() {
-      return `
-        <span class="detail-badge sin">Siniestros</span>
-        <div class="detail-title">Accidentes personales</div>
-        <div class="step"><div class="step-num">1</div><div class="step-text">Completar el formulario de denuncia de siniestro.</div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-text">Adjuntar historia clínica o constancia médica.</div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-text">Comprobante de CBU del titular.</div></div>
-        <div class="warn-box">Cada siniestro es diferente. En algunos casos puede solicitarse documentación adicional.</div>
-      `;
-    }
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon sin">🩹</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Accidentes personales</div></div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Completar el formulario de denuncia de siniestro.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Adjuntar historia clínica o constancia médica.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Comprobante de CBU del titular.</div></div>
+      <div class="warn-box">Cada siniestro es diferente. En algunos casos puede solicitarse documentación adicional.</div>`; }
   },
 ];
 
 const NOVEDADES = [
-  {
-    fecha: "27 de enero de 2026",
-    titulo: "Nuevas condiciones de motos — MAX 3",
+  { fecha: "27 de enero de 2026", titulo: "Nuevas condiciones de motos — MAX 3",
     cuerpo: "A partir del 1/2/2026 se implementará una mejora de condiciones de contratación en el segmento de motos de hasta 350 cc en la cobertura Max 3.",
-    requisitos: [
-      "Operaciones nuevas",
-      "Zona de Riesgo 1.0",
-      "Solo para clientes con cobertura/s vigentes",
-      "Tomador debe tener la titularidad del vehículo",
-      "Emisiones anuales con facturación mensual o semestral en cuotas",
-      "Cobranza electrónica exclusivamente"
-    ],
-    extra: "Motos hasta 350 cc — Cobertura Max 3: se habilita el módulo RC + Incendio Total y Parcial + Robo Total para los intermediarios asociados."
-  },
+    requisitos: ["Operaciones nuevas","Zona de Riesgo 1.0","Solo para clientes con cobertura/s vigentes","Tomador debe tener la titularidad del vehículo","Emisiones anuales con facturación mensual o semestral en cuotas","Cobranza electrónica exclusivamente"],
+    extra: "Motos hasta 350 cc — Cobertura Max 3: se habilita el módulo RC + Incendio Total y Parcial + Robo Total para los intermediarios asociados." },
 ];
 
 const EVENTOS = [
@@ -316,56 +321,52 @@ const EVENTOS = [
 ];
 
 function matches(t, q) {
-  return t.title.toLowerCase().includes(q) ||
-    t.desc.toLowerCase().includes(q) ||
-    t.tags.some(tg => tg.toLowerCase().includes(q)) ||
-    t.section.toLowerCase().includes(q);
+  return t.title.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q) ||
+    t.tags.some(tg => tg.toLowerCase().includes(q)) || t.section.toLowerCase().includes(q);
 }
 
 function cardHtml(t, q) {
-  const tags = t.tags.map(tg =>
-    `<span class="tag ${q && tg.toLowerCase().includes(q) ? 'match' : ''}">${tg}</span>`
-  ).join('');
-  const badgeClass = t.section === 'Finanzas' ? 'fin' : '';
-  return `<div class="card" onclick="showDetail(${t.id})">
-    <div class="card-header">
-      <span class="card-title">${t.title}</span>
-      <span class="badge ${badgeClass}">${t.section}</span>
+  const isFin = t.section === 'Finanzas';
+  const tags = t.tags.map(tg => `<span class="tcard-tag ${q && tg.toLowerCase().includes(q) ? 'match' : ''}">${tg}</span>`).join('');
+  return `<div class="tcard" onclick="showDetail(${t.id})">
+    <div class="tcard-top">
+      <div class="tcard-icon ${isFin?'fin':'sin'}">${t.icon}</div>
+      <div class="tcard-info">
+        <div class="tcard-title">${t.title}</div>
+        <span class="tcard-badge ${isFin?'fin':'sin'}">${t.section}</span>
+      </div>
     </div>
-    <div class="card-desc">${t.desc}</div>
-    <div class="tags">${tags}</div>
+    <div class="tcard-desc">${t.desc}</div>
+    <div class="tcard-tags">${tags}</div>
   </div>`;
 }
 
 function renderTutorials(q) {
-  q = (q || '').toLowerCase().trim();
-  const list = document.getElementById('tutorialList');
-  const label = document.getElementById('resultsLabel');
-  const sins = TUTORIALES.filter(t => t.section === 'Siniestros' && (!q || matches(t, q)));
-  const fins = TUTORIALES.filter(t => t.section === 'Finanzas' && (!q || matches(t, q)));
-  const total = sins.length + fins.length;
-  label.textContent = q ? `${total} resultado${total !== 1 ? 's' : ''} para "${q}"` : 'Todos los tutoriales';
+  q = (q||'').toLowerCase().trim();
+  const fins = TUTORIALES.filter(t => t.section==='Finanzas' && (!q||matches(t,q)));
+  const sins = TUTORIALES.filter(t => t.section==='Siniestros' && (!q||matches(t,q)));
+  const total = fins.length + sins.length;
+  document.getElementById('resultsLabel').textContent = q ? `${total} resultado${total!==1?'s':''} para "${q}"` : '';
   let html = '';
   if (fins.length) {
-    html += `<div class="section-title">Finanzas</div>`;
-    if (!q) html += `<div class="section-desc">Tutoriales para el orden financiero de nuestros clientes y la salud de nuestra cartera.</div>`;
-    fins.forEach(t => html += cardHtml(t, q));
+    html += `<div class="sec-header"><div class="sec-header-icon fin">💰</div><div class="sec-header-text"><h3>Finanzas</h3>${!q?'<p>Orden financiero y salud de la cartera</p>':''}</div></div>`;
+    html += `<div class="card-grid">${fins.map(t=>cardHtml(t,q)).join('')}</div>`;
   }
   if (sins.length) {
-    html += `<div class="section-title">Siniestros</div>`;
-    sins.forEach(t => html += cardHtml(t, q));
+    html += `<div class="sec-header"><div class="sec-header-icon sin">🚨</div><div class="sec-header-text"><h3>Siniestros</h3>${!q?'<p>Gestión y documentación de siniestros</p>':''}</div></div>`;
+    html += `<div class="card-grid">${sins.map(t=>cardHtml(t,q)).join('')}</div>`;
   }
   if (!total) html = '<div class="empty-state">No se encontraron tutoriales para esa búsqueda.</div>';
-  list.innerHTML = html;
+  document.getElementById('tutorialList').innerHTML = html;
 }
 
 function showDetail(id) {
-  const t = TUTORIALES.find(x => x.id === id);
+  const t = TUTORIALES.find(x => x.id===id);
   if (!t) return;
   document.getElementById('detailContent').innerHTML = t.renderDetail();
   document.getElementById('sec-tutoriales').classList.add('hidden');
   document.getElementById('sec-detail').classList.remove('hidden');
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
 
 function backToList() {
@@ -374,28 +375,19 @@ function backToList() {
 }
 
 function showSection(s) {
-  ['tutoriales', 'detail', 'novedades', 'calendario'].forEach(x => {
-    document.getElementById('sec-' + x).classList.add('hidden');
-  });
-  document.getElementById('sec-' + s).classList.remove('hidden');
-  document.querySelectorAll('.nav-btn').forEach((b, i) => {
-    b.classList.toggle('active', ['tutoriales', 'novedades', 'calendario'][i] === s);
-  });
-  if (s === 'novedades') renderNovedades();
-  if (s === 'calendario') renderCalendario();
-  window.scrollTo(0, 0);
+  ['tutoriales','detail','novedades','calendario'].forEach(x => document.getElementById('sec-'+x).classList.add('hidden'));
+  document.getElementById('sec-'+s).classList.remove('hidden');
+  document.querySelectorAll('.nav-btn').forEach((b,i) => b.classList.toggle('active', ['tutoriales','novedades','calendario'][i]===s));
+  if (s==='novedades') renderNovedades();
+  if (s==='calendario') renderCalendario();
+  window.scrollTo(0,0);
 }
 
 function renderNovedades() {
-  let html = '<div class="section-title">Novedades del mes</div>';
+  let html = '';
   NOVEDADES.forEach(n => {
-    html += `<div class="novedad-card">
-      <div class="novedad-date">${n.fecha}</div>
-      <div class="novedad-title">${n.titulo}</div>
-      <div class="novedad-body">${n.cuerpo}</div>`;
-    if (n.requisitos && n.requisitos.length) {
-      html += `<ul class="novedad-reqs">${n.requisitos.map(r => `<li>${r}</li>`).join('')}</ul>`;
-    }
+    html += `<div class="novedad-card"><div class="novedad-date">${n.fecha}</div><div class="novedad-title">${n.titulo}</div><div class="novedad-body">${n.cuerpo}</div>`;
+    if (n.requisitos?.length) html += `<ul class="novedad-reqs">${n.requisitos.map(r=>`<li>${r}</li>`).join('')}</ul>`;
     if (n.extra) html += `<div class="novedad-body" style="margin-top:10px">${n.extra}</div>`;
     html += `</div>`;
   });
@@ -405,27 +397,18 @@ function renderNovedades() {
 function renderCalendario() {
   const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
   const dias = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-  if (!EVENTOS.length) {
-    document.getElementById('calendarioContent').innerHTML = '<div class="empty-state">No hay eventos cargados.</div>';
-    return;
-  }
+  if (!EVENTOS.length) { document.getElementById('calendarioContent').innerHTML='<div class="empty-state">No hay eventos cargados.</div>'; return; }
   const ref = EVENTOS[0];
-  const anio = ref.anio, mes = ref.mes;
-  const firstDay = new Date(anio, mes, 1).getDay();
-  const daysInMonth = new Date(anio, mes + 1, 0).getDate();
-  const eventDias = EVENTOS.map(e => e.dia);
-  let html = `<div class="cal-month">${meses[mes]} ${anio}</div><div class="cal-grid">`;
-  html += dias.map(d => `<div class="cal-day-name">${d}</div>`).join('');
-  for (let i = 0; i < firstDay; i++) html += `<div class="cal-day other"></div>`;
-  for (let d = 1; d <= daysInMonth; d++) {
-    html += `<div class="cal-day${eventDias.includes(d) ? ' has-event' : ''}">${d}</div>`;
-  }
-  html += `</div><div class="section-title">Eventos del mes</div>`;
+  const firstDay = new Date(ref.anio,ref.mes,1).getDay();
+  const daysInMonth = new Date(ref.anio,ref.mes+1,0).getDate();
+  const eventDias = EVENTOS.map(e=>e.dia);
+  let html = `<div class="cal-header"><div class="cal-month-badge">${meses[ref.mes]} ${ref.anio}</div></div>`;
+  html += `<div class="cal-grid">${dias.map(d=>`<div class="cal-day-name">${d}</div>`).join('')}`;
+  for (let i=0;i<firstDay;i++) html+=`<div class="cal-day other"></div>`;
+  for (let d=1;d<=daysInMonth;d++) html+=`<div class="cal-day${eventDias.includes(d)?' has-event':''}">${d}</div>`;
+  html += `</div><div class="sec-header"><div class="sec-header-icon fin">📅</div><div class="sec-header-text"><h3>Eventos del mes</h3></div></div>`;
   EVENTOS.forEach(e => {
-    html += `<div class="event-item">
-      <div class="event-date-badge">${e.dia}<br>${meses[e.mes].substring(0,3).toUpperCase()}</div>
-      <div><div class="event-title">${e.titulo}</div><div class="event-desc">${e.desc}</div></div>
-    </div>`;
+    html += `<div class="event-item"><div class="event-date-badge">${e.dia}<br>${meses[e.mes].substring(0,3).toUpperCase()}</div><div><div class="event-title">${e.titulo}</div><div class="event-desc">${e.desc}</div></div></div>`;
   });
   document.getElementById('calendarioContent').innerHTML = html;
 }
@@ -434,4 +417,3 @@ renderTutorials('');
 </script>
 </body>
 </html>
-
