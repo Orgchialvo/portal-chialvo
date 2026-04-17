@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organización Chialvo</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a1a; }
+
+  .topbar { background: #fff; border-bottom: 1px solid #e5e5e5; padding: 14px 20px; display: flex; align-items: center; gap: 10px; position: sticky; top: 0; z-index: 10; }
+  .topbar-logo { width: 32px; height: 32px; border-radius: 8px; background: #e8f0fe; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .topbar h1 { font-size: 17px; font-weight: 600; color: #1a1a1a; }
+
+  .nav { background: #fff; border-bottom: 1px solid #e5e5e5; padding: 0 20px; display: flex; gap: 0; overflow-x: auto; }
+  .nav-btn { padding: 12px 18px; font-size: 14px; font-weight: 400; color: #666; border: none; background: transparent; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.15s; }
+  .nav-btn.active { color: #1a1a1a; border-bottom-color: #1a1a1a; font-weight: 600; }
+  .nav-btn:hover:not(.active) { color: #1a1a1a; }
+
+  .content { padding: 20px; max-width: 860px; margin: 0 auto; }
+
+  .search-wrap { margin-bottom: 14px; }
+  .search-box { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 11px 16px; }
+  .search-box input { border: none; background: transparent; font-size: 15px; color: #1a1a1a; flex: 1; outline: none; }
+  .search-box input::placeholder { color: #aaa; }
+
+  .results-label { font-size: 12px; color: #999; margin-bottom: 10px; }
+  .section-title { font-size: 12px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin: 18px 0 8px; }
+
+  .card { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; transition: border-color 0.15s; }
+  .card:hover { border-color: #aaa; }
+  .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+  .card-title { font-size: 15px; font-weight: 600; color: #1a1a1a; }
+  .badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; background: #e8f0fe; color: #1a56db; white-space: nowrap; flex-shrink: 0; }
+  .badge.fin { background: #ecfdf5; color: #047857; }
+  .card-desc { font-size: 13px; color: #666; line-height: 1.5; margin-bottom: 8px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag { font-size: 11px; padding: 3px 9px; border-radius: 20px; background: #f5f5f3; color: #666; border: 1px solid #e5e5e5; }
+  .tag.match { background: #e8f0fe; color: #1a56db; border-color: transparent; }
+
+  .detail-wrap { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 20px; }
+  .back-btn { font-size: 13px; color: #666; background: none; border: none; cursor: pointer; padding: 0; margin-bottom: 16px; display: flex; align-items: center; gap: 4px; }
+  .back-btn:hover { color: #1a1a1a; }
+  .detail-title { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+  .detail-sect { font-size: 12px; color: #999; margin-bottom: 20px; }
+  .step { display: flex; gap: 12px; margin-bottom: 14px; }
+  .step-num { width: 24px; height: 24px; border-radius: 50%; background: #e8f0fe; color: #1a56db; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .step-text { font-size: 14px; color: #1a1a1a; line-height: 1.6; }
+  .img-placeholder { background: #f5f5f3; border: 1px dashed #ccc; border-radius: 8px; padding: 20px; text-align: center; font-size: 12px; color: #aaa; margin: 8px 0 14px; }
+  .img-placeholder img { max-width: 100%; border-radius: 6px; display: block; margin: 0 auto; }
+  .aclaracion { background: #fffbeb; border-left: 3px solid #f59e0b; border-radius: 0 8px 8px 0; padding: 12px 14px; margin-top: 16px; font-size: 13px; color: #92400e; line-height: 1.6; }
+
+  .novedad-card { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+  .novedad-date { font-size: 11px; color: #999; margin-bottom: 4px; }
+  .novedad-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+  .novedad-body { font-size: 14px; color: #444; line-height: 1.6; }
+  .novedad-reqs { margin: 10px 0 0 18px; }
+  .novedad-reqs li { font-size: 13px; color: #555; margin-bottom: 4px; line-height: 1.5; }
+
+  .cal-month { font-size: 16px; font-weight: 600; margin-bottom: 14px; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-bottom: 20px; }
+  .cal-day-name { font-size: 11px; color: #999; text-align: center; padding: 4px 0; font-weight: 600; }
+  .cal-day { min-height: 38px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 13px; color: #666; }
+  .cal-day.other { color: #ccc; }
+  .cal-day.has-event { background: #e8f0fe; color: #1a56db; font-weight: 600; cursor: pointer; }
+  .event-item { background: #fff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+  .event-date-badge { background: #e8f0fe; color: #1a56db; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 12px; font-weight: 600; min-width: 46px; line-height: 1.3; }
+  .event-title { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+  .event-desc { font-size: 12px; color: #888; margin-top: 2px; }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">🤝</div>
+  <h1>Organización Chialvo</h1>
+</div>
+
+<div class="nav">
+  <button class="nav-btn active" onclick="showSection('tutoriales')">Tutoriales</button>
+  <button class="nav-btn" onclick="showSection('novedades')">Novedades</button>
+  <button class="nav-btn" onclick="showSection('calendario')">Capacitaciones</button>
+</div>
+
+<div class="content">
+
+  <!-- TUTORIALES -->
+  <div id="sec-tutoriales">
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="#aaa" stroke-width="1.5"/><path d="M10.5 10.5L14 14" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <input type="text" id="searchInput" placeholder="Buscá por tema: choque, televisor, cobranza..." oninput="renderTutorials(this.value)"/>
+      </div>
+    </div>
+    <div class="results-label" id="resultsLabel">Todos los tutoriales</div>
+    <div id="tutorialList"></div>
+  </div>
+
+  <!-- DETALLE TUTORIAL -->
+  <div id="sec-detail" class="hidden">
+    <button class="back-btn" onclick="backToList()">← Volver a tutoriales</button>
+    <div class="detail-wrap" id="detailContent"></div>
+  </div>
+
+  <!-- NOVEDADES -->
+  <div id="sec-novedades" class="hidden">
+    <div id="novedadesList"></div>
+  </div>
+
+  <!-- CALENDARIO -->
+  <div id="sec-calendario" class="hidden">
+    <div id="calendarioContent"></div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// DATOS — EDITÁ ESTA SECCIÓN PARA AGREGAR CONTENIDO
+// ============================================================
+
+const TUTORIALES = [
+  {
+    id: 1,
+    title: "Aparatos y equipos electrónicos",
+    section: "Siniestros",
+    desc: "Instrucciones para presentar documentación de daños en aparatos electrónicos.",
+    tags: ["heladera", "televisor", "aire acondicionado", "electrodoméstico", "pantalla", "equipo"],
+    link: "", // dejá vacío si el detalle está acá abajo, o poné un link externo
+    pasos: [
+      { texto: "Informe técnico donde se detallen las causas del daño y presupuesto de reparación. Si no tiene reparación, debe constar en el Informe Técnico.", imagen: "" },
+      { texto: "Fotos del aparato dañado donde se pueda ver marca, modelo y estado.", imagen: "" },
+      { texto: "Fotos de los componentes dañados desmontados (el técnico puede incluirlas en el Informe).", imagen: "" },
+      { texto: "Fotos de los componentes nuevos montados.", imagen: "" },
+      { texto: "Comprobante de CBU del titular de la póliza. Si el titular no tiene cuenta bancaria, ofrecer la alternativa de abrir una en Banco del Sol.", imagen: "" },
+    ],
+    aclaracion: "Cada siniestro es diferente y en algunos casos puede ser solicitada documentación extra, acreditar daños o retirar los equipos para ser verificados con los técnicos de la compañía. Recordar no descartar los equipos y elementos dañados hasta el momento de la liquidación del siniestro."
+  },
+  {
+    id: 2,
+    title: "Accidentes personales",
+    section: "Siniestros",
+    desc: "Cobertura de accidentes laborales con reintegro para profesionales y trabajadores.",
+    tags: ["golpe", "caída", "accidente laboral", "lesión", "fractura", "choque"],
+    link: "",
+    pasos: [
+      { texto: "Completar el formulario de denuncia de siniestro.", imagen: "" },
+      { texto: "Adjuntar historia clínica o constancia médica.", imagen: "" },
+      { texto: "Comprobante de CBU del titular.", imagen: "" },
+    ],
+    aclaracion: ""
+  },
+  {
+    id: 3,
+    title: "Cómo emitir una póliza",
+    section: "Finanzas",
+    desc: "Paso a paso para emitir una póliza nueva desde el sistema.",
+    tags: ["póliza", "emisión", "nuevo cliente", "alta", "contrato"],
+    link: "",
+    pasos: [
+      { texto: "Ingresá al sistema con tu usuario y contraseña.", imagen: "" },
+      { texto: "Seleccioná 'Nueva póliza' en el menú principal.", imagen: "" },
+      { texto: "Completá los datos del cliente y del vehículo.", imagen: "" },
+    ],
+    aclaracion: ""
+  },
+];
+
+const NOVEDADES = [
+  {
+    fecha: "27 de enero de 2026",
+    titulo: "Nuevas condiciones de motos — MAX 3",
+    cuerpo: "A partir del 1/2/2026 se implementará una mejora de condiciones de contratación en el segmento de motos de hasta 350 cc en la cobertura Max 3.",
+    requisitos: [
+      "Operaciones nuevas",
+      "Zona de Riesgo 1.0",
+      "Solo para clientes con cobertura/s vigentes",
+      "Tomador debe tener la titularidad del vehículo",
+      "Emisiones anuales con facturación mensual o semestral en cuotas",
+      "Cobranza electrónica exclusivamente"
+    ],
+    extra: "Motos hasta 350 cc — Cobertura Max 3: se habilita el módulo RC + Incendio Total y Parcial + Robo Total para los intermediarios asociados."
+  },
+];
+
+const EVENTOS = [
+  {
+    dia: 15,
+    mes: 6, // 0 = enero, 6 = julio
+    anio: 2026,
+    titulo: "PCC Virtual — fecha límite",
+    desc: "Vencimiento para completar el PCC Virtual obligatorio"
+  },
+];
+
+// ============================================================
+// LÓGICA — NO HACE FALTA TOCAR ESTO
+// ============================================================
+
+let currentSection = 'tutoriales';
+
+function showSection(s) {
+  ['tutoriales','detail','novedades','calendario'].forEach(x => {
+    document.getElementById('sec-' + x).classList.add('hidden');
+  });
+  document.getElementById('sec-' + s).classList.remove('hidden');
+  document.querySelectorAll('.nav-btn').forEach((b, i) => {
+    b.classList.toggle('active', ['tutoriales','novedades','calendario'][i] === s);
+  });
+  currentSection = s;
+  if (s === 'novedades') renderNovedades();
+  if (s === 'calendario') renderCalendario();
+}
+
+function matches(t, q) {
+  return t.title.toLowerCase().includes(q) ||
+    t.desc.toLowerCase().includes(q) ||
+    t.tags.some(tg => tg.toLowerCase().includes(q)) ||
+    t.section.toLowerCase().includes(q);
+}
+
+function cardHtml(t, q) {
+  const tags = t.tags.map(tg =>
+    `<span class="tag ${q && tg.toLowerCase().includes(q) ? 'match' : ''}">${tg}</span>`
+  ).join('');
+  const badge = t.section === 'Finanzas' ? 'fin' : '';
+  const onclick = t.link ? `window.open('${t.link}','_blank')` : `showDetail(${t.id})`;
+  return `<div class="card" onclick="${onclick}">
+    <div class="card-header">
+      <span class="card-title">${t.title}</span>
+      <span class="badge ${badge}">${t.section}</span>
+    </div>
+    <div class="card-desc">${t.desc}</div>
+    <div class="tags">${tags}</div>
+  </div>`;
+}
+
+function renderTutorials(q) {
+  q = (q || '').toLowerCase().trim();
+  const list = document.getElementById('tutorialList');
+  const label = document.getElementById('resultsLabel');
+  const sins = TUTORIALES.filter(t => t.section === 'Siniestros' && (!q || matches(t, q)));
+  const fins = TUTORIALES.filter(t => t.section === 'Finanzas' && (!q || matches(t, q)));
+  const total = sins.length + fins.length;
+  label.textContent = q ? `${total} resultado${total !== 1 ? 's' : ''} para "${q}"` : 'Todos los tutoriales';
+  let html = '';
+  if (sins.length) { html += `<div class="section-title">Siniestros</div>`; sins.forEach(t => html += cardHtml(t, q)); }
+  if (fins.length) { html += `<div class="section-title">Finanzas</div>`; fins.forEach(t => html += cardHtml(t, q)); }
+  if (!total) html = '<div style="padding:2rem 0;text-align:center;font-size:14px;color:#aaa">No se encontraron tutoriales.</div>';
+  list.innerHTML = html;
+}
+
+function showDetail(id) {
+  const t = TUTORIALES.find(x => x.id === id);
+  if (!t) return;
+  let html = `<div class="detail-title">${t.title}</div><div class="detail-sect">${t.section}</div>`;
+  t.pasos.forEach((p, i) => {
+    html += `<div class="step"><div class="step-num">${i + 1}</div><div class="step-text">${p.texto}</div></div>`;
+    if (p.imagen) html += `<div class="img-placeholder"><img src="${p.imagen}" alt="Imagen paso ${i+1}"/></div>`;
+    else html += `<div class="img-placeholder">📷 Imagen de ejemplo — reemplazá con la URL de la foto</div>`;
+  });
+  if (t.aclaracion) html += `<div class="aclaracion"><strong>Aclaración importante:</strong> ${t.aclaracion}</div>`;
+  document.getElementById('detailContent').innerHTML = html;
+  document.getElementById('sec-tutoriales').classList.add('hidden');
+  document.getElementById('sec-detail').classList.remove('hidden');
+}
+
+function backToList() {
+  document.getElementById('sec-detail').classList.add('hidden');
+  document.getElementById('sec-tutoriales').classList.remove('hidden');
+}
+
+function renderNovedades() {
+  let html = '<div class="section-title">Novedades del mes</div>';
+  NOVEDADES.forEach(n => {
+    html += `<div class="novedad-card">
+      <div class="novedad-date">${n.fecha}</div>
+      <div class="novedad-title">${n.titulo}</div>
+      <div class="novedad-body">${n.cuerpo}</div>`;
+    if (n.requisitos && n.requisitos.length) {
+      html += `<ul class="novedad-reqs">${n.requisitos.map(r => `<li>${r}</li>`).join('')}</ul>`;
+    }
+    if (n.extra) html += `<div class="novedad-body" style="margin-top:10px">${n.extra}</div>`;
+    html += `</div>`;
+  });
+  document.getElementById('novedadesList').innerHTML = html;
+}
+
+function renderCalendario() {
+  const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const dias = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+
+  const eventosMes = EVENTOS;
+  if (!eventosMes.length) {
+    document.getElementById('calendarioContent').innerHTML = '<div style="color:#aaa;font-size:14px;padding:2rem 0;text-align:center">No hay eventos cargados.</div>';
+    return;
+  }
+
+  const primerEvento = eventosMes[0];
+  const anio = primerEvento.anio;
+  const mes = primerEvento.mes;
+  const firstDay = new Date(anio, mes, 1).getDay();
+  const daysInMonth = new Date(anio, mes + 1, 0).getDate();
+  const eventDias = eventosMes.map(e => e.dia);
+
+  let calHtml = `<div class="cal-month">${meses[mes]} ${anio}</div><div class="cal-grid">`;
+  calHtml += dias.map(d => `<div class="cal-day-name">${d}</div>`).join('');
+  for (let i = 0; i < firstDay; i++) calHtml += `<div class="cal-day other"></div>`;
+  for (let d = 1; d <= daysInMonth; d++) {
+    const hasEv = eventDias.includes(d);
+    calHtml += `<div class="cal-day${hasEv ? ' has-event' : ''}">${d}</div>`;
+  }
+  calHtml += `</div><div class="section-title">Eventos del mes</div>`;
+
+  eventosMes.forEach(e => {
+    calHtml += `<div class="event-item">
+      <div class="event-date-badge">${e.dia}<br>${meses[e.mes].substring(0,3).toUpperCase()}</div>
+      <div>
+        <div class="event-title">${e.titulo}</div>
+        <div class="event-desc">${e.desc}</div>
+      </div>
+    </div>`;
+  });
+
+  document.getElementById('calendarioContent').innerHTML = calHtml;
+}
+
+renderTutorials('');
+</script>
+</body>
+</html>
