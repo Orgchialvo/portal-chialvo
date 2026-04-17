@@ -46,16 +46,13 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 .search-box input { border: none; background: transparent; font-size: 15px; color: var(--black); flex: 1; outline: none; font-family: inherit; }
 .search-box input::placeholder { color: var(--gray-300); }
 .results-label { font-size: 12px; color: var(--gray-500); margin-bottom: 12px; font-weight: 500; min-height: 18px; }
-
-/* Camila banner */
-.camila-banner { background: var(--white); border-radius: var(--radius); padding: 18px 22px; margin-bottom: 24px; box-shadow: var(--shadow-sm); border: 1.5px solid var(--maiz-light); display: flex; align-items: center; gap: 16px; }
+.camila-banner { background: var(--white); border-radius: var(--radius); padding: 18px 22px; margin-bottom: 20px; box-shadow: var(--shadow-sm); border: 1.5px solid var(--maiz-light); display: flex; align-items: center; gap: 16px; }
 .camila-avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid var(--maiz); flex-shrink: 0; }
 .camila-text { flex: 1; }
 .camila-text p { font-size: 14px; color: var(--gray-700); line-height: 1.6; }
 .camila-text strong { color: var(--black); }
 .camila-wa { display: inline-flex; align-items: center; gap: 7px; margin-top: 8px; background: #25D366; color: white; font-size: 13px; font-weight: 700; padding: 7px 14px; border-radius: 20px; text-decoration: none; transition: opacity 0.2s; }
 .camila-wa:hover { opacity: 0.85; }
-
 .sec-header { display: flex; align-items: center; gap: 10px; margin: 24px 0 12px; }
 .sec-header-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
 .sec-header-icon.fin { background: var(--maiz-light); }
@@ -101,12 +98,9 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 .data-box strong { font-weight: 700; }
 .infografia { width: 100%; border-radius: var(--radius-sm); margin: 16px 0; display: block; box-shadow: var(--shadow-sm); }
 .divider { border: none; border-top: 1px solid var(--gray-100); margin: 20px 0; }
-
-/* Sub-sección dentro del detalle */
 .sub-section { background: var(--gray-100); border-radius: var(--radius-sm); padding: 18px 20px; margin: 18px 0; }
 .sub-section-title { font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 6px; }
 .sub-section-desc { font-size: 13px; color: var(--gray-700); line-height: 1.6; margin-bottom: 12px; }
-
 .novedad-card { background: var(--white); border-radius: var(--radius); padding: 20px; margin-bottom: 14px; box-shadow: var(--shadow-sm); border-left: 4px solid var(--maiz); }
 .novedad-date { font-size: 11px; color: var(--gray-500); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
 .novedad-title { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
@@ -157,7 +151,6 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 </div>
 
 <div class="content">
-
   <div id="sec-tutoriales">
     <div class="search-wrap">
       <div class="search-box">
@@ -168,18 +161,26 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
     <div class="results-label" id="resultsLabel"></div>
     <div id="tutorialList"></div>
   </div>
-
   <div id="sec-detail" class="hidden">
     <button class="back-btn" onclick="backToList()">← Volver</button>
     <div class="detail-card" id="detailContent"></div>
   </div>
-
   <div id="sec-novedades" class="hidden"><div id="novedadesList"></div></div>
   <div id="sec-calendario" class="hidden"><div id="calendarioContent"></div></div>
-
 </div>
 
 <script>
+const CAMILA_BANNER = `<div class="camila-banner">
+  <img src="img_camila.png" class="camila-avatar" alt="Camila"/>
+  <div class="camila-text">
+    <p>¡Hola! Soy <strong>Camila</strong>. Recordá que estoy para ayudarte ante cualquier consulta.</p>
+    <a class="camila-wa" href="https://wa.me/5493491691674" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      (3491) 691674
+    </a>
+  </div>
+</div>`;
+
 const TUTORIALES = [
   {
     id: 1, icon: '🏦',
@@ -299,39 +300,17 @@ const TUTORIALES = [
     tags: ["heladera", "televisor", "aire acondicionado", "electrodoméstico", "pantalla", "daño", "reparación", "presupuesto", "informe técnico"],
     renderDetail: function() { return `
       <div class="detail-top"><div class="detail-icon sin">📺</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Aparatos y equipos electrónicos</div></div></div>
-
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-text"><strong>Informe técnico</strong> donde se detallen las causas del daño, junto con el <strong>presupuesto de reparación</strong>. Si el equipo no tiene reparación posible, debe constar en el Informe Técnico.<br><br><em>Ejemplo:</em></div>
-      </div>
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Informe técnico</strong> donde se detallen las causas del daño, junto con el <strong>presupuesto de reparación</strong>. Si el equipo no tiene reparación posible, debe constar en el Informe Técnico.<br><br><em>Ejemplo:</em></div></div>
       <img src="img_sin_elec_presupuesto.png" class="step-img" alt="Ejemplo informe técnico y presupuesto"/>
-
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-text"><strong>Fotos del aparato dañado</strong> donde se pueda ver marca, modelo y estado del equipo.<br><br><em>Ejemplo:</em></div>
-      </div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Fotos del aparato dañado</strong> donde se pueda ver marca, modelo y estado del equipo.<br><br><em>Ejemplo:</em></div></div>
       <img src="img_sin_elec_fotos_tv.png" class="step-img" alt="Ejemplo fotos del equipo dañado"/>
-
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-text"><strong>Fotos de los componentes dañados desmontados.</strong> El técnico puede incluirlas dentro del Informe Técnico.<br><br><em>Ejemplo:</em></div>
-      </div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Fotos de los componentes dañados desmontados.</strong> El técnico puede incluirlas dentro del Informe Técnico.<br><br><em>Ejemplo:</em></div></div>
       <img src="img_sin_elec_componentes.png" class="step-img" alt="Ejemplo componentes desmontados"/>
-
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-text"><strong>Fotos de los componentes nuevos montados</strong> una vez realizada la reparación.</div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">5</div>
-        <div class="step-text"><strong>Comprobante de CBU</strong> del titular de la póliza. Si el titular no tiene cuenta bancaria, ofrecerle la alternativa de abrir una en <strong>Banco del Sol</strong>.<br><br><em>Ejemplo:</em></div>
-      </div>
+      <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Fotos de los componentes nuevos montados</strong> una vez realizada la reparación.</div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Comprobante de CBU</strong> del titular de la póliza. Si el titular no tiene cuenta bancaria, ofrecerle la alternativa de abrir una en <strong>Banco del Sol</strong>.<br><br><em>Ejemplo:</em></div></div>
       <img src="img_sin_elec_cbu.png" class="step-img" alt="Ejemplo constancia CBU Banco del Sol"/>
-
       <div class="warn-box"><strong>Aclaraciones importantes:</strong> Cada siniestro es diferente y en algunos casos puede solicitarse documentación extra, acreditar daños o retirar los equipos para verificación con los técnicos de la compañía. <strong>Recordá no descartar los equipos y elementos dañados hasta el momento de la liquidación del siniestro.</strong></div>`; }
   },
-
   {
     id: 6, icon: '🩹',
     title: "Accidentes personales",
@@ -340,44 +319,31 @@ const TUTORIALES = [
     tags: ["accidente", "accidente laboral", "lesión", "fractura", "AP", "reintegro", "prestacional", "rehabilitación", "traslado"],
     renderDetail: function() { return `
       <div class="detail-top"><div class="detail-icon sin">🩹</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Accidentes personales</div></div></div>
-
-      <!-- AP en Ocasión del Trabajo -->
       <div class="sub-section">
         <div class="sub-section-title">1. AP en Ocasión del Trabajo</div>
         <div class="sub-section-desc">Cobertura diseñada para particulares que contraten tareas puntuales o quienes se dediquen a manejar servicios con personal eventual.</div>
-        <img src="img_sin_ap_coberturas1.png" class="step-img" alt="Coberturas AP en ocasión del trabajo"/>
+        <img src="img_sin_ap_coberturas1.png" class="step-img" alt="Coberturas AP"/>
         <img src="img_sin_ap_coberturas2.png" class="step-img" alt="Asistencia médica y gastos de sepelio"/>
         <div class="info-box"><strong>Importante:</strong> La cobertura es <strong>POR REINTEGRO</strong>, no prestacional. El asegurado deberá pagar y luego la aseguradora le reintegrará el monto que corresponda.</div>
-        <div class="step"><div class="step-num">→</div><div class="step-text">Los reintegros se pueden cargar por sistema (ver video explicativo) o pueden adelantarlo vía mail. Si el reintegro es por estudios médicos (ej: RMN o Ecografías), también se debe aportar el informe.</div></div>
+        <div class="step"><div class="step-num">→</div><div class="step-text">Los reintegros se pueden cargar por sistema o adelantar vía mail. Si son por estudios médicos (RMN, Ecografías), también se debe aportar el informe.</div></div>
         <div class="step"><div class="step-num">→</div><div class="step-text"><strong>No posee cobertura de reintegro de jornales.</strong></div></div>
-        <div class="step"><div class="step-num">→</div><div class="step-text"><strong>Sesiones de rehabilitación:</strong> enviar pedido vía mail informando qué profesional realizará las sesiones.</div></div>
-        <div class="step"><div class="step-num">→</div><div class="step-text"><strong>Traslados:</strong> el pedido NO es prestacional. Son gastos reintegrables hasta el 10% de la suma asegurada de AMF.</div></div>
+        <div class="step"><div class="step-num">→</div><div class="step-text"><strong>Rehabilitación:</strong> enviar pedido vía mail informando qué profesional realizará las sesiones.</div></div>
+        <div class="step"><div class="step-num">→</div><div class="step-text"><strong>Traslados:</strong> gastos reintegrables hasta el 10% de la suma asegurada de AMF.</div></div>
       </div>
-
-      <!-- AP Íntegro Max -->
       <div class="sub-section">
         <div class="sub-section-title">2. AP Íntegro Max</div>
-        <div class="sub-section-desc">Máxima cobertura pensada para trabajadores y profesionales independientes, garantizando las atenciones médicas a través de la amplia red de prestadores.</div>
+        <div class="sub-section-desc">Máxima cobertura para trabajadores y profesionales independientes, con atención médica a través de la red de prestadores.</div>
         <img src="img_sin_ap_integro1.png" class="step-img" alt="Coberturas AP Íntegro Max"/>
-        <img src="img_sin_ap_integro2.png" class="step-img" alt="Asistencia médica farmacéutica y subsidio por fallecimiento"/>
+        <img src="img_sin_ap_integro2.png" class="step-img" alt="Asistencia médica farmacéutica y subsidio"/>
       </div>
-
-      <!-- AP Eventos -->
       <div class="sub-section">
         <div class="sub-section-title">3. AP Eventos</div>
-        <div class="sub-section-desc">Carga de la denuncia: recordar que en esta cobertura <strong>no hay certificado por cada uno de los asegurados</strong>. Los datos del accidentado se deben ingresar al momento de la carga de la denuncia.</div>
-        <div class="data-box">
-          <strong>Datos que se solicitan al momento de la denuncia:</strong><br><br>
-          1. Nombre y apellido<br>
-          2. DNI<br>
-          3. Fecha de nacimiento<br>
-          4. Forma de ocurrencia
-        </div>
-        <img src="img_sin_ap_eventos.png" class="step-img" alt="Situaciones cubiertas y no cubiertas AP Eventos"/>
+        <div class="sub-section-desc">No hay certificado por cada asegurado. Los datos del accidentado se ingresan al momento de la denuncia.</div>
+        <div class="data-box"><strong>Datos requeridos:</strong><br><br>1. Nombre y apellido<br>2. DNI<br>3. Fecha de nacimiento<br>4. Forma de ocurrencia</div>
+        <img src="img_sin_ap_eventos.png" class="step-img" alt="AP Eventos"/>
         <div class="warn-box"><strong>Importante:</strong> La cobertura NO es prestacional, es por reintegro.</div>
       </div>`; }
   },
-
   {
     id: 9, icon: '🏗️',
     title: "ART — Aseguradora de Riesgos del Trabajo",
@@ -386,76 +352,112 @@ const TUTORIALES = [
     tags: ["ART", "accidente de trabajo", "enfermedad profesional", "ILT", "jornal", "reintegro", "PreveNET", "traslado", "incapacidad"],
     renderDetail: function() { return `
       <div class="detail-top"><div class="detail-icon sin">🏗️</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">ART — Aseguradora de Riesgos del Trabajo</div></div></div>
-
-      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:16px">La ART se encarga de reparar los daños económicos en casos de accidentes de trabajo o enfermedades profesionales. Si el trabajador sufriera un accidente de trabajo o una enfermedad profesional, la ART se hace cargo de:</p>
-
-      <div class="data-box">
-        • Su atención médica inmediata.<br>
-        • Pagarle el sueldo mientras está en tratamiento (durante los primeros 10 días se encuentran a cargo del empleador).<br>
-        • Pagarle las indemnizaciones que correspondan.
-      </div>
-
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:16px">La ART se encarga de reparar los daños económicos en casos de accidentes de trabajo o enfermedades profesionales. Se hace cargo de la atención médica inmediata, el pago del sueldo durante el tratamiento (los primeros 10 días a cargo del empleador) y las indemnizaciones que correspondan.</p>
       <hr class="divider"/>
-
       <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">✅ Situaciones que están cubiertas</p>
       <img src="img_sin_art_cubiertas.png" class="step-img" alt="Situaciones cubiertas por la ART"/>
-
       <p style="font-size:15px;font-weight:700;color:#111;margin:16px 0 12px">❌ Situaciones que NO están cubiertas</p>
       <img src="img_sin_art_nocubiertas.png" class="step-img" alt="Situaciones no cubiertas por la ART"/>
-
       <hr class="divider"/>
-
       <div class="sub-section">
         <div class="sub-section-title">Incapacidad Laboral Temporal (ILT)</div>
-        <div class="sub-section-desc">Se produce cuando el trabajador accidentado o con enfermedad profesional no puede realizar sus tareas habituales. Comienza en la fecha de la primera manifestación invalidante (PMI) y finaliza con el alta médica, declaración de ILP, a los 2 años de la PMI, o por fallecimiento.</div>
-        <div class="info-box"><strong>Salario durante ILT:</strong> Los primeros 10 días los paga el empleador; a partir del día 11 los paga la ART. El plazo corre desde que la ART toma conocimiento del siniestro. Los jornales pueden reintegrarse al empleador o liquidarse directamente al trabajador si este lo autoriza.</div>
+        <div class="sub-section-desc">Comienza en la fecha de la primera manifestación invalidante y finaliza con el alta médica, declaración de ILP, a los 2 años, o por fallecimiento. Los primeros 10 días los paga el empleador; desde el día 11 la ART.</div>
       </div>
-
       <div class="sub-section">
         <div class="sub-section-title">Incapacidad Laboral Permanente (ILP)</div>
-        <div class="sub-section-desc">Se produce cuando el daño ocasiona una disminución de la capacidad de trabajo que durará toda la vida. El grado de incapacidad permanente es determinado por las Comisiones Médicas.</div>
+        <div class="sub-section-desc">Cuando el daño ocasiona una disminución de la capacidad de trabajo permanente. El grado es determinado por las Comisiones Médicas.</div>
       </div>
-
       <div class="sub-section">
         <div class="sub-section-title">Muerte del trabajador</div>
-        <div class="sub-section-desc">El Art. 248 de la LCT obliga al empleador a indemnizar a los derechohabientes. Esta indemnización es independiente de la que se reconozca a los herederos por la ley de accidentes de trabajo y de cualquier otro beneficio.</div>
+        <div class="sub-section-desc">El Art. 248 de la LCT obliga al empleador a indemnizar a los derechohabientes, independientemente de las indemnizaciones por ley de accidentes de trabajo.</div>
       </div>
-
       <hr class="divider"/>
-
       <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">📥 Ingreso de siniestros</p>
-      <div class="data-box">
-        <strong>Información a tener en cuenta:</strong><br><br>
-        • Datos personales del accidentado (nombre completo, domicilio actual y teléfono de contacto).<br>
-        • Fecha, hora, lugar y forma de ocurrencia del accidente.<br>
-        • Si cuentan con datos adicionales (ej: si recibió primera atención) pueden completarlos en observaciones.
-      </div>
-      <div class="info-box">Los siniestros pueden ingresarse desde <strong>PreveNET</strong> o telefónicamente al <strong>0800-4444-278</strong>.</div>
-
+      <div class="data-box">• Datos personales del accidentado (nombre, domicilio, teléfono).<br>• Fecha, hora, lugar y forma de ocurrencia.<br>• Datos adicionales en observaciones (ej: primera atención recibida).</div>
+      <div class="info-box">Ingresar desde <strong>PreveNET</strong> o llamar al <strong>0800-4444-278</strong>.</div>
       <hr class="divider"/>
-
       <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">🚗 Gestión de traslados</p>
-      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:12px">Los traslados para que el accidentado asista a turnos y/o estudios médicos pueden gestionarse vía mail informando fecha y horario del turno, o telefónicamente al <strong>0800-5555-078</strong>.</p>
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:12px">Gestionar vía mail informando fecha y horario del turno, o llamar al <strong>0800-5555-078</strong>.</p>
+      <hr class="divider"/>
+      <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">💰 Reintegro de gastos</p>
+      <div class="data-box">• Factura y/o comprobante válido.<br>• Pedido médico (prestaciones y/o medicamentos).<br>• Informe del estudio realizado.<br>• CBU del tomador o accidentado.</div>
+      <hr class="divider"/>
+      <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">📋 Reintegro de jornales</p>
+      <div class="data-box">• Recibo de sueldo firmado por el trabajador.<br>• Nota de solicitud si el empleador prefiere que el jornal se abone directamente al trabajador.</div>`; }
+  },
+  {
+    id: 10, icon: '🚗',
+    title: "Automotor",
+    section: "Siniestros",
+    desc: "Documentación por tipo de siniestro, sistema CLEAS, seguimiento de pericias, NEO y reporte de pagos.",
+    tags: ["choque", "robo", "hurto", "destrucción total", "granizo", "cristales", "incendio", "CLEAS", "pericia", "NEO", "Ceibo", "denuncia", "automotor", "tercero", "deducible"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon sin">🚗</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Automotor</div></div></div>
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:20px">Aquí encontrarás la documentación a presentar en cada tipo de siniestro de automotor.</p>
+
+      <img src="img_auto_destruccion_total.png" class="step-img" alt="Destrucción Total"/>
+      <img src="img_auto_accidente_parcial.png" class="step-img" alt="Accidente Parcial con Deducible"/>
+      <img src="img_auto_rotura_cerraduras.png" class="step-img" alt="Rotura de Cerraduras"/>
+      <img src="img_auto_danio_parcial_robo.png" class="step-img" alt="Daño Parcial sin Deducible al amparo de Robo Total"/>
+      <img src="img_auto_robo_hurto_parcial.png" class="step-img" alt="Robo y/o Hurto Parcial"/>
+      <img src="img_auto_incendio_parcial.png" class="step-img" alt="Incendio Parcial"/>
+      <img src="img_auto_cristales.png" class="step-img" alt="Rotura o Reparación de Cristales"/>
+
+      <div class="info-box"><strong>Importante:</strong> En siniestros donde se encuentren involucradas dos unidades es importante contar con los datos del tercero. Puede suceder que el siniestro ingrese al sistema <strong>CLEAS</strong>.</div>
 
       <hr class="divider"/>
 
-      <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">💰 Reintegro de gastos</p>
-      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:10px">La gestión del reintegro de gastos se puede cargar desde <strong>PreveNET</strong>. Documentación a adjuntar:</p>
-      <div class="data-box">
-        • Factura y/o comprobante válido como factura.<br>
-        • Pedido médico en caso de prestaciones médicas y/o medicamentos.<br>
-        • Informe del estudio realizado.<br>
-        • CBU del tomador o accidentado (según a favor de quién se gestione el reintegro).
+      <div class="sub-section">
+        <div class="sub-section-title">¿Qué es el sistema CLEAS?</div>
+        <div class="sub-section-desc">Es un sistema de compensación de siniestros entre compañías de seguros. Con CLEAS, si tenés un choque y no sos responsable, la aseguradora se encarga de todo: las compañías adheridas trabajan entre sí.</div>
+        <img src="img_auto_cleas_mapa.png" class="step-img" alt="Compañías adheridas al sistema CLEAS"/>
+        <p style="font-size:14px;font-weight:700;color:#111;margin:14px 0 8px">¿Cómo funciona?</p>
+        <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:12px">Cuando chocan dos vehículos asegurados en compañías adheridas, el asegurado no responsable solo tiene que hacer la denuncia a su propia compañía, que se encargará de reparar el auto y gestionar todo con la otra compañía.</p>
+        <p style="font-size:14px;font-weight:700;color:#111;margin:14px 0 8px">¿Qué tipos de choques entran en CLEAS?</p>
+        <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:12px">Choques leves entre dos vehículos con seguro vigente en compañías adheridas. Quedan excluidos motos y vehículos de más de 9 toneladas.</p>
+        <p style="font-size:14px;font-weight:700;color:#111;margin:14px 0 8px">¿Qué casos están excluidos?</p>
+        <div class="data-box">• Motos, máquinas agrícolas, vehículos de más de 9 toneladas, casas rodantes, acoplados, furgones y semirremolques.<br>• Siniestros entre vehículos de la misma compañía.<br>• Vehículos con destrucción total.<br>• Siniestros con lesiones y/o muertes.</div>
+        <div class="warn-box">Existe un tope máximo que se actualiza periódicamente. <strong>Consultar antes de gestionar.</strong></div>
       </div>
 
       <hr class="divider"/>
 
-      <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">📋 Reintegro de jornales</p>
-      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:10px">La gestión del reintegro de jornales se puede cargar desde <strong>PreveNET</strong>. Documentación a adjuntar:</p>
-      <div class="data-box">
-        • Recibo de sueldo del trabajador, firmado por este.<br>
-        • En caso que el empleador pretenda que el jornal se abone directamente al trabajador, deberá presentar nota de solicitud.
-      </div>`; }
+      <div class="sub-section">
+        <div class="sub-section-title">Seguimiento de pericias</div>
+        <div class="sub-section-desc">Desde Ceibo podemos verificar si la pericia fue realizada, su fecha de finalización, y si ya se enviaron órdenes a talleres y proveedores de repuestos.</div>
+        <p style="font-size:13px;color:#3A3A3C;line-height:1.7;margin-bottom:10px">Ingresar a consultar el siniestro → reclamo del <strong>ASEGURADO</strong> o <strong>TERCERO</strong> → opción <strong>LINK DE SEGUIMIENTO DE PERICIA</strong>.</p>
+        <img src="img_auto_consulta_reclamo.png" class="step-img" alt="Consulta de Reclamo — Link seguimiento de pericia"/>
+        <p style="font-size:13px;color:#3A3A3C;line-height:1.7;margin-bottom:10px">Al ingresar se verá toda la información de la pericia, órdenes al taller y gestión de repuestos.</p>
+        <img src="img_auto_pericia_gestion.png" class="step-img" alt="Pantalla seguimiento de pericia"/>
+      </div>
+
+      <hr class="divider"/>
+
+      <div class="sub-section">
+        <div class="sub-section-title">Ingreso de denuncias por NEO</div>
+        <div class="sub-section-desc">Las pólizas emitidas por sistema NEO deben ingresarse por allí en caso de siniestro.</div>
+        <img src="img_auto_neo_inicio.png" class="step-img" alt="NEO — Menú Siniestros"/>
+        <img src="img_auto_neo_busqueda.png" class="step-img" alt="NEO — Búsqueda por cliente"/>
+        <img src="img_auto_neo_poliza.png" class="step-img" alt="NEO — Selección de póliza"/>
+        <img src="img_auto_neo_denuncia.png" class="step-img" alt="NEO — Nueva denuncia"/>
+      </div>
+
+      <hr class="divider"/>
+
+      <div class="sub-section">
+        <div class="sub-section-title">Consulta de reporte de pago de siniestros</div>
+        <div class="sub-section-desc">El reporte puede consultarse desde <strong>CEIBO</strong>. Los pasos a seguir son:</div>
+        <img src="img_auto_reporte_ceibo.png" class="step-img" alt="Ceibo — Intermediarios → Reportes"/>
+        <img src="img_auto_reporte_menu.png" class="step-img" alt="Ceibo — Detalle de Pago de Siniestros"/>
+        <img src="img_auto_reporte_criterios.png" class="step-img" alt="Ceibo — Criterios y Generar Reporte"/>
+        <img src="img_auto_reporte_buscar.png" class="step-img" alt="Ceibo — Buscar número de siniestro"/>
+        <img src="img_auto_reporte_excel2.png" class="step-img" alt="Excel — Planilla de pagos"/>
+        <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin:10px 0">Una vez realizada la búsqueda, se marcará el casillero con el número de siniestro si este ya fue pagado por la compañía.</p>
+        <img src="img_auto_reporte_excel.png" class="step-img" alt="Excel — Siniestro marcado"/>
+      </div>
+
+      <div class="info-box">Esta consulta es aplicable a siniestros de <strong>todos los ramos</strong>, no solo automotor. También incluye pagos a prestadores (talleres, proveedores de repuestos, médicos, etc.).</div>
+      <div class="warn-box"><strong>Aclaración importante:</strong> Cada caso es diferente y de acuerdo con sus particularidades puede solicitarse documentación extra, lo que será informado durante las gestiones.</div>`; }
   },
 ];
 
@@ -499,16 +501,7 @@ function renderTutorials(q) {
   document.getElementById('resultsLabel').textContent = q ? `${total} resultado${total!==1?'s':''} para "${q}"` : '';
   let html = '';
   if (fins.length) {
-    html += `<div class="camila-banner">
-      <img src="img_camila.png" class="camila-avatar" alt="Camila"/>
-      <div class="camila-text">
-        <p>¡Hola! Soy <strong>Camila</strong>. Recordá que estoy para ayudarte ante cualquier consulta.</p>
-        <a class="camila-wa" href="https://wa.me/5493491691674" target="_blank">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-          (3491) 691674
-        </a>
-      </div>
-    </div>`;
+    html += CAMILA_BANNER;
     html += `<div class="sec-header"><div class="sec-header-icon fin">💰</div><div class="sec-header-text"><h3>Finanzas</h3>${!q?'<p>Orden financiero y salud de la cartera</p>':''}</div></div>`;
     html += `<div class="card-grid">${fins.map(t=>cardHtml(t,q)).join('')}</div>`;
   }
