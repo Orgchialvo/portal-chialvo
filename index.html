@@ -24,27 +24,22 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-100); color: var(--black); -webkit-font-smoothing: antialiased; }
-
 .topbar { background: var(--black); padding: 0 24px; height: 60px; display: flex; align-items: center; position: sticky; top: 0; z-index: 100; }
 .topbar-inner { max-width: 900px; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 12px; }
 .topbar-logo { width: 36px; height: 36px; border-radius: 10px; background: var(--maiz); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
 .topbar-text h1 { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.2; }
 .topbar-text p { font-size: 11px; color: var(--gray-300); }
-
 .hero { background: var(--gray-900); padding: 32px 24px 28px; border-bottom: 3px solid var(--maiz); }
 .hero-inner { max-width: 900px; margin: 0 auto; }
 .hero-chip { display: inline-flex; align-items: center; background: rgba(232,184,75,0.15); border: 1px solid rgba(232,184,75,0.3); color: var(--maiz); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; }
 .hero h2 { font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
 .hero p { font-size: 14px; color: #AAA; line-height: 1.7; max-width: 580px; }
-
 .nav-wrap { background: var(--white); border-bottom: 1px solid var(--gray-100); box-shadow: var(--shadow-sm); }
 .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; display: flex; overflow-x: auto; }
 .nav-btn { padding: 16px 20px; font-size: 13px; font-weight: 500; color: var(--gray-500); border: none; background: transparent; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; font-family: inherit; }
 .nav-btn.active { color: var(--black); border-bottom-color: var(--maiz); font-weight: 700; }
 .nav-btn:hover:not(.active) { color: var(--black); }
-
 .content { padding: 24px; max-width: 900px; margin: 0 auto; }
-
 .search-wrap { margin-bottom: 20px; }
 .search-box { display: flex; align-items: center; gap: 12px; background: var(--white); border: 1.5px solid var(--gray-300); border-radius: var(--radius); padding: 13px 18px; box-shadow: var(--shadow-sm); transition: border-color 0.2s, box-shadow 0.2s; }
 .search-box:focus-within { border-color: var(--maiz); box-shadow: 0 0 0 3px rgba(232,184,75,0.15); }
@@ -52,16 +47,23 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 .search-box input::placeholder { color: var(--gray-300); }
 .results-label { font-size: 12px; color: var(--gray-500); margin-bottom: 12px; font-weight: 500; min-height: 18px; }
 
+/* Camila banner */
+.camila-banner { background: var(--white); border-radius: var(--radius); padding: 18px 22px; margin-bottom: 24px; box-shadow: var(--shadow-sm); border: 1.5px solid var(--maiz-light); display: flex; align-items: center; gap: 16px; }
+.camila-avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid var(--maiz); flex-shrink: 0; }
+.camila-text { flex: 1; }
+.camila-text p { font-size: 14px; color: var(--gray-700); line-height: 1.6; }
+.camila-text strong { color: var(--black); }
+.camila-wa { display: inline-flex; align-items: center; gap: 7px; margin-top: 8px; background: #25D366; color: white; font-size: 13px; font-weight: 700; padding: 7px 14px; border-radius: 20px; text-decoration: none; transition: opacity 0.2s; }
+.camila-wa:hover { opacity: 0.85; }
+
 .sec-header { display: flex; align-items: center; gap: 10px; margin: 24px 0 12px; }
 .sec-header-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
 .sec-header-icon.fin { background: var(--maiz-light); }
 .sec-header-icon.sin { background: #EEF2FF; }
 .sec-header-text h3 { font-size: 14px; font-weight: 700; color: var(--black); }
 .sec-header-text p { font-size: 12px; color: var(--gray-500); }
-
 .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 8px; }
 @media (max-width: 580px) { .card-grid { grid-template-columns: 1fr; } }
-
 .tcard { background: var(--white); border-radius: var(--radius); padding: 18px; cursor: pointer; transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s; box-shadow: var(--shadow-sm); border: 1.5px solid transparent; display: flex; flex-direction: column; gap: 10px; }
 .tcard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--maiz); }
 .tcard-top { display: flex; align-items: flex-start; gap: 12px; }
@@ -77,7 +79,6 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 .tcard-tags { display: flex; flex-wrap: wrap; gap: 4px; }
 .tcard-tag { font-size: 10px; padding: 2px 7px; border-radius: 20px; background: var(--gray-100); color: var(--gray-500); border: 1px solid var(--gray-300); }
 .tcard-tag.match { background: var(--maiz-light); color: var(--maiz-dark); border-color: var(--maiz); font-weight: 600; }
-
 .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--gray-500); background: var(--white); border: 1.5px solid var(--gray-300); border-radius: var(--radius-sm); padding: 8px 14px; cursor: pointer; margin-bottom: 18px; transition: all 0.15s; font-family: inherit; }
 .back-btn:hover { color: var(--black); border-color: var(--black); }
 .detail-card { background: var(--white); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-sm); }
@@ -101,13 +102,17 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 .infografia { width: 100%; border-radius: var(--radius-sm); margin: 16px 0; display: block; box-shadow: var(--shadow-sm); }
 .divider { border: none; border-top: 1px solid var(--gray-100); margin: 20px 0; }
 
+/* Sub-sección dentro del detalle */
+.sub-section { background: var(--gray-100); border-radius: var(--radius-sm); padding: 18px 20px; margin: 18px 0; }
+.sub-section-title { font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+.sub-section-desc { font-size: 13px; color: var(--gray-700); line-height: 1.6; margin-bottom: 12px; }
+
 .novedad-card { background: var(--white); border-radius: var(--radius); padding: 20px; margin-bottom: 14px; box-shadow: var(--shadow-sm); border-left: 4px solid var(--maiz); }
 .novedad-date { font-size: 11px; color: var(--gray-500); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
 .novedad-title { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
 .novedad-body { font-size: 14px; color: var(--gray-700); line-height: 1.7; }
 .novedad-reqs { margin: 10px 0 0 18px; }
 .novedad-reqs li { font-size: 13px; color: var(--gray-700); margin-bottom: 5px; line-height: 1.5; }
-
 .cal-header { margin-bottom: 16px; }
 .cal-month-badge { display: inline-block; background: var(--black); color: var(--maiz); font-size: 15px; font-weight: 700; padding: 6px 14px; border-radius: var(--radius-sm); }
 .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 24px; background: var(--white); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow-sm); }
@@ -152,6 +157,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 </div>
 
 <div class="content">
+
   <div id="sec-tutoriales">
     <div class="search-wrap">
       <div class="search-box">
@@ -162,12 +168,15 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
     <div class="results-label" id="resultsLabel"></div>
     <div id="tutorialList"></div>
   </div>
+
   <div id="sec-detail" class="hidden">
     <button class="back-btn" onclick="backToList()">← Volver</button>
     <div class="detail-card" id="detailContent"></div>
   </div>
+
   <div id="sec-novedades" class="hidden"><div id="novedadesList"></div></div>
   <div id="sec-calendario" class="hidden"><div id="calendarioContent"></div></div>
+
 </div>
 
 <script>
@@ -279,33 +288,174 @@ const TUTORIALES = [
       <div class="step"><div class="step-num">4</div><div class="step-text">Seleccioná <strong>2 cuotas</strong> para cambiar la causa de anulación.</div></div>
       <div class="warn-box">La búsqueda aplica solo a pólizas anuladas por falta de pago.</div>`; }
   },
+
+  // ── SINIESTROS ──────────────────────────────────────────────
+
   {
     id: 5, icon: '📺',
     title: "Aparatos y equipos electrónicos",
     section: "Siniestros",
-    desc: "Documentación necesaria para presentar daños en aparatos electrónicos.",
-    tags: ["heladera", "televisor", "aire acondicionado", "electrodoméstico", "pantalla", "daño", "reparación"],
+    desc: "Documentación necesaria para gestionar siniestros de aparatos y equipos electrónicos.",
+    tags: ["heladera", "televisor", "aire acondicionado", "electrodoméstico", "pantalla", "daño", "reparación", "presupuesto", "informe técnico"],
     renderDetail: function() { return `
       <div class="detail-top"><div class="detail-icon sin">📺</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Aparatos y equipos electrónicos</div></div></div>
-      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Informe técnico</strong> con las causas del daño y presupuesto de reparación. Si no tiene reparación, debe constar en el Informe Técnico.</div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-text">Fotos del aparato dañado donde se pueda ver <strong>marca, modelo y estado</strong>.</div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-text">Fotos de los componentes dañados desmontados (el técnico puede incluirlas en el Informe).</div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-text">Fotos de los componentes nuevos montados.</div></div>
-      <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Comprobante de CBU</strong> del titular. Si no tiene cuenta, ofrecer abrir una en Banco del Sol.</div></div>
-      <div class="warn-box"><strong>Aclaración:</strong> Cada siniestro es diferente. Pueden solicitarse documentos adicionales. No descartar los equipos dañados hasta la liquidación.</div>`; }
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Informe técnico</strong> donde se detallen las causas del daño, junto con el <strong>presupuesto de reparación</strong>. Si el equipo no tiene reparación posible, debe constar en el Informe Técnico.<br><br><em>Ejemplo:</em></div>
+      </div>
+      <img src="img_sin_elec_presupuesto.png" class="step-img" alt="Ejemplo informe técnico y presupuesto"/>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Fotos del aparato dañado</strong> donde se pueda ver marca, modelo y estado del equipo.<br><br><em>Ejemplo:</em></div>
+      </div>
+      <img src="img_sin_elec_fotos_tv.png" class="step-img" alt="Ejemplo fotos del equipo dañado"/>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Fotos de los componentes dañados desmontados.</strong> El técnico puede incluirlas dentro del Informe Técnico.<br><br><em>Ejemplo:</em></div>
+      </div>
+      <img src="img_sin_elec_componentes.png" class="step-img" alt="Ejemplo componentes desmontados"/>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Fotos de los componentes nuevos montados</strong> una vez realizada la reparación.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-text"><strong>Comprobante de CBU</strong> del titular de la póliza. Si el titular no tiene cuenta bancaria, ofrecerle la alternativa de abrir una en <strong>Banco del Sol</strong>.<br><br><em>Ejemplo:</em></div>
+      </div>
+      <img src="img_sin_elec_cbu.png" class="step-img" alt="Ejemplo constancia CBU Banco del Sol"/>
+
+      <div class="warn-box"><strong>Aclaraciones importantes:</strong> Cada siniestro es diferente y en algunos casos puede solicitarse documentación extra, acreditar daños o retirar los equipos para verificación con los técnicos de la compañía. <strong>Recordá no descartar los equipos y elementos dañados hasta el momento de la liquidación del siniestro.</strong></div>`; }
   },
+
   {
     id: 6, icon: '🩹',
     title: "Accidentes personales",
     section: "Siniestros",
-    desc: "Cobertura de accidentes laborales con reintegro para profesionales y trabajadores.",
-    tags: ["golpe", "caída", "accidente laboral", "lesión", "fractura", "choque", "accidente personal"],
+    desc: "Coberturas disponibles para accidentes personales: en ocasión del trabajo, Íntegro Max y Eventos.",
+    tags: ["accidente", "accidente laboral", "lesión", "fractura", "AP", "reintegro", "prestacional", "rehabilitación", "traslado"],
     renderDetail: function() { return `
       <div class="detail-top"><div class="detail-icon sin">🩹</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Accidentes personales</div></div></div>
-      <div class="step"><div class="step-num">1</div><div class="step-text">Completar el formulario de denuncia de siniestro.</div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-text">Adjuntar historia clínica o constancia médica.</div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-text">Comprobante de CBU del titular.</div></div>
-      <div class="warn-box">Cada siniestro es diferente. En algunos casos puede solicitarse documentación adicional.</div>`; }
+
+      <!-- AP en Ocasión del Trabajo -->
+      <div class="sub-section">
+        <div class="sub-section-title">1. AP en Ocasión del Trabajo</div>
+        <div class="sub-section-desc">Cobertura diseñada para particulares que contraten tareas puntuales o quienes se dediquen a manejar servicios con personal eventual.</div>
+        <img src="img_sin_ap_coberturas1.png" class="step-img" alt="Coberturas AP en ocasión del trabajo"/>
+        <img src="img_sin_ap_coberturas2.png" class="step-img" alt="Asistencia médica y gastos de sepelio"/>
+        <div class="info-box"><strong>Importante:</strong> La cobertura es <strong>POR REINTEGRO</strong>, no prestacional. El asegurado deberá pagar y luego la aseguradora le reintegrará el monto que corresponda.</div>
+        <div class="step"><div class="step-num">→</div><div class="step-text">Los reintegros se pueden cargar por sistema (ver video explicativo) o pueden adelantarlo vía mail. Si el reintegro es por estudios médicos (ej: RMN o Ecografías), también se debe aportar el informe.</div></div>
+        <div class="step"><div class="step-num">→</div><div class="step-text"><strong>No posee cobertura de reintegro de jornales.</strong></div></div>
+        <div class="step"><div class="step-num">→</div><div class="step-text"><strong>Sesiones de rehabilitación:</strong> enviar pedido vía mail informando qué profesional realizará las sesiones.</div></div>
+        <div class="step"><div class="step-num">→</div><div class="step-text"><strong>Traslados:</strong> el pedido NO es prestacional. Son gastos reintegrables hasta el 10% de la suma asegurada de AMF.</div></div>
+      </div>
+
+      <!-- AP Íntegro Max -->
+      <div class="sub-section">
+        <div class="sub-section-title">2. AP Íntegro Max</div>
+        <div class="sub-section-desc">Máxima cobertura pensada para trabajadores y profesionales independientes, garantizando las atenciones médicas a través de la amplia red de prestadores.</div>
+        <img src="img_sin_ap_integro1.png" class="step-img" alt="Coberturas AP Íntegro Max"/>
+        <img src="img_sin_ap_integro2.png" class="step-img" alt="Asistencia médica farmacéutica y subsidio por fallecimiento"/>
+      </div>
+
+      <!-- AP Eventos -->
+      <div class="sub-section">
+        <div class="sub-section-title">3. AP Eventos</div>
+        <div class="sub-section-desc">Carga de la denuncia: recordar que en esta cobertura <strong>no hay certificado por cada uno de los asegurados</strong>. Los datos del accidentado se deben ingresar al momento de la carga de la denuncia.</div>
+        <div class="data-box">
+          <strong>Datos que se solicitan al momento de la denuncia:</strong><br><br>
+          1. Nombre y apellido<br>
+          2. DNI<br>
+          3. Fecha de nacimiento<br>
+          4. Forma de ocurrencia
+        </div>
+        <img src="img_sin_ap_eventos.png" class="step-img" alt="Situaciones cubiertas y no cubiertas AP Eventos"/>
+        <div class="warn-box"><strong>Importante:</strong> La cobertura NO es prestacional, es por reintegro.</div>
+      </div>`; }
+  },
+
+  {
+    id: 9, icon: '🏗️',
+    title: "ART — Aseguradora de Riesgos del Trabajo",
+    section: "Siniestros",
+    desc: "Funciones de la ART, coberturas, gestión de siniestros, traslados y reintegros.",
+    tags: ["ART", "accidente de trabajo", "enfermedad profesional", "ILT", "jornal", "reintegro", "PreveNET", "traslado", "incapacidad"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon sin">🏗️</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">ART — Aseguradora de Riesgos del Trabajo</div></div></div>
+
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:16px">La ART se encarga de reparar los daños económicos en casos de accidentes de trabajo o enfermedades profesionales. Si el trabajador sufriera un accidente de trabajo o una enfermedad profesional, la ART se hace cargo de:</p>
+
+      <div class="data-box">
+        • Su atención médica inmediata.<br>
+        • Pagarle el sueldo mientras está en tratamiento (durante los primeros 10 días se encuentran a cargo del empleador).<br>
+        • Pagarle las indemnizaciones que correspondan.
+      </div>
+
+      <hr class="divider"/>
+
+      <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">✅ Situaciones que están cubiertas</p>
+      <img src="img_sin_art_cubiertas.png" class="step-img" alt="Situaciones cubiertas por la ART"/>
+
+      <p style="font-size:15px;font-weight:700;color:#111;margin:16px 0 12px">❌ Situaciones que NO están cubiertas</p>
+      <img src="img_sin_art_nocubiertas.png" class="step-img" alt="Situaciones no cubiertas por la ART"/>
+
+      <hr class="divider"/>
+
+      <div class="sub-section">
+        <div class="sub-section-title">Incapacidad Laboral Temporal (ILT)</div>
+        <div class="sub-section-desc">Se produce cuando el trabajador accidentado o con enfermedad profesional no puede realizar sus tareas habituales. Comienza en la fecha de la primera manifestación invalidante (PMI) y finaliza con el alta médica, declaración de ILP, a los 2 años de la PMI, o por fallecimiento.</div>
+        <div class="info-box"><strong>Salario durante ILT:</strong> Los primeros 10 días los paga el empleador; a partir del día 11 los paga la ART. El plazo corre desde que la ART toma conocimiento del siniestro. Los jornales pueden reintegrarse al empleador o liquidarse directamente al trabajador si este lo autoriza.</div>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-section-title">Incapacidad Laboral Permanente (ILP)</div>
+        <div class="sub-section-desc">Se produce cuando el daño ocasiona una disminución de la capacidad de trabajo que durará toda la vida. El grado de incapacidad permanente es determinado por las Comisiones Médicas.</div>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-section-title">Muerte del trabajador</div>
+        <div class="sub-section-desc">El Art. 248 de la LCT obliga al empleador a indemnizar a los derechohabientes. Esta indemnización es independiente de la que se reconozca a los herederos por la ley de accidentes de trabajo y de cualquier otro beneficio.</div>
+      </div>
+
+      <hr class="divider"/>
+
+      <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">📥 Ingreso de siniestros</p>
+      <div class="data-box">
+        <strong>Información a tener en cuenta:</strong><br><br>
+        • Datos personales del accidentado (nombre completo, domicilio actual y teléfono de contacto).<br>
+        • Fecha, hora, lugar y forma de ocurrencia del accidente.<br>
+        • Si cuentan con datos adicionales (ej: si recibió primera atención) pueden completarlos en observaciones.
+      </div>
+      <div class="info-box">Los siniestros pueden ingresarse desde <strong>PreveNET</strong> o telefónicamente al <strong>0800-4444-278</strong>.</div>
+
+      <hr class="divider"/>
+
+      <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">🚗 Gestión de traslados</p>
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:12px">Los traslados para que el accidentado asista a turnos y/o estudios médicos pueden gestionarse vía mail informando fecha y horario del turno, o telefónicamente al <strong>0800-5555-078</strong>.</p>
+
+      <hr class="divider"/>
+
+      <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">💰 Reintegro de gastos</p>
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:10px">La gestión del reintegro de gastos se puede cargar desde <strong>PreveNET</strong>. Documentación a adjuntar:</p>
+      <div class="data-box">
+        • Factura y/o comprobante válido como factura.<br>
+        • Pedido médico en caso de prestaciones médicas y/o medicamentos.<br>
+        • Informe del estudio realizado.<br>
+        • CBU del tomador o accidentado (según a favor de quién se gestione el reintegro).
+      </div>
+
+      <hr class="divider"/>
+
+      <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">📋 Reintegro de jornales</p>
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:10px">La gestión del reintegro de jornales se puede cargar desde <strong>PreveNET</strong>. Documentación a adjuntar:</p>
+      <div class="data-box">
+        • Recibo de sueldo del trabajador, firmado por este.<br>
+        • En caso que el empleador pretenda que el jornal se abone directamente al trabajador, deberá presentar nota de solicitud.
+      </div>`; }
   },
 ];
 
@@ -349,11 +499,21 @@ function renderTutorials(q) {
   document.getElementById('resultsLabel').textContent = q ? `${total} resultado${total!==1?'s':''} para "${q}"` : '';
   let html = '';
   if (fins.length) {
+    html += `<div class="camila-banner">
+      <img src="img_camila.png" class="camila-avatar" alt="Camila"/>
+      <div class="camila-text">
+        <p>¡Hola! Soy <strong>Camila</strong>. Recordá que estoy para ayudarte ante cualquier consulta.</p>
+        <a class="camila-wa" href="https://wa.me/5493491691674" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+          (3491) 691674
+        </a>
+      </div>
+    </div>`;
     html += `<div class="sec-header"><div class="sec-header-icon fin">💰</div><div class="sec-header-text"><h3>Finanzas</h3>${!q?'<p>Orden financiero y salud de la cartera</p>':''}</div></div>`;
     html += `<div class="card-grid">${fins.map(t=>cardHtml(t,q)).join('')}</div>`;
   }
   if (sins.length) {
-    html += `<div class="sec-header"><div class="sec-header-icon sin">🚨</div><div class="sec-header-text"><h3>Siniestros</h3>${!q?'<p>Gestión y documentación de siniestros</p>':''}</div></div>`;
+    html += `<div class="sec-header"><div class="sec-header-icon sin">🚨</div><div class="sec-header-text"><h3>Siniestros</h3>${!q?'<p>Toda la información que necesitás sobre la gestión de siniestros.</p>':''}</div></div>`;
     html += `<div class="card-grid">${sins.map(t=>cardHtml(t,q)).join('')}</div>`;
   }
   if (!total) html = '<div class="empty-state">No se encontraron tutoriales para esa búsqueda.</div>';
@@ -417,3 +577,4 @@ renderTutorials('');
 </script>
 </body>
 </html>
+
