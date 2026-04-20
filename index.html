@@ -614,6 +614,31 @@ const TUTORIALES = [
 ];
 
 const NOVEDADES = [
+  { fecha: "20 de abril de 2026", titulo: "Descuentos en autos y pick-ups",
+    cuerpo: "Más herramientas para que tus clientes accedan a mejores condiciones.",
+    requisitos: [
+      "15% de descuento base + adicional promocional (cuando el cotizador lo habilite)",
+      "+30% por captación — también aplicable a clientes con póliza vigente a tu criterio",
+      "🏠 Reintegro Banco del Sol: 25% de reintegro en las primeras 4 cuotas para pólizas adheridas al débito automático de Banco del Sol. Tope: $12.000 por cliente."
+    ],
+    extra: "Ejemplo práctico — Auto con prima mensual base $80.000: luego del descuento base (−$12.000) y captación (−$20.400), la prima final es $47.600/mes. Con Banco del Sol: reintegro del 25% = $11.900 por cuota → prima efectiva primeras 4 cuotas: $35.700/mes. *Los montos son ilustrativos." },
+  { fecha: "20 de abril de 2026", titulo: "Beneficios del débito automático",
+    cuerpo: "¿Por qué te conviene tener tu seguro con débito?",
+    requisitos: [
+      "✅ Te asegurás que pagaste en tiempo y forma — evitás suspensiones y deudas acumuladas.",
+      "✅ Te mandamos un mensajito todos los meses con cuánto y cuándo te vamos a debitar.",
+      "✅ Si no tenés plata, se hacen otros intentos en diferentes días."
+    ],
+    imagen: "img_novedad_debito.jpeg",
+    extra: "Y además, si tenés cuenta en Banco del Sol recibís un 25% de reintegro en tus 4 primeras cuotas. ¡Consultanos para adherirte hoy mismo — es simple y rápido!" },
+  { fecha: "20 de abril de 2026", titulo: "Cursos Obligatorios 2026",
+    cuerpo: "Estimados/as, les informamos que desde el 16 de marzo hasta el 17 de julio podrán realizar:",
+    requisitos: [
+      "📝 Curso Obligatorio E-Learning 2026 del primer cuatrimestre.",
+      "🧑‍💻 Curso E-learning: \"Actualización Normativa SSN 2024-2025 y su impacto en la Actividad del PAS\".",
+      "➡️ En el Entorno Virtual de la página del Ente Ley: www.enteley22400.org.ar"
+    ],
+    extra: "🚦 Recordamos que esta capacitación es gratuita y de carácter obligatorio, realizada dentro del plazo correspondiente." },
   { fecha: "27 de enero de 2026", titulo: "Nuevas condiciones de motos — MAX 3",
     cuerpo: "A partir del 1/2/2026 se implementará una mejora de condiciones de contratación en el segmento de motos de hasta 350 cc en la cobertura Max 3.",
     requisitos: ["Operaciones nuevas","Zona de Riesgo 1.0","Solo para clientes con cobertura/s vigentes","Tomador debe tener la titularidad del vehículo","Emisiones anuales con facturación mensual o semestral en cuotas","Cobranza electrónica exclusivamente"],
@@ -621,7 +646,7 @@ const NOVEDADES = [
 ];
 
 const EVENTOS = [
-  { dia: 15, mes: 6, anio: 2026, titulo: "PCC Virtual — fecha límite", desc: "Vencimiento para completar el PCC Virtual obligatorio" },
+  { dia: 17, mes: 6, anio: 2026, titulo: "Cursos Obligatorios 2026 — fecha límite", desc: "Vencimiento para completar el Curso Obligatorio E-Learning 2026 y el curso de Actualización Normativa SSN 2024-2025" },
 ];
 
 function matches(t, q) {
@@ -695,6 +720,7 @@ function renderNovedades() {
   NOVEDADES.forEach(n => {
     html += `<div class="novedad-card"><div class="novedad-date">${n.fecha}</div><div class="novedad-title">${n.titulo}</div><div class="novedad-body">${n.cuerpo}</div>`;
     if (n.requisitos?.length) html += `<ul class="novedad-reqs">${n.requisitos.map(r=>`<li>${r}</li>`).join('')}</ul>`;
+    if (n.imagen) html += `<img src="${n.imagen}" style="width:100%;max-width:400px;display:block;margin:14px auto;border-radius:12px;" alt="${n.titulo}"/>`;
     if (n.extra) html += `<div class="novedad-body" style="margin-top:10px">${n.extra}</div>`;
     html += `</div>`;
   });
