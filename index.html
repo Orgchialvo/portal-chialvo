@@ -170,7 +170,37 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 </div>
 
 <script>
-const CAMILA_BANNER = `<div class="camila-banner">
+const MAURICIO_BANNER = `<div class="camila-banner" style="margin-top:14px">
+  <img src="img_mauricio.png" class="camila-avatar" alt="Mauricio"/>
+  <div class="camila-text">
+    <p>¡Hola! Soy <strong>Mauricio</strong>. Recordá que estoy para ayudarte ante cualquier consulta.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+      <a class="camila-wa" href="https://wa.me/5493491465674" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        (3491) 465674
+      </a>
+      <a class="camila-wa" href="mailto:mauricio@orgchialvo.com.ar" target="_blank" style="background:#6366F1">
+        ✉ mauricio@orgchialvo.com.ar
+      </a>
+    </div>
+  </div>
+</div>`;
+
+const HORACIO_BANNER = `<div class="camila-banner" style="margin-top:14px">
+  <img src="img_horacio.png" class="camila-avatar" alt="Horacio"/>
+  <div class="camila-text">
+    <p>¡Hola! Soy <strong>Horacio</strong>. Recordá que estoy para ayudarte ante cualquier consulta.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+      <a class="camila-wa" href="https://wa.me/5493491465671" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        (3491) 465671
+      </a>
+      <a class="camila-wa" href="mailto:horacio@orgchialvo.com.ar" target="_blank" style="background:#6366F1">
+        ✉ horacio@orgchialvo.com.ar
+      </a>
+    </div>
+  </div>
+</div>`; = `<div class="camila-banner">
   <img src="img_camila.png" class="camila-avatar" alt="Camila"/>
   <div class="camila-text">
     <p>¡Hola! Soy <strong>Camila</strong>. Recordá que estoy para ayudarte ante cualquier consulta.</p>
@@ -395,13 +425,13 @@ const TUTORIALES = [
       <div class="detail-top"><div class="detail-icon sin">🚗</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Automotor</div></div></div>
       <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:20px">Aquí encontrarás la documentación a presentar en cada tipo de siniestro de automotor.</p>
 
-      <img src="img_auto_destruccion_total.png" class="step-img" alt="Destrucción Total"/>
-      <img src="img_auto_accidente_parcial.png" class="step-img" alt="Accidente Parcial con Deducible"/>
-      <img src="img_auto_rotura_cerraduras.png" class="step-img" alt="Rotura de Cerraduras"/>
-      <img src="img_auto_danio_parcial_robo.png" class="step-img" alt="Daño Parcial sin Deducible al amparo de Robo Total"/>
-      <img src="img_auto_robo_hurto_parcial.png" class="step-img" alt="Robo y/o Hurto Parcial"/>
-      <img src="img_auto_incendio_parcial.png" class="step-img" alt="Incendio Parcial"/>
       <img src="img_auto_cristales.png" class="step-img" alt="Rotura o Reparación de Cristales"/>
+      <img src="img_auto_incendio_parcial.png" class="step-img" alt="Incendio Parcial"/>
+      <img src="img_auto_robo_hurto_parcial.png" class="step-img" alt="Robo y/o Hurto Parcial"/>
+      <img src="img_auto_danio_parcial_robo.png" class="step-img" alt="Daño Parcial sin Deducible al amparo de Robo Total"/>
+      <img src="img_auto_rotura_cerraduras.png" class="step-img" alt="Rotura de Cerraduras"/>
+      <img src="img_auto_accidente_parcial.png" class="step-img" alt="Accidente Parcial con Deducible"/>
+      <img src="img_auto_destruccion_total.png" class="step-img" alt="Destrucción Total"/>
 
       <div class="info-box"><strong>Importante:</strong> En siniestros donde se encuentren involucradas dos unidades es importante contar con los datos del tercero. Puede suceder que el siniestro ingrese al sistema <strong>CLEAS</strong>.</div>
 
@@ -412,52 +442,172 @@ const TUTORIALES = [
         <div class="sub-section-desc">Es un sistema de compensación de siniestros entre compañías de seguros. Con CLEAS, si tenés un choque y no sos responsable, la aseguradora se encarga de todo: las compañías adheridas trabajan entre sí.</div>
         <img src="img_auto_cleas_mapa.png" class="step-img" alt="Compañías adheridas al sistema CLEAS"/>
         <p style="font-size:14px;font-weight:700;color:#111;margin:14px 0 8px">¿Cómo funciona?</p>
-        <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:12px">Cuando chocan dos vehículos asegurados en compañías adheridas, el asegurado no responsable solo tiene que hacer la denuncia a su propia compañía, que se encargará de reparar el auto y gestionar todo con la otra compañía.</p>
+        <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:12px">Cuando chocan dos vehículos asegurados en las compañías adheridas al sistema, entra en funcionamiento el CLEAS. El asegurado no responsable del siniestro sólo tiene que hacer la denuncia a su propia compañía, que se encargará de reparar el auto y hacer todos los trámites con la otra compañía.</p>
         <p style="font-size:14px;font-weight:700;color:#111;margin:14px 0 8px">¿Qué tipos de choques entran en CLEAS?</p>
-        <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:12px">Choques leves entre dos vehículos con seguro vigente en compañías adheridas. Quedan excluidos motos y vehículos de más de 9 toneladas.</p>
-        <p style="font-size:14px;font-weight:700;color:#111;margin:14px 0 8px">¿Qué casos están excluidos?</p>
-        <div class="data-box">• Motos, máquinas agrícolas, vehículos de más de 9 toneladas, casas rodantes, acoplados, furgones y semirremolques.<br>• Siniestros entre vehículos de la misma compañía.<br>• Vehículos con destrucción total.<br>• Siniestros con lesiones y/o muertes.</div>
-        <div class="warn-box">Existe un tope máximo que se actualiza periódicamente. <strong>Consultar antes de gestionar.</strong></div>
+        <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:12px">Choques leves entre dos vehículos con seguro vigente en alguna de las compañías adheridas. Quedan excluidos motos y vehículos de más de 9 toneladas de peso bruto total (ómnibus y camiones).</p>
+        <p style="font-size:14px;font-weight:700;color:#111;margin:14px 0 8px">¿Qué casos están excluidos de este sistema?</p>
+        <div class="data-box">• Motos, máquinas agrícolas, vehículos de más de 9 toneladas de peso bruto total (ómnibus y camiones), casas rodantes, acoplados, furgones y semirremolques.<br>• Los siniestros entre vehículos de la misma Compañía.<br>• Vehículos que hayan sufrido destrucción total.<br>• Los siniestros con lesiones y/o muertes.</div>
+        <div class="warn-box">Existe un tope máximo que se actualiza con los meses. <strong>CONSULTAR antes de gestionar.</strong></div>
       </div>
 
       <hr class="divider"/>
 
       <div class="sub-section">
         <div class="sub-section-title">Seguimiento de pericias</div>
-        <div class="sub-section-desc">Desde Ceibo podemos verificar si la pericia fue realizada, su fecha de finalización, y si ya se enviaron órdenes a talleres y proveedores de repuestos.</div>
-        <p style="font-size:13px;color:#3A3A3C;line-height:1.7;margin-bottom:10px">Ingresar a consultar el siniestro → reclamo del <strong>ASEGURADO</strong> o <strong>TERCERO</strong> → opción <strong>LINK DE SEGUIMIENTO DE PERICIA</strong>.</p>
+        <div class="sub-section-desc">En Ceibo podemos verificar si la pericia ya fue realizada y su fecha de finalización, como así también si ya se enviaron las órdenes a los talleres, proveedores de repuestos, su fecha, etc.</div>
+        <p style="font-size:13px;color:#3A3A3C;line-height:1.7;margin-bottom:10px">Se debe ingresar a consultar el siniestro, luego al reclamo del <strong>ASEGURADO</strong> o <strong>TERCERO</strong>, según de quien se pretenda dar seguimiento, y allí se podrá observar la opción <strong>LINK DE SEGUIMIENTO DE PERICIA</strong>.</p>
         <img src="img_auto_consulta_reclamo.png" class="step-img" alt="Consulta de Reclamo — Link seguimiento de pericia"/>
-        <p style="font-size:13px;color:#3A3A3C;line-height:1.7;margin-bottom:10px">Al ingresar se verá toda la información de la pericia, órdenes al taller y gestión de repuestos.</p>
-        <img src="img_auto_pericia_gestion.png" class="step-img" alt="Pantalla seguimiento de pericia"/>
+        <p style="font-size:13px;color:#3A3A3C;line-height:1.7;margin-bottom:10px">Al ingresar se podrá ver la siguiente pantalla, con toda la información respecto de la pericia, órdenes de mano de obra para el taller y gestión de los repuestos.</p>
+        <img src="img_auto_pericia_gestion.png" class="step-img" alt="Pantalla seguimiento — peritación y gestión de repuestos"/>
       </div>
 
       <hr class="divider"/>
 
       <div class="sub-section">
         <div class="sub-section-title">Ingreso de denuncias por NEO</div>
-        <div class="sub-section-desc">Las pólizas emitidas por sistema NEO deben ingresarse por allí en caso de siniestro.</div>
+        <div class="sub-section-desc">Aquellas pólizas que se hayan cargado y emitido por sistema NEO, en caso de sufrir un siniestro, deben ingresarse por allí. A continuación, los pasos a seguir para cargar denuncia desde NEO:</div>
         <img src="img_auto_neo_inicio.png" class="step-img" alt="NEO — Menú Siniestros"/>
         <img src="img_auto_neo_busqueda.png" class="step-img" alt="NEO — Búsqueda por cliente"/>
-        <img src="img_auto_neo_poliza.png" class="step-img" alt="NEO — Selección de póliza"/>
-        <img src="img_auto_neo_denuncia.png" class="step-img" alt="NEO — Nueva denuncia"/>
+        <img src="img_auto_neo_poliza.png" class="step-img" alt="NEO — Selección de póliza vigente"/>
+        <img src="img_auto_neo_denuncia.png" class="step-img" alt="NEO — Nueva denuncia de siniestro"/>
       </div>
 
       <hr class="divider"/>
 
       <div class="sub-section">
         <div class="sub-section-title">Consulta de reporte de pago de siniestros</div>
-        <div class="sub-section-desc">El reporte puede consultarse desde <strong>CEIBO</strong>. Los pasos a seguir son:</div>
-        <img src="img_auto_reporte_ceibo.png" class="step-img" alt="Ceibo — Intermediarios → Reportes"/>
-        <img src="img_auto_reporte_menu.png" class="step-img" alt="Ceibo — Detalle de Pago de Siniestros"/>
-        <img src="img_auto_reporte_criterios.png" class="step-img" alt="Ceibo — Criterios y Generar Reporte"/>
-        <img src="img_auto_reporte_buscar.png" class="step-img" alt="Ceibo — Buscar número de siniestro"/>
-        <img src="img_auto_reporte_excel2.png" class="step-img" alt="Excel — Planilla de pagos"/>
-        <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin:10px 0">Una vez realizada la búsqueda, se marcará el casillero con el número de siniestro si este ya fue pagado por la compañía.</p>
-        <img src="img_auto_reporte_excel.png" class="step-img" alt="Excel — Siniestro marcado"/>
+        <div class="sub-section-desc">El reporte de pago de siniestros puede consultarse desde <strong>CEIBO</strong>. Los pasos a seguir son:</div>
+        <img src="img_auto_reporte_paso1.webp" class="step-img" alt="Ceibo — paso 1"/>
+        <img src="img_auto_reporte_paso2.webp" class="step-img" alt="Ceibo — paso 2"/>
+        <img src="img_auto_reporte_paso3.webp" class="step-img" alt="Ceibo — paso 3"/>
+        <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin:14px 0 10px">Se descargará un archivo de Excel que podemos filtrar por número de siniestro:</p>
+        <img src="img_auto_excel_filtro1.png" class="step-img" alt="Excel — filtro por número de siniestro"/>
+        <img src="img_auto_excel_filtro2.png" class="step-img" alt="Excel — buscar y reemplazar"/>
+        <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin:14px 0 10px">Una vez realizada la búsqueda se marcará el casillero con el número de siniestro, en caso de que este ya se haya pagado por la compañía.</p>
+        <img src="img_auto_excel_resultado.png" class="step-img" alt="Excel — siniestro marcado en amarillo"/>
       </div>
 
-      <div class="info-box">Esta consulta es aplicable a siniestros de <strong>todos los ramos</strong>, no solo automotor. También incluye pagos a prestadores (talleres, proveedores de repuestos, médicos, etc.).</div>
-      <div class="warn-box"><strong>Aclaración importante:</strong> Cada caso es diferente y de acuerdo con sus particularidades puede solicitarse documentación extra, lo que será informado durante las gestiones.</div>`; }
+      <div class="info-box">Esta modalidad de consulta es aplicable a siniestros de <strong>TODOS LOS RAMOS</strong> (no solo automotor). En estos reportes también constan los pagos a prestadores (talleres prestadores, proveedores de repuestos, médicos, etc.).</div>
+      <div class="warn-box"><strong>Aclaración importante:</strong> Tener en cuenta que cada caso es diferente y de acuerdo con las particularidades que estos presenten puede ser solicitada documentación extra, lo que nos será informado durante las gestiones.</div>`; }
+  },
+
+  {
+    id: 11, icon: '🚛',
+    title: "Transporte",
+    section: "Siniestros",
+    desc: "Documentación a presentar ante siniestros de mercaderías en tránsito por vía terrestre, aérea o marítima.",
+    tags: ["transporte", "mercadería", "cereales", "robo", "accidente", "remito", "carta porte", "flete", "ruta"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon sin">🚛</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Transporte</div></div></div>
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:16px">Este seguro ofrece diferentes alternativas de contratación dependiendo el medio por el que serán transportadas las mercaderías. En cualquiera de estos casos, la cobertura ampara toda clase de mercaderías y/o efectos.</p>
+      <img src="img_sin_transporte_vias.png" class="step-img" alt="Vías de transporte — terrestre, aérea, marítima"/>
+      <p style="font-size:15px;font-weight:700;color:#111;margin:20px 0 14px">Ante un siniestro, ¿qué documentación debo presentar?</p>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Fotos de la unidad transportadora.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Documentación del vehículo transportador: RUTA, tarjeta verde, VTV, etc.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Licencia de conducir.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Hoja de RUTA con detalle de envío y valores declarados.</div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-text">En caso de robo o accidente, <strong>denuncia policial</strong>.</div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-text">Documentación de la mercadería que transporta: <strong>facturas, remitos</strong>.</div></div>
+      <div class="step"><div class="step-num">7</div><div class="step-text">Nota de reclamo en carácter de declaración jurada del dueño de la mercadería, especificando además si cuentan con seguro propio.</div></div>
+      <div class="step"><div class="step-num">8</div><div class="step-text">En caso de cereales: <strong>carta porte, recibos</strong>, etc.</div></div>
+      <div class="step"><div class="step-num">9</div><div class="step-text">En caso de robo/hurto, <strong>declaración del chofer</strong>.</div></div>
+      <div class="step"><div class="step-num">10</div><div class="step-text">En caso de falta de entrega o rotura de mercadería, <strong>copia del remito</strong> donde se deja asentada la falta/rotura.</div></div>
+      <div class="warn-box"><strong>Aclaración importante:</strong> Cada caso es diferente y de acuerdo con las particularidades que estos presenten puede ser solicitada información extra, lo que nos será informado durante las gestiones.</div>`; }
+  },
+
+  {
+    id: 12, icon: '🏥',
+    title: "Salud",
+    section: "Siniestros",
+    desc: "Coberturas de Salud Segura Max y Seguro de Salud Hernias: documentación y prestaciones.",
+    tags: ["salud", "cirugía", "prótesis", "trasplante", "hernia", "reintegro", "CBU", "farmacia", "historia clínica"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon sin">🏥</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Salud</div></div></div>
+
+      <div class="sub-section">
+        <div class="sub-section-title">Salud Segura Max</div>
+        <div class="sub-section-desc">Es un seguro que brinda una amplia variedad de alternativas para cuidar tu salud y brindar tranquilidad a tu familia ante las contingencias de la vida. <strong>Funciona por reintegro.</strong></div>
+        <img src="img_sin_salud_incluye.png" class="step-img" alt="¿Qué incluye Salud Segura Max?"/>
+        <p style="font-size:14px;font-weight:700;color:#111;margin:14px 0 10px">Documentación a presentar:</p>
+        <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Protocolo quirúrgico</strong> de la prestación realizada (se pide al médico o clínica).</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">En caso de colocación de prótesis: <strong>comprobantes válidos como factura</strong>.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Historia clínica completa</strong>, que detalle: fecha de diagnóstico de la patología denunciada y su evolución.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text"><strong>CBU</strong> a nombre del tomador de la póliza.</div></div>
+        <div class="info-box"><strong>Importante:</strong> El capital no se agota — se indemniza al 100% de la suma asegurada en cada intervención quirúrgica.</div>
+        <p style="font-size:14px;font-weight:700;color:#111;margin:16px 0 8px">✨ Plus incluido</p>
+        <div class="data-box">
+          <strong>Asistencia en viaje:</strong> Protección para el asegurado y el grupo familiar en viajes dentro de Argentina o al exterior.<br><br>
+          <strong>Descuento del 50% en farmacias:</strong> No se debe presentar denuncia. El socio se presenta con DNI, receta y tarjeta en la farmacia prestadora. Al ingresar el DNI y el medicamento (si está en el vademécum) el descuento se aplica automáticamente.
+        </div>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-section-title">Seguro de Salud Hernias</div>
+        <div class="sub-section-desc">Cobertura complementaria al seguro de AP en ocasión de trabajo. <strong>Funciona por reintegro.</strong></div>
+        <p style="font-size:14px;font-weight:700;color:#111;margin:14px 0 10px">Documentación a presentar:</p>
+        <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Protocolo quirúrgico</strong> de la prestación realizada (se pide al médico o clínica).</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Comprobantes válidos como factura</strong> (a nombre del tomador) de todos los gastos médicos de la intervención.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Historia clínica completa</strong>, que detalle: fecha de diagnóstico de la patología denunciada y su evolución.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text"><strong>CBU</strong> a nombre del tomador de la póliza.</div></div>
+      </div>`; }
+  },
+
+  {
+    id: 13, icon: '💙',
+    title: "Seguro de Vida",
+    section: "Siniestros",
+    desc: "Documentación para siniestros de Vida Colectivo: Convenio Mercantil, Vida Pyme, Contrato de Trabajo y Vida Obligatorio.",
+    tags: ["vida", "fallecimiento", "defunción", "beneficiarios", "AFIP", "herencia", "incapacidad", "vida pyme", "contrato de trabajo", "Dec. 1567"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon sin">💙</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Seguro de Vida</div></div></div>
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:20px">Aquí encontrarás la documentación a presentar ante siniestros en cada producto dentro del ramo Seguros de Vida (Vida Obligatorio Dec.1567/74, Vida Pyme, Convenio Mercantil, Contrato de Trabajo).</p>
+
+      <div class="sub-section">
+        <div class="sub-section-title">Seguro de Vida Colectivo — Convenio Mercantil</div>
+        <div class="step"><div class="step-num">1</div><div class="step-text">Denuncia de Fallecimiento <strong>(F25/30)</strong>.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Copia de <strong>Acta de Defunción</strong> emitida por Registro Civil.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Copia del recibo de liquidación final <strong>(Liquidación Ley Contrato de Trabajo Art. 248)</strong>.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">Copia de <strong>historia clínica completa</strong> e informes de estudios complementarios <em>(solo si la póliza tiene menos de un año de vigencia)</em>.</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text">Formulario de designación expresa de beneficiarios por la Póliza Convenio Mercantil, suscripta por el asegurado. De no contar con él, informar mediante nota adjuntando Declaratoria de Herederos y copia de DNI de los herederos.</div></div>
+        <div class="step"><div class="step-num">6</div><div class="step-text">Copia de un <strong>recibo de haberes firmado</strong> por el empleado fallecido (cualquier período) y/o documento donde conste su firma (ej. copia del DNI).</div></div>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-section-title">Seguro de Vida Colectivo — Vida Pyme</div>
+        <div class="step"><div class="step-num">1</div><div class="step-text">Denuncia de Fallecimiento <strong>(F25/30)</strong>.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Copia de <strong>Acta de Defunción</strong> emitida por Registro Civil.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Copia de <strong>historia clínica completa</strong> e informes de estudios complementarios <em>(solo si la póliza tiene menos de un año de vigencia)</em>.</div></div>
+        <div class="info-box">Aportar número de póliza y/o referencia, ya que de acuerdo con esta puede variar la documentación a presentar.</div>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-section-title">Seguro de Vida Colectivo — Contrato de Trabajo</div>
+        <div class="step"><div class="step-num">1</div><div class="step-text">Denuncia de Fallecimiento <strong>(F25/30)</strong>.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Copia de <strong>Acta de Defunción</strong> emitida por Registro Civil.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Copia del recibo de liquidación final <strong>(Liquidación Ley Contrato de Trabajo Art. 248)</strong>, suscripta por los beneficiarios como constancia de percepción.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">Copia de <strong>historia clínica completa</strong> e informes de estudios complementarios <em>(solo si la póliza tiene menos de un año de vigencia)</em>.</div></div>
+        <p style="font-size:14px;font-weight:700;color:#111;margin:16px 0 10px">Para siniestros de Incapacidad Total y Permanente presentar además:</p>
+        <div class="step"><div class="step-num">1</div><div class="step-text">Denuncia de Fallecimiento <strong>(F25/30)</strong>.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Copia de Dictamen de Comisión Médica o informe de SRT donde se determine la incapacidad total, con el % de incapacidad y documentación médica de las patologías incapacitantes.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Copia del recibo de liquidación final <strong>(Art. 212)</strong>, firmada por el empleado como constancia de percepción.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">Copia de <strong>baja ante AFIP</strong>.</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text">Copia del <strong>telegrama de renuncia</strong>.</div></div>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-section-title">Seguro de Vida Obligatorio — Dec. 1567/74</div>
+        <div class="step"><div class="step-num">1</div><div class="step-text">Denuncia de Fallecimiento <strong>(F1720/19)</strong>.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Copia de <strong>Acta de Defunción</strong> emitida por Registro Civil.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Constancia de CUIL</strong> del empleado fallecido.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">Copia del <strong>último recibo de haberes</strong> firmado por el empleado fallecido.</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text">Copia de <strong>Alta y Baja ante AFIP</strong>.</div></div>
+        <div class="step"><div class="step-num">6</div><div class="step-text">Copia del <strong>recibo de liquidación final</strong>.</div></div>
+        <div class="step"><div class="step-num">7</div><div class="step-text"><strong>Nómina de empleados ingresados al SUSS</strong> en el mes del fallecimiento.</div></div>
+        <div class="step"><div class="step-num">8</div><div class="step-text"><strong>Formulario 931</strong> del mes del fallecimiento, adjuntando la constancia de pago ante AFIP.</div></div>
+        <div class="step"><div class="step-num">9</div><div class="step-text">Original o copia del <strong>formulario de designación de beneficiarios</strong>. Si no posee designación expresa, remitir elementos que acrediten herederos (esposa/concubina, hijos, padres) y Declaración de derechohabientes expedida por ANSeS o similar.</div></div>
+      </div>
+
+      <div class="warn-box"><strong>Tener en cuenta</strong> que cada caso es diferente y, de acuerdo con las particularidades que estos presenten, puede ser solicitada documentación extra, lo que nos será informado durante las gestiones.</div>`; }
   },
 ];
 
@@ -501,13 +651,15 @@ function renderTutorials(q) {
   document.getElementById('resultsLabel').textContent = q ? `${total} resultado${total!==1?'s':''} para "${q}"` : '';
   let html = '';
   if (fins.length) {
-    html += CAMILA_BANNER;
     html += `<div class="sec-header"><div class="sec-header-icon fin">💰</div><div class="sec-header-text"><h3>Finanzas</h3>${!q?'<p>Orden financiero y salud de la cartera</p>':''}</div></div>`;
     html += `<div class="card-grid">${fins.map(t=>cardHtml(t,q)).join('')}</div>`;
+    html += CAMILA_BANNER;
   }
   if (sins.length) {
     html += `<div class="sec-header"><div class="sec-header-icon sin">🚨</div><div class="sec-header-text"><h3>Siniestros</h3>${!q?'<p>Toda la información que necesitás sobre la gestión de siniestros.</p>':''}</div></div>`;
     html += `<div class="card-grid">${sins.map(t=>cardHtml(t,q)).join('')}</div>`;
+    html += MAURICIO_BANNER;
+    html += HORACIO_BANNER;
   }
   if (!total) html = '<div class="empty-state">No se encontraron tutoriales para esa búsqueda.</div>';
   document.getElementById('tutorialList').innerHTML = html;
@@ -570,4 +722,5 @@ renderTutorials('');
 </script>
 </body>
 </html>
+
 
