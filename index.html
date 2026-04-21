@@ -24,21 +24,123 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-100); color: var(--black); -webkit-font-smoothing: antialiased; }
+
+/* ── TOPBAR ── */
 .topbar { background: var(--black); padding: 0 24px; height: 60px; display: flex; align-items: center; position: sticky; top: 0; z-index: 100; }
 .topbar-inner { max-width: 900px; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 12px; }
 .topbar-logo { width: 36px; height: 36px; border-radius: 10px; background: var(--maiz); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
 .topbar-text h1 { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.2; }
 .topbar-text p { font-size: 11px; color: var(--gray-300); }
-.hero { background: var(--gray-900); padding: 32px 24px 28px; border-bottom: 3px solid var(--maiz); }
-.hero-inner { max-width: 900px; margin: 0 auto; }
-.hero-chip { display: inline-flex; align-items: center; background: rgba(232,184,75,0.15); border: 1px solid rgba(232,184,75,0.3); color: var(--maiz); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; }
-.hero h2 { font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
-.hero p { font-size: 14px; color: #AAA; line-height: 1.7; max-width: 580px; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 3px solid var(--maiz);
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('img_oficina.png');
+  background-size: cover;
+  background-position: center top;
+  filter: brightness(0.38);
+  z-index: 0;
+}
+.hero-inner {
+  position: relative; z-index: 1;
+  max-width: 900px; margin: 0 auto; width: 100%;
+  padding: 36px 24px 32px;
+}
+.hero-chip { display: inline-flex; align-items: center; background: rgba(232,184,75,0.18); border: 1px solid rgba(232,184,75,0.4); color: var(--maiz); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; }
+.hero h2 { font-size: 26px; font-weight: 700; color: var(--white); margin-bottom: 8px; line-height: 1.25; }
+.hero p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.7; max-width: 520px; margin-bottom: 28px; }
+
+/* Quick-access cards */
+.hero-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 560px; }
+@media (max-width: 500px) { .hero-cards { grid-template-columns: 1fr; max-width: 100%; } }
+.hero-card {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, border-color 0.2s;
+  text-align: left;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.hero-card:hover { background: rgba(232,184,75,0.22); border-color: var(--maiz); transform: translateY(-2px); }
+.hero-card-icon { font-size: 22px; }
+.hero-card-title { font-size: 13px; font-weight: 700; color: var(--white); }
+.hero-card-desc { font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+/* ── EQUIPO ── */
+.equipo-section { background: var(--white); border-bottom: 1px solid var(--gray-100); }
+.equipo-inner { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+.equipo-title { font-size: 18px; font-weight: 700; color: var(--black); margin-bottom: 4px; }
+.equipo-subtitle { font-size: 13px; color: var(--gray-500); margin-bottom: 24px; }
+.equipo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+@media (max-width: 480px) { .equipo-grid { grid-template-columns: repeat(2, 1fr); } }
+.miembro-card {
+  background: var(--gray-100);
+  border-radius: var(--radius);
+  padding: 18px 12px 14px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+.miembro-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.miembro-avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--maiz);
+  background: var(--gray-300);
+  flex-shrink: 0;
+}
+.miembro-avatar-placeholder {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--maiz-light);
+  border: 3px solid var(--maiz);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; font-weight: 700; color: var(--maiz-dark);
+  flex-shrink: 0;
+}
+.miembro-nombre { font-size: 13px; font-weight: 700; color: var(--black); text-align: center; line-height: 1.3; }
+.miembro-area { font-size: 11px; color: var(--gray-500); text-align: center; margin-top: -4px; margin-bottom: 2px; }
+.miembro-btns { display: flex; flex-direction: column; gap: 5px; width: 100%; }
+.miembro-wa {
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  background: #25D366; color: var(--white);
+  font-size: 11px; font-weight: 700;
+  padding: 5px 8px; border-radius: 20px;
+  text-decoration: none; transition: opacity 0.2s;
+}
+.miembro-wa:hover { opacity: 0.85; }
+.miembro-mail {
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  background: #6366F1; color: var(--white);
+  font-size: 11px; font-weight: 700;
+  padding: 5px 8px; border-radius: 20px;
+  text-decoration: none; transition: opacity 0.2s;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.miembro-mail:hover { opacity: 0.85; }
+
+/* ── NAV ── */
 .nav-wrap { background: var(--white); border-bottom: 1px solid var(--gray-100); box-shadow: var(--shadow-sm); }
 .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; display: flex; overflow-x: auto; }
 .nav-btn { padding: 16px 20px; font-size: 13px; font-weight: 500; color: var(--gray-500); border: none; background: transparent; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; font-family: inherit; }
 .nav-btn.active { color: var(--black); border-bottom-color: var(--maiz); font-weight: 700; }
 .nav-btn:hover:not(.active) { color: var(--black); }
+
+/* ── CONTENT ── */
 .content { padding: 24px; max-width: 900px; margin: 0 auto; }
 .search-wrap { margin-bottom: 20px; }
 .search-box { display: flex; align-items: center; gap: 12px; background: var(--white); border: 1.5px solid var(--gray-300); border-radius: var(--radius); padding: 13px 18px; box-shadow: var(--shadow-sm); transition: border-color 0.2s, box-shadow 0.2s; }
@@ -144,19 +246,192 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
   </div>
 </div>
 
+<!-- HERO RENOVADO -->
 <div class="hero">
+  <div class="hero-bg"></div>
   <div class="hero-inner">
     <div class="hero-chip">Portal Productores</div>
-    <h2>Organización Chialvo</h2>
-    <p>En este sitio encontrarás novedades, tutoriales, recursos y demás herramientas útiles para mejorar tu trabajo diario como Productor de nuestra Organización.</p>
+    <h2>¡Hola! Bienvenido/a a tu portal</h2>
+    <p>Todo lo que necesitás para trabajar mejor, en un solo lugar. Tutoriales, novedades y el calendario de tu equipo.</p>
+    <div class="hero-cards">
+      <div class="hero-card" onclick="showSection('tutoriales')">
+        <div class="hero-card-icon">🎓</div>
+        <div class="hero-card-title">Tutoriales</div>
+        <div class="hero-card-desc">Guías paso a paso de Finanzas y Siniestros</div>
+      </div>
+      <div class="hero-card" onclick="showSection('novedades')">
+        <div class="hero-card-icon">📢</div>
+        <div class="hero-card-title">Novedades</div>
+        <div class="hero-card-desc">Últimas noticias y actualizaciones</div>
+      </div>
+      <div class="hero-card" onclick="showSection('calendario')">
+        <div class="hero-card-icon">📅</div>
+        <div class="hero-card-title">Calendario</div>
+        <div class="hero-card-desc">Eventos y fechas importantes del mes</div>
+      </div>
+    </div>
   </div>
 </div>
 
+<!-- SECCIÓN EQUIPO -->
+<div class="equipo-section">
+  <div class="equipo-inner">
+    <div class="equipo-title">Tu equipo</div>
+    <div class="equipo-subtitle">Estamos para ayudarte. Contactanos directamente por WhatsApp o mail.</div>
+    <div class="equipo-grid">
+
+      <!-- Marcelo -->
+      <div class="miembro-card">
+        <img src="img_equipo_marcelo.png" class="miembro-avatar" alt="Marcelo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">M</div>
+        <div class="miembro-nombre">Marcelo</div>
+        <div class="miembro-area">Gerencia</div>
+        <div class="miembro-btns">
+          <a class="miembro-mail" href="mailto:marcelo@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <!-- Gerardo -->
+      <div class="miembro-card">
+        <img src="img_equipo_gerardo.png" class="miembro-avatar" alt="Gerardo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">G</div>
+        <div class="miembro-nombre">Gerardo</div>
+        <div class="miembro-area">Gerencia</div>
+        <div class="miembro-btns">
+          <a class="miembro-mail" href="mailto:gerardo@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <!-- Camila -->
+      <div class="miembro-card">
+        <img src="img_camila.png" class="miembro-avatar" alt="Camila" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">C</div>
+        <div class="miembro-nombre">Camila</div>
+        <div class="miembro-area">Finanzas</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491691674" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:camila@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <!-- Mauricio -->
+      <div class="miembro-card">
+        <img src="img_mauricio.png" class="miembro-avatar" alt="Mauricio" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">M</div>
+        <div class="miembro-nombre">Mauricio</div>
+        <div class="miembro-area">Siniestros</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491465674" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:mauricio@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <!-- Horacio -->
+      <div class="miembro-card">
+        <img src="img_horacio.png" class="miembro-avatar" alt="Horacio" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">H</div>
+        <div class="miembro-nombre">Horacio</div>
+        <div class="miembro-area">Siniestros</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491465671" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:horacio@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <!-- Mileva -->
+      <div class="miembro-card">
+        <img src="img_equipo_mileva.png" class="miembro-avatar" alt="Mileva" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">Mi</div>
+        <div class="miembro-nombre">Mileva</div>
+        <div class="miembro-area">Asistencia técnica</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491431515" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:mileva@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <!-- Ludmila -->
+      <div class="miembro-card">
+        <img src="img_equipo_ludmila.png" class="miembro-avatar" alt="Ludmila" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">L</div>
+        <div class="miembro-nombre">Ludmila</div>
+        <div class="miembro-area">Suscripción</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491457648" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:ludmila@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <!-- Angélica -->
+      <div class="miembro-card">
+        <img src="img_equipo_angelica.png" class="miembro-avatar" alt="Angélica" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">A</div>
+        <div class="miembro-nombre">Angélica</div>
+        <div class="miembro-area">Comercial</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493408572530" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:angelica@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <!-- Fernando -->
+      <div class="miembro-card">
+        <img src="img_equipo_fernando.png" class="miembro-avatar" alt="Fernando" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">F</div>
+        <div class="miembro-nombre">Fernando</div>
+        <div class="miembro-area">Comercial</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491465672" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:fernando@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <!-- Javier -->
+      <div class="miembro-card">
+        <img src="img_equipo_javier.png" class="miembro-avatar" alt="Javier" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">J</div>
+        <div class="miembro-nombre">Javier</div>
+        <div class="miembro-area">Contabilidad</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491465673" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:javier@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
 <div class="nav-wrap">
   <div class="nav-inner">
     <button class="nav-btn active" onclick="showSection('tutoriales')">Tutoriales</button>
     <button class="nav-btn" onclick="showSection('novedades')">Novedades</button>
-    <button class="nav-btn" onclick="showSection('calendario')">Capacitaciones</button>
+    <button class="nav-btn" onclick="showSection('calendario')">Calendario</button>
   </div>
 </div>
 
@@ -180,13 +455,15 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 </div>
 
 <script>
+const WA_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>';
+
 const MAURICIO_BANNER = `<div class="camila-banner" style="margin-top:14px">
   <img src="img_mauricio.png" class="camila-avatar" alt="Mauricio"/>
   <div class="camila-text">
     <p>¡Hola! Soy <strong>Mauricio</strong>. Recordá que estoy para ayudarte ante cualquier consulta.</p>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
       <a class="camila-wa" href="https://wa.me/5493491465674" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        ${WA_SVG}
         (3491) 465674
       </a>
       <a class="camila-wa" href="mailto:mauricio@orgchialvo.com.ar" target="_blank" style="background:#6366F1">
@@ -202,7 +479,7 @@ const HORACIO_BANNER = `<div class="camila-banner" style="margin-top:14px">
     <p>¡Hola! Soy <strong>Horacio</strong>. Recordá que estoy para ayudarte ante cualquier consulta.</p>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
       <a class="camila-wa" href="https://wa.me/5493491465671" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        ${WA_SVG}
         (3491) 465671
       </a>
       <a class="camila-wa" href="mailto:horacio@orgchialvo.com.ar" target="_blank" style="background:#6366F1">
@@ -217,7 +494,7 @@ const CAMILA_BANNER = `<div class="camila-banner">
   <div class="camila-text">
     <p>¡Hola! Soy <strong>Camila</strong>. Recordá que estoy para ayudarte ante cualquier consulta.</p>
     <a class="camila-wa" href="https://wa.me/5493491691674" target="_blank">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      ${WA_SVG}
       (3491) 691674
     </a>
   </div>
@@ -436,7 +713,6 @@ const TUTORIALES = [
     renderDetail: function() { return `
       <div class="detail-top"><div class="detail-icon sin">🚗</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Automotor</div></div></div>
       <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:20px">Aquí encontrarás la documentación a presentar en cada tipo de siniestro de automotor.</p>
-
       <img src="img_auto_cristales.png" class="step-img" alt="Rotura o Reparación de Cristales"/>
       <img src="img_auto_incendio_parcial.png" class="step-img" alt="Incendio Parcial"/>
       <img src="img_auto_robo_hurto_parcial.png" class="step-img" alt="Robo y/o Hurto Parcial"/>
@@ -444,11 +720,8 @@ const TUTORIALES = [
       <img src="img_auto_rotura_cerraduras.png" class="step-img" alt="Rotura de Cerraduras"/>
       <img src="img_auto_accidente_parcial.png" class="step-img" alt="Accidente Parcial con Deducible"/>
       <img src="img_auto_destruccion_total.png" class="step-img" alt="Destrucción Total"/>
-
       <div class="info-box"><strong>Importante:</strong> En siniestros donde se encuentren involucradas dos unidades es importante contar con los datos del tercero. Puede suceder que el siniestro ingrese al sistema <strong>CLEAS</strong>.</div>
-
       <hr class="divider"/>
-
       <div class="sub-section">
         <div class="sub-section-title">¿Qué es el sistema CLEAS?</div>
         <div class="sub-section-desc">Es un sistema de compensación de siniestros entre compañías de seguros. Con CLEAS, si tenés un choque y no sos responsable, la aseguradora se encarga de todo: las compañías adheridas trabajan entre sí.</div>
@@ -461,9 +734,7 @@ const TUTORIALES = [
         <div class="data-box">• Motos, máquinas agrícolas, vehículos de más de 9 toneladas de peso bruto total (ómnibus y camiones), casas rodantes, acoplados, furgones y semirremolques.<br>• Los siniestros entre vehículos de la misma Compañía.<br>• Vehículos que hayan sufrido destrucción total.<br>• Los siniestros con lesiones y/o muertes.</div>
         <div class="warn-box">Existe un tope máximo que se actualiza con los meses. <strong>CONSULTAR antes de gestionar.</strong></div>
       </div>
-
       <hr class="divider"/>
-
       <div class="sub-section">
         <div class="sub-section-title">Seguimiento de pericias</div>
         <div class="sub-section-desc">En Ceibo podemos verificar si la pericia ya fue realizada y su fecha de finalización, como así también si ya se enviaron las órdenes a los talleres, proveedores de repuestos, su fecha, etc.</div>
@@ -471,119 +742,25 @@ const TUTORIALES = [
         <img src="img_auto_consulta_reclamo.png" class="step-img" alt="Consulta de Reclamo — Link seguimiento de pericia"/>
         <p style="font-size:13px;color:#3A3A3C;line-height:1.7;margin-bottom:10px">Al ingresar se podrá ver la siguiente pantalla, con toda la información respecto de la pericia, órdenes de mano de obra para el taller y gestión de los repuestos.</p>
         <img src="img_auto_pericia_gestion.png" class="step-img" alt="Pantalla seguimiento — peritación y gestión de repuestos"/>
-      </div>
-
-      <hr class="divider"/>
-
-      <div class="sub-section">
-        <div class="sub-section-title">Ingreso de denuncias por NEO</div>
-        <div class="sub-section-desc">Aquellas pólizas que se hayan cargado y emitido por sistema NEO, en caso de sufrir un siniestro, deben ingresarse por allí. A continuación, los pasos a seguir para cargar denuncia desde NEO:</div>
-        <img src="img_auto_neo_inicio.png" class="step-img" alt="NEO — Menú Siniestros"/>
-        <img src="img_auto_neo_busqueda.png" class="step-img" alt="NEO — Búsqueda por cliente"/>
-        <img src="img_auto_neo_poliza.png" class="step-img" alt="NEO — Selección de póliza vigente"/>
-        <img src="img_auto_neo_denuncia.png" class="step-img" alt="NEO — Nueva denuncia de siniestro"/>
-      </div>
-
-      <hr class="divider"/>
-
-      <div class="sub-section">
-        <div class="sub-section-title">Consulta de reporte de pago de siniestros</div>
-        <div class="sub-section-desc">El reporte de pago de siniestros puede consultarse desde <strong>CEIBO</strong>. Los pasos a seguir son:</div>
-        <img src="img_auto_reporte_excel.png" class="step-img" alt="Ceibo — Intermediarios Reportes"/>
-        <img src="img_auto_reporte_excel2.png" class="step-img" alt="Ceibo — Detalle de Pago de Siniestros"/>
-        <img src="img_auto_reporte_buscar.png" class="step-img" alt="Ceibo — Criterios y Generar Reporte"/>
-        <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin:14px 0 10px">Se descargará un archivo de Excel que podemos filtrar por número de siniestro:</p>
-        <img src="img_auto_reporte_criterios.png" class="step-img" alt="Excel — filtro por número de siniestro"/>
-        <img src="img_auto_reporte_menu.png" class="step-img" alt="Excel — buscar y reemplazar"/>
-        <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin:14px 0 10px">Una vez realizada la búsqueda se marcará el casillero con el número de siniestro, en caso de que este ya se haya pagado por la compañía.</p>
-        <img src="img_auto_reporte_ceibo.png" class="step-img" alt="Excel — siniestro marcado en amarillo"/>
-      </div>
-
-      <div class="info-box">Esta modalidad de consulta es aplicable a siniestros de <strong>TODOS LOS RAMOS</strong> (no solo automotor). En estos reportes también constan los pagos a prestadores (talleres prestadores, proveedores de repuestos, médicos, etc.).</div>
-      <div class="warn-box"><strong>Aclaración importante:</strong> Tener en cuenta que cada caso es diferente y de acuerdo con las particularidades que estos presenten puede ser solicitada documentación extra, lo que nos será informado durante las gestiones.</div>`; }
-  },
-
-  {
-    id: 11, icon: '🚛',
-    title: "Transporte",
-    section: "Siniestros",
-    desc: "Documentación a presentar ante siniestros de mercaderías en tránsito por vía terrestre, aérea o marítima.",
-    tags: ["transporte", "mercadería", "cereales", "robo", "accidente", "remito", "carta porte", "flete", "ruta"],
-    renderDetail: function() { return `
-      <div class="detail-top"><div class="detail-icon sin">🚛</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Transporte</div></div></div>
-      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:16px">Este seguro ofrece diferentes alternativas de contratación dependiendo el medio por el que serán transportadas las mercaderías. En cualquiera de estos casos, la cobertura ampara toda clase de mercaderías y/o efectos.</p>
-      <img src="img_sin_transporte_vias.png" class="step-img" alt="Vías de transporte — terrestre, aérea, marítima"/>
-      <p style="font-size:15px;font-weight:700;color:#111;margin:20px 0 14px">Ante un siniestro, ¿qué documentación debo presentar?</p>
-      <div class="step"><div class="step-num">1</div><div class="step-text">Fotos de la unidad transportadora.</div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-text">Documentación del vehículo transportador: RUTA, tarjeta verde, VTV, etc.</div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-text">Licencia de conducir.</div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-text">Hoja de RUTA con detalle de envío y valores declarados.</div></div>
-      <div class="step"><div class="step-num">5</div><div class="step-text">En caso de robo o accidente, <strong>denuncia policial</strong>.</div></div>
-      <div class="step"><div class="step-num">6</div><div class="step-text">Documentación de la mercadería que transporta: <strong>facturas, remitos</strong>.</div></div>
-      <div class="step"><div class="step-num">7</div><div class="step-text">Nota de reclamo en carácter de declaración jurada del dueño de la mercadería, especificando además si cuentan con seguro propio.</div></div>
-      <div class="step"><div class="step-num">8</div><div class="step-text">En caso de cereales: <strong>carta porte, recibos</strong>, etc.</div></div>
-      <div class="step"><div class="step-num">9</div><div class="step-text">En caso de robo/hurto, <strong>declaración del chofer</strong>.</div></div>
-      <div class="step"><div class="step-num">10</div><div class="step-text">En caso de falta de entrega o rotura de mercadería, <strong>copia del remito</strong> donde se deja asentada la falta/rotura.</div></div>
-      <div class="warn-box"><strong>Aclaración importante:</strong> Cada caso es diferente y de acuerdo con las particularidades que estos presenten puede ser solicitada información extra, lo que nos será informado durante las gestiones.</div>`; }
-  },
-
-  {
-    id: 12, icon: '🏥',
-    title: "Salud",
-    section: "Siniestros",
-    desc: "Coberturas de Salud Segura Max y Seguro de Salud Hernias: documentación y prestaciones.",
-    tags: ["salud", "cirugía", "prótesis", "trasplante", "hernia", "reintegro", "CBU", "farmacia", "historia clínica"],
-    renderDetail: function() { return `
-      <div class="detail-top"><div class="detail-icon sin">🏥</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Salud</div></div></div>
-
-      <div class="sub-section">
-        <div class="sub-section-title">Salud Segura Max</div>
-        <div class="sub-section-desc">Es un seguro que brinda una amplia variedad de alternativas para cuidar tu salud y brindar tranquilidad a tu familia ante las contingencias de la vida. <strong>Funciona por reintegro.</strong></div>
-        <img src="img_sin_salud_incluye.png" class="step-img" alt="¿Qué incluye Salud Segura Max?"/>
-        <p style="font-size:14px;font-weight:700;color:#111;margin:14px 0 10px">Documentación a presentar:</p>
-        <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Protocolo quirúrgico</strong> de la prestación realizada (se pide al médico o clínica).</div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-text">En caso de colocación de prótesis: <strong>comprobantes válidos como factura</strong>.</div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Historia clínica completa</strong>, que detalle: fecha de diagnóstico de la patología denunciada y su evolución.</div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-text"><strong>CBU</strong> a nombre del tomador de la póliza.</div></div>
-        <div class="info-box"><strong>Importante:</strong> El capital no se agota — se indemniza al 100% de la suma asegurada en cada intervención quirúrgica.</div>
-        <p style="font-size:14px;font-weight:700;color:#111;margin:16px 0 8px">✨ Plus incluido</p>
-        <div class="data-box">
-          <strong>Asistencia en viaje:</strong> Protección para el asegurado y el grupo familiar en viajes dentro de Argentina o al exterior.<br><br>
-          <strong>Descuento del 50% en farmacias:</strong> No se debe presentar denuncia. El socio se presenta con DNI, receta y tarjeta en la farmacia prestadora. Al ingresar el DNI y el medicamento (si está en el vademécum) el descuento se aplica automáticamente.
-        </div>
-      </div>
-
-      <div class="sub-section">
-        <div class="sub-section-title">Seguro de Salud Hernias</div>
-        <div class="sub-section-desc">Cobertura complementaria al seguro de AP en ocasión de trabajo. <strong>Funciona por reintegro.</strong></div>
-        <p style="font-size:14px;font-weight:700;color:#111;margin:14px 0 10px">Documentación a presentar:</p>
-        <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Protocolo quirúrgico</strong> de la prestación realizada (se pide al médico o clínica).</div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Comprobantes válidos como factura</strong> (a nombre del tomador) de todos los gastos médicos de la intervención.</div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Historia clínica completa</strong>, que detalle: fecha de diagnóstico de la patología denunciada y su evolución.</div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-text"><strong>CBU</strong> a nombre del tomador de la póliza.</div></div>
       </div>`; }
   },
-
   {
-    id: 13, icon: '💙',
-    title: "Seguro de Vida",
+    id: 11, icon: '💼',
+    title: "Seguros de vida — Siniestros por fallecimiento e incapacidad",
     section: "Siniestros",
-    desc: "Documentación para siniestros de Vida Colectivo: Convenio Mercantil, Vida Pyme, Contrato de Trabajo y Vida Obligatorio.",
-    tags: ["vida", "fallecimiento", "defunción", "beneficiarios", "AFIP", "herencia", "incapacidad", "vida pyme", "contrato de trabajo", "Dec. 1567"],
+    desc: "Documentación para seguros de vida individuales, colectivos y obligatorio por fallecimiento e incapacidad.",
+    tags: ["vida", "fallecimiento", "incapacidad", "sepelio", "beneficiario", "acta de defunción", "historia clínica", "CBU", "Vida Pyme", "Dec. 1567"],
     renderDetail: function() { return `
-      <div class="detail-top"><div class="detail-icon sin">💙</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Seguro de Vida</div></div></div>
-      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:20px">Aquí encontrarás la documentación a presentar ante siniestros en cada producto dentro del ramo Seguros de Vida (Vida Obligatorio Dec.1567/74, Vida Pyme, Convenio Mercantil, Contrato de Trabajo).</p>
-
+      <div class="detail-top"><div class="detail-icon sin">💼</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Seguros de vida — Siniestros por fallecimiento e incapacidad</div></div></div>
       <div class="sub-section">
-        <div class="sub-section-title">Seguro de Vida Colectivo — Convenio Mercantil</div>
+        <div class="sub-section-title">Seguro de Vida Individual</div>
         <div class="step"><div class="step-num">1</div><div class="step-text">Denuncia de Fallecimiento <strong>(F25/30)</strong>.</div></div>
         <div class="step"><div class="step-num">2</div><div class="step-text">Copia de <strong>Acta de Defunción</strong> emitida por Registro Civil.</div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-text">Copia del recibo de liquidación final <strong>(Liquidación Ley Contrato de Trabajo Art. 248)</strong>.</div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-text">Copia de <strong>historia clínica completa</strong> e informes de estudios complementarios <em>(solo si la póliza tiene menos de un año de vigencia)</em>.</div></div>
-        <div class="step"><div class="step-num">5</div><div class="step-text">Formulario de designación expresa de beneficiarios por la Póliza Convenio Mercantil, suscripta por el asegurado. De no contar con él, informar mediante nota adjuntando Declaratoria de Herederos y copia de DNI de los herederos.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Copia de <strong>historia clínica completa</strong> e informes de estudios complementarios <em>(solo si la póliza tiene menos de un año de vigencia)</em>.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Constancia de CBU</strong> del/los beneficiario/s.</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text">Copia de <strong>DNI</strong> del/los beneficiario/s.</div></div>
         <div class="step"><div class="step-num">6</div><div class="step-text">Copia de un <strong>recibo de haberes firmado</strong> por el empleado fallecido (cualquier período) y/o documento donde conste su firma (ej. copia del DNI).</div></div>
       </div>
-
       <div class="sub-section">
         <div class="sub-section-title">Seguro de Vida Colectivo — Vida Pyme</div>
         <div class="step"><div class="step-num">1</div><div class="step-text">Denuncia de Fallecimiento <strong>(F25/30)</strong>.</div></div>
@@ -591,7 +768,6 @@ const TUTORIALES = [
         <div class="step"><div class="step-num">3</div><div class="step-text">Copia de <strong>historia clínica completa</strong> e informes de estudios complementarios <em>(solo si la póliza tiene menos de un año de vigencia)</em>.</div></div>
         <div class="info-box">Aportar número de póliza y/o referencia, ya que de acuerdo con esta puede variar la documentación a presentar.</div>
       </div>
-
       <div class="sub-section">
         <div class="sub-section-title">Seguro de Vida Colectivo — Contrato de Trabajo</div>
         <div class="step"><div class="step-num">1</div><div class="step-text">Denuncia de Fallecimiento <strong>(F25/30)</strong>.</div></div>
@@ -605,7 +781,6 @@ const TUTORIALES = [
         <div class="step"><div class="step-num">4</div><div class="step-text">Copia de <strong>baja ante AFIP</strong>.</div></div>
         <div class="step"><div class="step-num">5</div><div class="step-text">Copia del <strong>telegrama de renuncia</strong>.</div></div>
       </div>
-
       <div class="sub-section">
         <div class="sub-section-title">Seguro de Vida Obligatorio — Dec. 1567/74</div>
         <div class="step"><div class="step-num">1</div><div class="step-text">Denuncia de Fallecimiento <strong>(F1720/19)</strong>.</div></div>
@@ -618,7 +793,6 @@ const TUTORIALES = [
         <div class="step"><div class="step-num">8</div><div class="step-text"><strong>Formulario 931</strong> del mes del fallecimiento, adjuntando la constancia de pago ante AFIP.</div></div>
         <div class="step"><div class="step-num">9</div><div class="step-text">Original o copia del <strong>formulario de designación de beneficiarios</strong>. Si no posee designación expresa, remitir elementos que acrediten herederos (esposa/concubina, hijos, padres) y Declaración de derechohabientes expedida por ANSeS o similar.</div></div>
       </div>
-
       <div class="warn-box"><strong>Tener en cuenta</strong> que cada caso es diferente y, de acuerdo con las particularidades que estos presenten, puede ser solicitada documentación extra, lo que nos será informado durante las gestiones.</div>`; }
   },
 ];
@@ -661,54 +835,55 @@ const EVENTOS = [
 
 function matches(t, q) {
   return t.title.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q) ||
-    t.tags.some(tg => tg.toLowerCase().includes(q)) || t.section.toLowerCase().includes(q);
+    t.tags.some(function(tg) { return tg.toLowerCase().includes(q); }) || t.section.toLowerCase().includes(q);
 }
 
 function cardHtml(t, q) {
-  const isFin = t.section === 'Finanzas';
-  const tags = t.tags.map(tg => `<span class="tcard-tag ${q && tg.toLowerCase().includes(q) ? 'match' : ''}">${tg}</span>`).join('');
-  return `<div class="tcard" onclick="showDetail(${t.id})">
-    <div class="tcard-top">
-      <div class="tcard-icon ${isFin?'fin':'sin'}">${t.icon}</div>
-      <div class="tcard-info">
-        <div class="tcard-title">${t.title}</div>
-        <span class="tcard-badge ${isFin?'fin':'sin'}">${t.section}</span>
-      </div>
-    </div>
-    <div class="tcard-desc">${t.desc}</div>
-    <div class="tcard-tags">${tags}</div>
-  </div>`;
+  var isFin = t.section === 'Finanzas';
+  var tags = t.tags.map(function(tg) {
+    return '<span class="tcard-tag ' + (q && tg.toLowerCase().includes(q) ? 'match' : '') + '">' + tg + '</span>';
+  }).join('');
+  return '<div class="tcard" onclick="showDetail(' + t.id + ')">' +
+    '<div class="tcard-top">' +
+    '<div class="tcard-icon ' + (isFin ? 'fin' : 'sin') + '">' + t.icon + '</div>' +
+    '<div class="tcard-info">' +
+    '<div class="tcard-title">' + t.title + '</div>' +
+    '<span class="tcard-badge ' + (isFin ? 'fin' : 'sin') + '">' + t.section + '</span>' +
+    '</div></div>' +
+    '<div class="tcard-desc">' + t.desc + '</div>' +
+    '<div class="tcard-tags">' + tags + '</div>' +
+    '</div>';
 }
 
 function renderTutorials(q) {
-  q = (q||'').toLowerCase().trim();
-  const fins = TUTORIALES.filter(t => t.section==='Finanzas' && (!q||matches(t,q)));
-  const sins = TUTORIALES.filter(t => t.section==='Siniestros' && (!q||matches(t,q)));
-  const total = fins.length + sins.length;
-  document.getElementById('resultsLabel').textContent = q ? `${total} resultado${total!==1?'s':''} para "${q}"` : '';
-  let html = '';
+  q = (q || '').toLowerCase().trim();
+  var fins = TUTORIALES.filter(function(t) { return t.section === 'Finanzas' && (!q || matches(t, q)); });
+  var sins = TUTORIALES.filter(function(t) { return t.section === 'Siniestros' && (!q || matches(t, q)); });
+  var total = fins.length + sins.length;
+  document.getElementById('resultsLabel').textContent = q ? (total + ' resultado' + (total !== 1 ? 's' : '') + ' para "' + q + '"') : '';
+  var html = '';
   if (fins.length) {
-    html += `<div class="sec-header"><div class="sec-header-icon fin">💰</div><div class="sec-header-text"><h3>Finanzas</h3>${!q?'<p>Orden financiero y salud de la cartera</p>':''}</div></div>`;
-    html += `<div class="card-grid">${fins.map(t=>cardHtml(t,q)).join('')}</div>`;
+    html += '<div class="sec-header"><div class="sec-header-icon fin">💰</div><div class="sec-header-text"><h3>Finanzas</h3>' + (!q ? '<p>Orden financiero y salud de la cartera</p>' : '') + '</div></div>';
+    html += '<div class="card-grid">' + fins.map(function(t) { return cardHtml(t, q); }).join('') + '</div>';
     html += CAMILA_BANNER;
   }
   if (sins.length) {
-    html += `<div class="sec-header"><div class="sec-header-icon sin">🚨</div><div class="sec-header-text"><h3>Siniestros</h3>${!q?'<p>Toda la información que necesitás sobre la gestión de siniestros.</p>':''}</div></div>`;
-    html += `<div class="card-grid">${sins.map(t=>cardHtml(t,q)).join('')}</div>`;
+    html += '<div class="sec-header"><div class="sec-header-icon sin">🚨</div><div class="sec-header-text"><h3>Siniestros</h3>' + (!q ? '<p>Toda la información que necesitás sobre la gestión de siniestros.</p>' : '') + '</div></div>';
+    html += '<div class="card-grid">' + sins.map(function(t) { return cardHtml(t, q); }).join('') + '</div>';
     html += MAURICIO_BANNER;
     html += HORACIO_BANNER;
   }
-  if (!total) html = '<div class="empty-state">No se encontraron tutoriales para esa búsqueda.</div>';
+  if (!total) { html = '<div class="empty-state">No se encontraron tutoriales para esa búsqueda.</div>'; }
   document.getElementById('tutorialList').innerHTML = html;
 }
 
 function showDetail(id) {
-  const t = TUTORIALES.find(x => x.id===id);
-  if (!t) return;
+  var t = TUTORIALES.find(function(x) { return x.id === id; });
+  if (!t) { return; }
   document.getElementById('detailContent').innerHTML = t.renderDetail();
   document.getElementById('sec-tutoriales').classList.add('hidden');
   document.getElementById('sec-detail').classList.remove('hidden');
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
 }
 
 function backToList() {
@@ -717,51 +892,62 @@ function backToList() {
 }
 
 function showSection(s) {
-  ['tutoriales','detail','novedades','calendario'].forEach(x => document.getElementById('sec-'+x).classList.add('hidden'));
-  document.getElementById('sec-'+s).classList.remove('hidden');
-  document.querySelectorAll('.nav-btn').forEach((b,i) => b.classList.toggle('active', ['tutoriales','novedades','calendario'][i]===s));
-  if (s==='novedades') renderNovedades();
-  if (s==='calendario') renderCalendario();
-  window.scrollTo(0,0);
+  ['tutoriales', 'detail', 'novedades', 'calendario'].forEach(function(x) {
+    document.getElementById('sec-' + x).classList.add('hidden');
+  });
+  document.getElementById('sec-' + s).classList.remove('hidden');
+  document.querySelectorAll('.nav-btn').forEach(function(b, i) {
+    b.classList.toggle('active', ['tutoriales', 'novedades', 'calendario'][i] === s);
+  });
+  if (s === 'novedades') { renderNovedades(); }
+  if (s === 'calendario') { renderCalendario(); }
+  window.scrollTo(0, 0);
 }
 
 function renderNovedades() {
-  const iconos = ['🚗','🏦','📝','🏍️'];
-  const colores = ['color-1','color-2','color-3','color-4'];
-  let html = '<div class="novedades-grid">';
-  NOVEDADES.forEach((n, i) => {
-    const icono = iconos[i % iconos.length];
-    const color = colores[i % colores.length];
-    html += `<div class="novedad-card">
-      <div class="novedad-header ${color}">${icono}</div>
-      <div class="novedad-body-wrap">
-        <div class="novedad-date">${n.fecha}</div>
-        <div class="novedad-title">${n.titulo}</div>
-        <div class="novedad-body">${n.cuerpo}</div>`;
-    if (n.requisitos?.length) html += `<ul class="novedad-reqs">${n.requisitos.map(r=>`<li>${r}</li>`).join('')}</ul>`;
-    if (n.imagen) html += `<img src="${n.imagen}" class="novedad-img" alt="${n.titulo}"/>`;
-    if (n.extra) html += `<div class="novedad-extra">${n.extra}</div>`;
-    html += `</div></div>`;
+  var iconos = ['🚗', '🏦', '📝', '🏍️'];
+  var colores = ['color-1', 'color-2', 'color-3', 'color-4'];
+  var html = '<div class="novedades-grid">';
+  NOVEDADES.forEach(function(n, i) {
+    var icono = iconos[i % iconos.length];
+    var color = colores[i % colores.length];
+    html += '<div class="novedad-card">' +
+      '<div class="novedad-header ' + color + '">' + icono + '</div>' +
+      '<div class="novedad-body-wrap">' +
+      '<div class="novedad-date">' + n.fecha + '</div>' +
+      '<div class="novedad-title">' + n.titulo + '</div>' +
+      '<div class="novedad-body">' + n.cuerpo + '</div>';
+    if (n.requisitos && n.requisitos.length) {
+      html += '<ul class="novedad-reqs">' + n.requisitos.map(function(r) { return '<li>' + r + '</li>'; }).join('') + '</ul>';
+    }
+    if (n.imagen) { html += '<img src="' + n.imagen + '" class="novedad-img" alt="' + n.titulo + '"/>'; }
+    if (n.extra) { html += '<div class="novedad-extra">' + n.extra + '</div>'; }
+    html += '</div></div>';
   });
   html += '</div>';
   document.getElementById('novedadesList').innerHTML = html;
 }
 
 function renderCalendario() {
-  const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  const dias = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-  if (!EVENTOS.length) { document.getElementById('calendarioContent').innerHTML='<div class="empty-state">No hay eventos cargados.</div>'; return; }
-  const ref = EVENTOS[0];
-  const firstDay = new Date(ref.anio,ref.mes,1).getDay();
-  const daysInMonth = new Date(ref.anio,ref.mes+1,0).getDate();
-  const eventDias = EVENTOS.map(e=>e.dia);
-  let html = `<div class="cal-header"><div class="cal-month-badge">${meses[ref.mes]} ${ref.anio}</div></div>`;
-  html += `<div class="cal-grid">${dias.map(d=>`<div class="cal-day-name">${d}</div>`).join('')}`;
-  for (let i=0;i<firstDay;i++) html+=`<div class="cal-day other"></div>`;
-  for (let d=1;d<=daysInMonth;d++) html+=`<div class="cal-day${eventDias.includes(d)?' has-event':''}">${d}</div>`;
-  html += `</div><div class="sec-header"><div class="sec-header-icon fin">📅</div><div class="sec-header-text"><h3>Eventos del mes</h3></div></div>`;
-  EVENTOS.forEach(e => {
-    html += `<div class="event-item"><div class="event-date-badge">${e.dia}<br>${meses[e.mes].substring(0,3).toUpperCase()}</div><div><div class="event-title">${e.titulo}</div><div class="event-desc">${e.desc}</div></div></div>`;
+  var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  var dias = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  if (!EVENTOS.length) {
+    document.getElementById('calendarioContent').innerHTML = '<div class="empty-state">No hay eventos cargados.</div>';
+    return;
+  }
+  var ref = EVENTOS[0];
+  var firstDay = new Date(ref.anio, ref.mes, 1).getDay();
+  var daysInMonth = new Date(ref.anio, ref.mes + 1, 0).getDate();
+  var eventDias = EVENTOS.map(function(e) { return e.dia; });
+  var html = '<div class="cal-header"><div class="cal-month-badge">' + meses[ref.mes] + ' ' + ref.anio + '</div></div>';
+  html += '<div class="cal-grid">' + dias.map(function(d) { return '<div class="cal-day-name">' + d + '</div>'; }).join('');
+  for (var i = 0; i < firstDay; i++) { html += '<div class="cal-day other"></div>'; }
+  for (var d = 1; d <= daysInMonth; d++) {
+    html += '<div class="cal-day' + (eventDias.includes(d) ? ' has-event' : '') + '">' + d + '</div>';
+  }
+  html += '</div><div class="sec-header"><div class="sec-header-icon fin">📅</div><div class="sec-header-text"><h3>Eventos del mes</h3></div></div>';
+  EVENTOS.forEach(function(e) {
+    html += '<div class="event-item"><div class="event-date-badge">' + e.dia + '<br>' + meses[e.mes].substring(0, 3).toUpperCase() + '</div><div><div class="event-title">' + e.titulo + '</div><div class="event-desc">' + e.desc + '</div></div></div>';
   });
   document.getElementById('calendarioContent').innerHTML = html;
 }
