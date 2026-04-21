@@ -59,22 +59,33 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 .hero p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.7; max-width: 520px; margin-bottom: 28px; }
 
 /* Quick-access cards */
-.hero-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 560px; }
+.hero-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 620px; }
 @media (max-width: 500px) { .hero-cards { grid-template-columns: 1fr; max-width: 100%; } }
 .hero-card {
   background: rgba(255,255,255,0.10);
   border: 1px solid rgba(255,255,255,0.18);
   border-radius: 14px;
-  padding: 14px 16px;
+  padding: 18px 18px;
   cursor: pointer;
   transition: background 0.2s, transform 0.15s, border-color 0.2s;
   text-align: left;
   display: flex; flex-direction: column; gap: 6px;
 }
 .hero-card:hover { background: rgba(232,184,75,0.22); border-color: var(--maiz); transform: translateY(-2px); }
-.hero-card-icon { font-size: 22px; }
-.hero-card-title { font-size: 13px; font-weight: 700; color: var(--white); }
+.hero-card.span2 { grid-column: span 2; }
+@media (max-width: 500px) { .hero-card.span2 { grid-column: span 1; } }
+.hero-card-icon { font-size: 24px; }
+.hero-card-title { font-size: 14px; font-weight: 700; color: var(--white); }
 .hero-card-desc { font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+/* Mini calendario en hero */
+.cal-mini-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; margin-top: 10px; }
+.cal-mini-name { font-size: 9px; color: rgba(255,255,255,0.4); text-align: center; padding: 2px 0; }
+.cal-mini-day { height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: rgba(255,255,255,0.45); }
+.cal-mini-day.event { background: var(--maiz); color: var(--black); font-weight: 700; }
+.cal-mini-event { margin-top: 8px; display: flex; align-items: center; gap: 7px; }
+.cal-mini-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--maiz); flex-shrink: 0; }
+.cal-mini-label { font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.4; }
 
 /* ── EQUIPO ── */
 .equipo-section { background: var(--white); border-bottom: 1px solid var(--gray-100); }
@@ -232,6 +243,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 .event-desc { font-size: 12px; color: var(--gray-500); margin-top: 3px; }
 .empty-state { padding: 3rem 0; text-align: center; font-size: 14px; color: var(--gray-300); }
 .hidden { display: none !important; }
+.nav-btn.nav-home { border-right: 1px solid var(--gray-100); margin-right: 4px; padding-right: 20px; }
 </style>
 </head>
 <body>
@@ -247,7 +259,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 </div>
 
 <!-- HERO RENOVADO -->
-<div class="hero">
+<div class="hero" id="hero">
   <div class="hero-bg"></div>
   <div class="hero-inner">
     <div class="hero-chip">Portal Productores</div>
@@ -264,178 +276,25 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
         <div class="hero-card-title">Novedades</div>
         <div class="hero-card-desc">Últimas noticias y actualizaciones</div>
       </div>
-      <div class="hero-card" onclick="showSection('calendario')">
-        <div class="hero-card-icon">📅</div>
-        <div class="hero-card-title">Calendario</div>
-        <div class="hero-card-desc">Eventos y fechas importantes del mes</div>
+      <div class="hero-card span2" onclick="showSection('calendario')">
+        <div class="hero-card-title">📅 Calendario — Julio 2026</div>
+        <div id="hero-cal-mini"></div>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- SECCIÓN EQUIPO -->
-<div class="equipo-section">
-  <div class="equipo-inner">
-    <div class="equipo-title">Tu equipo</div>
-    <div class="equipo-subtitle">Estamos para ayudarte. Contactanos directamente por WhatsApp o mail.</div>
-    <div class="equipo-grid">
-
-      <!-- Marcelo -->
-      <div class="miembro-card">
-        <img src="img_equipo_marcelo.png" class="miembro-avatar" alt="Marcelo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="miembro-avatar-placeholder" style="display:none">M</div>
-        <div class="miembro-nombre">Marcelo</div>
-        <div class="miembro-area">Gerencia</div>
-        <div class="miembro-btns">
-          <a class="miembro-mail" href="mailto:marcelo@orgchialvo.com.ar">✉ Mail</a>
-        </div>
-      </div>
-
-      <!-- Gerardo -->
-      <div class="miembro-card">
-        <img src="img_equipo_gerardo.png" class="miembro-avatar" alt="Gerardo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="miembro-avatar-placeholder" style="display:none">G</div>
-        <div class="miembro-nombre">Gerardo</div>
-        <div class="miembro-area">Gerencia</div>
-        <div class="miembro-btns">
-          <a class="miembro-mail" href="mailto:gerardo@orgchialvo.com.ar">✉ Mail</a>
-        </div>
-      </div>
-
-      <!-- Camila -->
-      <div class="miembro-card">
-        <img src="img_camila.png" class="miembro-avatar" alt="Camila" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="miembro-avatar-placeholder" style="display:none">C</div>
-        <div class="miembro-nombre">Camila</div>
-        <div class="miembro-area">Finanzas</div>
-        <div class="miembro-btns">
-          <a class="miembro-wa" href="https://wa.me/5493491691674" target="_blank">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-            WhatsApp
-          </a>
-          <a class="miembro-mail" href="mailto:camila@orgchialvo.com.ar">✉ Mail</a>
-        </div>
-      </div>
-
-      <!-- Mauricio -->
-      <div class="miembro-card">
-        <img src="img_mauricio.png" class="miembro-avatar" alt="Mauricio" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="miembro-avatar-placeholder" style="display:none">M</div>
-        <div class="miembro-nombre">Mauricio</div>
-        <div class="miembro-area">Siniestros</div>
-        <div class="miembro-btns">
-          <a class="miembro-wa" href="https://wa.me/5493491465674" target="_blank">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-            WhatsApp
-          </a>
-          <a class="miembro-mail" href="mailto:mauricio@orgchialvo.com.ar">✉ Mail</a>
-        </div>
-      </div>
-
-      <!-- Horacio -->
-      <div class="miembro-card">
-        <img src="img_horacio.png" class="miembro-avatar" alt="Horacio" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="miembro-avatar-placeholder" style="display:none">H</div>
-        <div class="miembro-nombre">Horacio</div>
-        <div class="miembro-area">Siniestros</div>
-        <div class="miembro-btns">
-          <a class="miembro-wa" href="https://wa.me/5493491465671" target="_blank">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-            WhatsApp
-          </a>
-          <a class="miembro-mail" href="mailto:horacio@orgchialvo.com.ar">✉ Mail</a>
-        </div>
-      </div>
-
-      <!-- Mileva -->
-      <div class="miembro-card">
-        <img src="img_equipo_mileva.png" class="miembro-avatar" alt="Mileva" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="miembro-avatar-placeholder" style="display:none">Mi</div>
-        <div class="miembro-nombre">Mileva</div>
-        <div class="miembro-area">Asistencia técnica</div>
-        <div class="miembro-btns">
-          <a class="miembro-wa" href="https://wa.me/5493491431515" target="_blank">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-            WhatsApp
-          </a>
-          <a class="miembro-mail" href="mailto:mileva@orgchialvo.com.ar">✉ Mail</a>
-        </div>
-      </div>
-
-      <!-- Ludmila -->
-      <div class="miembro-card">
-        <img src="img_equipo_ludmila.png" class="miembro-avatar" alt="Ludmila" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="miembro-avatar-placeholder" style="display:none">L</div>
-        <div class="miembro-nombre">Ludmila</div>
-        <div class="miembro-area">Suscripción</div>
-        <div class="miembro-btns">
-          <a class="miembro-wa" href="https://wa.me/5493491457648" target="_blank">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-            WhatsApp
-          </a>
-          <a class="miembro-mail" href="mailto:ludmila@orgchialvo.com.ar">✉ Mail</a>
-        </div>
-      </div>
-
-      <!-- Angélica -->
-      <div class="miembro-card">
-        <img src="img_equipo_angelica.png" class="miembro-avatar" alt="Angélica" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="miembro-avatar-placeholder" style="display:none">A</div>
-        <div class="miembro-nombre">Angélica</div>
-        <div class="miembro-area">Comercial</div>
-        <div class="miembro-btns">
-          <a class="miembro-wa" href="https://wa.me/5493408572530" target="_blank">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-            WhatsApp
-          </a>
-          <a class="miembro-mail" href="mailto:angelica@orgchialvo.com.ar">✉ Mail</a>
-        </div>
-      </div>
-
-      <!-- Fernando -->
-      <div class="miembro-card">
-        <img src="img_equipo_fernando.png" class="miembro-avatar" alt="Fernando" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="miembro-avatar-placeholder" style="display:none">F</div>
-        <div class="miembro-nombre">Fernando</div>
-        <div class="miembro-area">Comercial</div>
-        <div class="miembro-btns">
-          <a class="miembro-wa" href="https://wa.me/5493491465672" target="_blank">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-            WhatsApp
-          </a>
-          <a class="miembro-mail" href="mailto:fernando@orgchialvo.com.ar">✉ Mail</a>
-        </div>
-      </div>
-
-      <!-- Javier -->
-      <div class="miembro-card">
-        <img src="img_equipo_javier.png" class="miembro-avatar" alt="Javier" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="miembro-avatar-placeholder" style="display:none">J</div>
-        <div class="miembro-nombre">Javier</div>
-        <div class="miembro-area">Contabilidad</div>
-        <div class="miembro-btns">
-          <a class="miembro-wa" href="https://wa.me/5493491465673" target="_blank">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-            WhatsApp
-          </a>
-          <a class="miembro-mail" href="mailto:javier@orgchialvo.com.ar">✉ Mail</a>
-        </div>
-      </div>
-
     </div>
   </div>
 </div>
 
 <!-- NAV -->
-<div class="nav-wrap">
+<div class="nav-wrap hidden" id="nav-wrap">
   <div class="nav-inner">
-    <button class="nav-btn active" onclick="showSection('tutoriales')">Tutoriales</button>
+    <button class="nav-btn nav-home" onclick="showHome()">← Inicio</button>
+    <button class="nav-btn" onclick="showSection('tutoriales')">Tutoriales</button>
     <button class="nav-btn" onclick="showSection('novedades')">Novedades</button>
     <button class="nav-btn" onclick="showSection('calendario')">Calendario</button>
   </div>
 </div>
 
-<div class="content">
+<div class="content hidden" id="main-content">
   <div id="sec-tutoriales">
     <div class="search-wrap">
       <div class="search-box">
@@ -452,6 +311,149 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
   </div>
   <div id="sec-novedades" class="hidden"><div id="novedadesList"></div></div>
   <div id="sec-calendario" class="hidden"><div id="calendarioContent"></div></div>
+</div>
+
+<!-- SECCIÓN EQUIPO (al final de la página) -->
+<div class="equipo-section" id="equipo-section">
+  <div class="equipo-inner">
+    <div class="equipo-title">Tu equipo</div>
+    <div class="equipo-subtitle">Estamos para ayudarte. Contactanos directamente por WhatsApp o mail.</div>
+    <div class="equipo-grid">
+
+      <div class="miembro-card">
+        <img src="img_equipo_marcelo.png" class="miembro-avatar" alt="Marcelo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">M</div>
+        <div class="miembro-nombre">Marcelo</div>
+        <div class="miembro-area">Gerencia</div>
+        <div class="miembro-btns">
+          <a class="miembro-mail" href="mailto:marcelo@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_equipo_gerardo.png" class="miembro-avatar" alt="Gerardo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">G</div>
+        <div class="miembro-nombre">Gerardo</div>
+        <div class="miembro-area">Gerencia</div>
+        <div class="miembro-btns">
+          <a class="miembro-mail" href="mailto:gerardo@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_camila.png" class="miembro-avatar" alt="Camila" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">C</div>
+        <div class="miembro-nombre">Camila</div>
+        <div class="miembro-area">Finanzas</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491691674" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:camila@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_mauricio.png" class="miembro-avatar" alt="Mauricio" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">M</div>
+        <div class="miembro-nombre">Mauricio</div>
+        <div class="miembro-area">Siniestros</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491465674" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:mauricio@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_horacio.png" class="miembro-avatar" alt="Horacio" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">H</div>
+        <div class="miembro-nombre">Horacio</div>
+        <div class="miembro-area">Siniestros</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491465671" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:horacio@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_equipo_mileva.png" class="miembro-avatar" alt="Mileva" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">Mi</div>
+        <div class="miembro-nombre">Mileva</div>
+        <div class="miembro-area">Asistencia técnica</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491431515" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:mileva@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_equipo_ludmila.png" class="miembro-avatar" alt="Ludmila" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">L</div>
+        <div class="miembro-nombre">Ludmila</div>
+        <div class="miembro-area">Suscripción</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491457648" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:ludmila@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_equipo_angelica.png" class="miembro-avatar" alt="Angélica" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">A</div>
+        <div class="miembro-nombre">Angélica</div>
+        <div class="miembro-area">Comercial</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493408572530" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:angelica@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_equipo_fernando.png" class="miembro-avatar" alt="Fernando" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">F</div>
+        <div class="miembro-nombre">Fernando</div>
+        <div class="miembro-area">Comercial</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491465672" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:fernando@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_equipo_javier.png" class="miembro-avatar" alt="Javier" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">J</div>
+        <div class="miembro-nombre">Javier</div>
+        <div class="miembro-area">Contabilidad</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491465673" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:javier@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <script>
@@ -802,7 +804,7 @@ const NOVEDADES = [
     cuerpo: "Más herramientas para que tus clientes accedan a mejores condiciones.",
     requisitos: [
       "15% de descuento base + adicional promocional (cuando el cotizador lo habilite)",
-      "+30% por captación — también aplicable a clientes con póliza vigente a tu criterio",
+      "+30% por captación",
       "🏠 Reintegro Banco del Sol: 25% de reintegro en las primeras 4 cuotas para pólizas adheridas al débito automático de Banco del Sol. Tope: $12.000 por cliente."
     ],
     extra: "Ejemplo práctico — Auto con prima mensual base $80.000: luego del descuento base (−$12.000) y captación (−$20.400), la prima final es $47.600/mes. Con Banco del Sol: reintegro del 25% = $11.900 por cuota → prima efectiva primeras 4 cuotas: $35.700/mes. *Los montos son ilustrativos." },
@@ -892,6 +894,10 @@ function backToList() {
 }
 
 function showSection(s) {
+  document.getElementById('hero').classList.add('hidden');
+  document.getElementById('equipo-section').classList.add('hidden');
+  document.getElementById('nav-wrap').classList.remove('hidden');
+  document.getElementById('main-content').classList.remove('hidden');
   ['tutoriales', 'detail', 'novedades', 'calendario'].forEach(function(x) {
     document.getElementById('sec-' + x).classList.add('hidden');
   });
@@ -901,6 +907,15 @@ function showSection(s) {
   });
   if (s === 'novedades') { renderNovedades(); }
   if (s === 'calendario') { renderCalendario(); }
+  if (s === 'tutoriales') { renderTutorials(''); }
+  window.scrollTo(0, 0);
+}
+
+function showHome() {
+  document.getElementById('hero').classList.remove('hidden');
+  document.getElementById('equipo-section').classList.remove('hidden');
+  document.getElementById('nav-wrap').classList.add('hidden');
+  document.getElementById('main-content').classList.add('hidden');
   window.scrollTo(0, 0);
 }
 
@@ -952,7 +967,29 @@ function renderCalendario() {
   document.getElementById('calendarioContent').innerHTML = html;
 }
 
-renderTutorials('');
-</script>
+function renderHeroCalendario() {
+  var el = document.getElementById('hero-cal-mini');
+  if (!el || !EVENTOS.length) { return; }
+  var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  var dias = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  var ref = EVENTOS[0];
+  var firstDay = new Date(ref.anio, ref.mes, 1).getDay();
+  var daysInMonth = new Date(ref.anio, ref.mes + 1, 0).getDate();
+  var eventDias = EVENTOS.map(function(e) { return e.dia; });
+  var html = '<div class="cal-mini-grid">';
+  dias.forEach(function(d) { html += '<div class="cal-mini-name">' + d + '</div>'; });
+  for (var i = 0; i < firstDay; i++) { html += '<div class="cal-mini-day"></div>'; }
+  for (var d = 1; d <= daysInMonth; d++) {
+    html += '<div class="cal-mini-day' + (eventDias.includes(d) ? ' event' : '') + '">' + d + '</div>';
+  }
+  html += '</div>';
+  EVENTOS.forEach(function(e) {
+    html += '<div class="cal-mini-event"><div class="cal-mini-dot"></div><span class="cal-mini-label">' + e.dia + ' ' + meses[e.mes].substring(0,3) + ' — ' + e.titulo + '</span></div>';
+  });
+  el.innerHTML = html;
+}
+
+// La página arranca en el inicio — el contenido se carga al hacer click en una card
+renderHeroCalendario();</script>
 </body>
 </html>
