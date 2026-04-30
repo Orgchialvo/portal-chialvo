@@ -844,22 +844,10 @@ function matches(t, q) {
     t.tags.some(function(tg) { return tg.toLowerCase().includes(q); }) || t.section.toLowerCase().includes(q);
 }
 
-var WA_SVG = '<svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>';
-
 function waShareUrl(id, title) {
   var url = 'https://orgchialvo.github.io/portal-chialvo/#tutorial-' + id;
   var msg = '¡Hola! Te comparto este tutorial de Organización Chialvo: *' + title + '* 👉 ' + url;
   return 'https://wa.me/?text=' + encodeURIComponent(msg);
-}
-
-function shareBtn(id, title, cssClass) {
-  var a = document.createElement('a');
-  a.className = cssClass;
-  a.href = waShareUrl(id, title);
-  a.target = '_blank';
-  a.innerHTML = WA_SVG + ' Compartir por WhatsApp';
-  a.addEventListener('click', function(e) { e.stopPropagation(); });
-  return a.outerHTML;
 }
 
 function cardHtml(t, q) {
@@ -867,6 +855,7 @@ function cardHtml(t, q) {
   var tags = t.tags.map(function(tg) {
     return '<span class="tcard-tag ' + (q && tg.toLowerCase().includes(q) ? 'match' : '') + '">' + tg + '</span>';
   }).join('');
+  var waUrl = waShareUrl(t.id, t.title);
   return '<div class="tcard" onclick="showDetail(' + t.id + ')">' +
     '<div class="tcard-top">' +
     '<div class="tcard-icon ' + (isFin ? 'fin' : 'sin') + '">' + t.icon + '</div>' +
@@ -876,7 +865,7 @@ function cardHtml(t, q) {
     '</div></div>' +
     '<div class="tcard-desc">' + t.desc + '</div>' +
     '<div class="tcard-tags">' + tags + '</div>' +
-    shareBtn(t.id, t.title, 'tcard-share') +
+    '<a class="tcard-share" href="' + waUrl + '" target="_blank" onclick="event.stopPropagation()">📲 Compartir</a>' +
     '</div>';
 }
 
@@ -905,10 +894,10 @@ function renderTutorials(q) {
 function showDetail(id) {
   var t = TUTORIALES.find(function(x) { return x.id === id; });
   if (!t) { return; }
-  // Actualizar URL con hash para que se pueda copiar/compartir
   history.pushState(null, '', '#tutorial-' + id);
-  var detailShareBtn = shareBtn(t.id, t.title, 'detail-share');
-  document.getElementById('detailContent').innerHTML = t.renderDetail() + detailShareBtn;
+  var waUrl = waShareUrl(t.id, t.title);
+  document.getElementById('detailContent').innerHTML = t.renderDetail() +
+    '<a class="detail-share" href="' + waUrl + '" target="_blank">📲 Compartir por WhatsApp</a>';
   document.getElementById('sec-tutoriales').classList.add('hidden');
   document.getElementById('sec-detail').classList.remove('hidden');
   window.scrollTo(0, 0);
@@ -1018,16 +1007,11 @@ function renderHeroCalendario() {
 
 // La página arranca en el inicio — el contenido se carga al hacer click en una card
 renderHeroCalendario();
-
 // Deep link: si la URL tiene #tutorial-ID, abrir ese tutorial directamente
 (function() {
   var hash = window.location.hash;
   var match = hash.match(/^#tutorial-(\d+)$/);
-  if (match) {
-    var id = parseInt(match[1]);
-    showSection('tutoriales');
-    showDetail(id);
-  }
+  if (match) { showSection('tutoriales'); showDetail(parseInt(match[1])); }
 })();</script>
 </body>
 </html>
