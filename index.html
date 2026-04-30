@@ -852,6 +852,16 @@ function waShareUrl(id, title) {
   return 'https://wa.me/?text=' + encodeURIComponent(msg);
 }
 
+function shareBtn(id, title, cssClass) {
+  var a = document.createElement('a');
+  a.className = cssClass;
+  a.href = waShareUrl(id, title);
+  a.target = '_blank';
+  a.innerHTML = WA_SVG + ' Compartir por WhatsApp';
+  a.addEventListener('click', function(e) { e.stopPropagation(); });
+  return a.outerHTML;
+}
+
 function cardHtml(t, q) {
   var isFin = t.section === 'Finanzas';
   var tags = t.tags.map(function(tg) {
@@ -866,7 +876,7 @@ function cardHtml(t, q) {
     '</div></div>' +
     '<div class="tcard-desc">' + t.desc + '</div>' +
     '<div class="tcard-tags">' + tags + '</div>' +
-    '<a class="tcard-share" href="' + waShareUrl(t.id, t.title) + '" target="_blank" onclick="event.stopPropagation()">' + WA_SVG + ' Compartir</a>' +
+    shareBtn(t.id, t.title, 'tcard-share') +
     '</div>';
 }
 
@@ -897,8 +907,8 @@ function showDetail(id) {
   if (!t) { return; }
   // Actualizar URL con hash para que se pueda copiar/compartir
   history.pushState(null, '', '#tutorial-' + id);
-  var shareBtn = '<a class="detail-share" href="' + waShareUrl(t.id, t.title) + '" target="_blank">' + WA_SVG + ' Compartir por WhatsApp</a>';
-  document.getElementById('detailContent').innerHTML = t.renderDetail() + shareBtn;
+  var detailShareBtn = shareBtn(t.id, t.title, 'detail-share');
+  document.getElementById('detailContent').innerHTML = t.renderDetail() + detailShareBtn;
   document.getElementById('sec-tutoriales').classList.add('hidden');
   document.getElementById('sec-detail').classList.remove('hidden');
   window.scrollTo(0, 0);
