@@ -189,6 +189,10 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 .tcard-tags { display: flex; flex-wrap: wrap; gap: 4px; }
 .tcard-tag { font-size: 10px; padding: 2px 7px; border-radius: 20px; background: var(--gray-100); color: var(--gray-500); border: 1px solid var(--gray-300); }
 .tcard-tag.match { background: var(--maiz-light); color: var(--maiz-dark); border-color: var(--maiz); font-weight: 600; }
+.tcard-share { display: inline-flex; align-items: center; gap: 5px; margin-top: 4px; background: #25D366; color: white; font-size: 11px; font-weight: 700; padding: 5px 11px; border-radius: 20px; text-decoration: none; transition: opacity 0.2s; align-self: flex-start; }
+.tcard-share:hover { opacity: 0.85; }
+.detail-share { display: inline-flex; align-items: center; gap: 7px; background: #25D366; color: white; font-size: 13px; font-weight: 700; padding: 9px 18px; border-radius: 20px; text-decoration: none; transition: opacity 0.2s, transform 0.15s; margin-top: 20px; }
+.detail-share:hover { opacity: 0.85; transform: translateY(-1px); }
 .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--gray-500); background: var(--white); border: 1.5px solid var(--gray-300); border-radius: var(--radius-sm); padding: 8px 14px; cursor: pointer; margin-bottom: 18px; transition: all 0.15s; font-family: inherit; }
 .back-btn:hover { color: var(--black); border-color: var(--black); }
 .detail-card { background: var(--white); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-sm); }
@@ -840,6 +844,14 @@ function matches(t, q) {
     t.tags.some(function(tg) { return tg.toLowerCase().includes(q); }) || t.section.toLowerCase().includes(q);
 }
 
+var WA_SVG = '<svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>';
+
+function waShareUrl(id, title) {
+  var url = 'https://orgchialvo.github.io/portal-chialvo/#tutorial-' + id;
+  var msg = '¡Hola! Te comparto este tutorial de Organización Chialvo: *' + title + '* 👉 ' + url;
+  return 'https://wa.me/?text=' + encodeURIComponent(msg);
+}
+
 function cardHtml(t, q) {
   var isFin = t.section === 'Finanzas';
   var tags = t.tags.map(function(tg) {
@@ -854,6 +866,7 @@ function cardHtml(t, q) {
     '</div></div>' +
     '<div class="tcard-desc">' + t.desc + '</div>' +
     '<div class="tcard-tags">' + tags + '</div>' +
+    '<a class="tcard-share" href="' + waShareUrl(t.id, t.title) + '" target="_blank" onclick="event.stopPropagation()">' + WA_SVG + ' Compartir</a>' +
     '</div>';
 }
 
@@ -882,13 +895,17 @@ function renderTutorials(q) {
 function showDetail(id) {
   var t = TUTORIALES.find(function(x) { return x.id === id; });
   if (!t) { return; }
-  document.getElementById('detailContent').innerHTML = t.renderDetail();
+  // Actualizar URL con hash para que se pueda copiar/compartir
+  history.pushState(null, '', '#tutorial-' + id);
+  var shareBtn = '<a class="detail-share" href="' + waShareUrl(t.id, t.title) + '" target="_blank">' + WA_SVG + ' Compartir por WhatsApp</a>';
+  document.getElementById('detailContent').innerHTML = t.renderDetail() + shareBtn;
   document.getElementById('sec-tutoriales').classList.add('hidden');
   document.getElementById('sec-detail').classList.remove('hidden');
   window.scrollTo(0, 0);
 }
 
 function backToList() {
+  history.pushState(null, '', window.location.pathname);
   document.getElementById('sec-detail').classList.add('hidden');
   document.getElementById('sec-tutoriales').classList.remove('hidden');
 }
@@ -990,6 +1007,18 @@ function renderHeroCalendario() {
 }
 
 // La página arranca en el inicio — el contenido se carga al hacer click en una card
-renderHeroCalendario();</script>
+renderHeroCalendario();
+
+// Deep link: si la URL tiene #tutorial-ID, abrir ese tutorial directamente
+(function() {
+  var hash = window.location.hash;
+  var match = hash.match(/^#tutorial-(\d+)$/);
+  if (match) {
+    var id = parseInt(match[1]);
+    showSection('tutoriales');
+    showDetail(id);
+  }
+})();</script>
 </body>
 </html>
+
