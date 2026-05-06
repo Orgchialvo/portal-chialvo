@@ -248,6 +248,33 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 .empty-state { padding: 3rem 0; text-align: center; font-size: 14px; color: var(--gray-300); }
 .hidden { display: none !important; }
 .nav-btn.nav-home { border-right: 1px solid var(--gray-100); margin-right: 4px; padding-right: 20px; }
+
+/* ── PRÓXIMAS VISITAS ── */
+.visitas-header { display: flex; align-items: flex-start; gap: 20px; background: var(--black); border-radius: var(--radius); padding: 24px 28px; margin-bottom: 20px; }
+.visitas-header-text { flex: 1; }
+.visitas-chip { display: inline-flex; align-items: center; gap: 6px; background: rgba(232,184,75,0.18); border: 1px solid rgba(232,184,75,0.4); color: var(--maiz); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; letter-spacing: 0.5px; text-transform: uppercase; }
+.visitas-header h3 { font-size: 20px; font-weight: 700; color: var(--white); margin: 0 0 6px; }
+.visitas-header p { font-size: 13px; color: rgba(255,255,255,0.6); margin: 0; line-height: 1.6; }
+.visitas-semana-pill { display: inline-flex; align-items: center; gap: 5px; background: var(--maiz); color: var(--black); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-top: 12px; }
+.huinca-viaje-img { width: 130px; height: 130px; object-fit: contain; flex-shrink: 0; }
+.loc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.loc-card { background: var(--white); border-radius: var(--radius); border: 1.5px solid transparent; box-shadow: var(--shadow-sm); overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+.loc-card:hover { border-color: var(--maiz); box-shadow: var(--shadow-md); }
+.loc-head { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: var(--gray-100); border-bottom: 1px solid rgba(0,0,0,0.05); }
+.loc-pin { color: var(--maiz-dark); font-size: 15px; flex-shrink: 0; }
+.loc-name { font-size: 13px; font-weight: 700; color: var(--black); flex: 1; }
+.loc-count { font-size: 11px; font-weight: 600; color: var(--gray-500); background: var(--white); border: 1px solid var(--gray-300); border-radius: 20px; padding: 2px 8px; flex-shrink: 0; }
+.loc-semana-badge { font-size: 10px; font-weight: 700; color: var(--black); background: var(--maiz); border-radius: 20px; padding: 2px 8px; flex-shrink: 0; }
+.vis-row { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-bottom: 1px solid var(--gray-100); transition: background 0.15s; }
+.vis-row:last-child { border-bottom: none; }
+.vis-row.esta-semana { background: var(--maiz-light); }
+.vis-row:hover { background: rgba(232,184,75,0.07); }
+.vis-row.esta-semana:hover { background: rgba(232,184,75,0.2); }
+.vis-fecha { background: var(--black); color: var(--maiz); border-radius: 7px; padding: 3px 8px; font-size: 11px; font-weight: 700; min-width: 42px; text-align: center; flex-shrink: 0; }
+.vis-row.esta-semana .vis-fecha { background: var(--maiz); color: var(--black); }
+.vis-dia { font-size: 11px; color: var(--gray-500); min-width: 28px; flex-shrink: 0; }
+.vis-resp { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--gray-700); background: var(--gray-100); border-radius: 20px; padding: 3px 9px; flex-shrink: 0; }
+.vis-row.esta-semana .vis-resp { background: rgba(232,184,75,0.3); color: var(--maiz-dark); }
 </style>
 </head>
 <body>
@@ -285,6 +312,11 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
         <div class="hero-card-title">Huinca</div>
         <div class="hero-card-desc">Asesor virtual de productos Sancor</div>
       </div>
+      <div class="hero-card" onclick="showSection('visitas')">
+        <div class="hero-card-icon">🗺️</div>
+        <div class="hero-card-title">Próximas Visitas</div>
+        <div class="hero-card-desc">Visitas de mayo organizadas por localidad</div>
+      </div>
       <div class="hero-card span2" onclick="showSection('calendario')">
         <div class="hero-card-title">📅 Calendario — Julio 2026</div>
         <div id="hero-cal-mini"></div>
@@ -299,6 +331,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
     <button class="nav-btn nav-home" onclick="showHome()">← Inicio</button>
     <button class="nav-btn" onclick="showSection('tutoriales')">Tutoriales</button>
     <button class="nav-btn" onclick="showSection('novedades')">Novedades</button>
+    <button class="nav-btn" onclick="showSection('visitas')">Visitas</button>
     <button class="nav-btn" onclick="showSection('calendario')">Calendario</button>
   </div>
 </div>
@@ -319,6 +352,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
     <div class="detail-card" id="detailContent"></div>
   </div>
   <div id="sec-novedades" class="hidden"><div id="novedadesList"></div></div>
+  <div id="sec-visitas" class="hidden"><div id="visitasList"></div></div>
   <div id="sec-calendario" class="hidden"><div id="calendarioContent"></div></div>
 </div>
 
@@ -914,21 +948,116 @@ function backToList() {
   document.getElementById('sec-tutoriales').classList.remove('hidden');
 }
 
+// ── PRÓXIMAS VISITAS ──
+var VISITAS = [
+  { fecha: '2026-05-06', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Fernando' },
+  { fecha: '2026-05-07', dia: 'Jue', locs: ['Ceres','Selva'], resp: 'Mauricio' },
+  { fecha: '2026-05-08', dia: 'Vie', locs: ['Arrufó','Villa Trinidad'], resp: 'Javier' },
+  { fecha: '2026-05-12', dia: 'Mar', locs: ['Bandera','Añatuya','Fernandez','Pinto','Selva'], resp: 'Fernando' },
+  { fecha: '2026-05-13', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Mauricio' },
+  { fecha: '2026-05-13', dia: 'Mié', locs: ['Ceres'], resp: 'Gerardo' },
+  { fecha: '2026-05-14', dia: 'Jue', locs: ['Arrufó','Villa Trinidad'], resp: 'Javier' },
+  { fecha: '2026-05-20', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Gerardo' },
+  { fecha: '2026-05-20', dia: 'Mié', locs: ['Arrufó','Villa Trinidad'], resp: 'Fernando' },
+  { fecha: '2026-05-21', dia: 'Jue', locs: ['Ceres','Selva'], resp: 'Mauricio' },
+  { fecha: '2026-05-26', dia: 'Mar', locs: ['Ceres'], resp: 'Fernando' },
+  { fecha: '2026-05-27', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Marcelo' },
+  { fecha: '2026-05-27', dia: 'Mié', locs: ['Arrufó','Villa Trinidad'], resp: 'Mauricio' },
+  { fecha: '2026-05-27', dia: 'Mié', locs: ['Bandera','Añatuya','Fernandez','Pinto','Selva'], resp: 'Gerardo' }
+];
+
+function getSemanaBounds() {
+  var hoy = new Date();
+  var dow = hoy.getDay();
+  var lunes = new Date(hoy);
+  lunes.setDate(hoy.getDate() - (dow === 0 ? 6 : dow - 1));
+  lunes.setHours(0,0,0,0);
+  var viernes = new Date(lunes);
+  viernes.setDate(lunes.getDate() + 4);
+  viernes.setHours(23,59,59,999);
+  return { desde: lunes, hasta: viernes };
+}
+
+function esSemanaActual(fechaStr) {
+  var s = getSemanaBounds();
+  var f = new Date(fechaStr + 'T00:00:00');
+  return f >= s.desde && f <= s.hasta;
+}
+
+function fmtFecha(fechaStr) {
+  var p = fechaStr.split('-');
+  return p[2] + '/' + p[1];
+}
+
+function renderVisitas() {
+  var mapa = {};
+  VISITAS.forEach(function(v) {
+    v.locs.forEach(function(loc) {
+      if (!mapa[loc]) mapa[loc] = [];
+      mapa[loc].push({ fecha: v.fecha, dia: v.dia, resp: v.resp, semana: esSemanaActual(v.fecha) });
+    });
+  });
+  var locs = Object.keys(mapa).sort();
+  locs.forEach(function(loc) {
+    mapa[loc].sort(function(a, b) { return a.fecha.localeCompare(b.fecha); });
+  });
+
+  var semana = getSemanaBounds();
+  var opts = { day: 'numeric', month: 'long' };
+  var semanaLabel = semana.desde.toLocaleDateString('es-AR', opts) + ' – ' + semana.hasta.toLocaleDateString('es-AR', opts);
+  var hayEstaSemana = VISITAS.some(function(v) { return esSemanaActual(v.fecha); });
+
+  var html = '<div class="visitas-header">'
+    + '<div class="visitas-header-text">'
+    + '<div class="visitas-chip">🗺️ Próximas visitas</div>'
+    + '<h3>Mayo 2026</h3>'
+    + '<p>Visitas del equipo organizadas por localidad.</p>'
+    + (hayEstaSemana ? '<div class="visitas-semana-pill">⚡ Esta semana: ' + semanaLabel + '</div>' : '')
+    + '</div>'
+    + '<img class="huinca-viaje-img" src="ChatGPT_Image_27_abr_2026__12_39_00_p_m_.png" alt="Huinca viajando" onerror="this.style.display=\'none\'"/>'
+    + '</div>';
+
+  html += '<div class="loc-grid">';
+  locs.forEach(function(loc) {
+    var visitas = mapa[loc];
+    var tieneSemana = visitas.some(function(v) { return v.semana; });
+    html += '<div class="loc-card">'
+      + '<div class="loc-head">'
+      + '<span class="loc-pin">📍</span>'
+      + '<span class="loc-name">' + loc + '</span>'
+      + '<span class="loc-count">' + visitas.length + ' visita' + (visitas.length > 1 ? 's' : '') + '</span>'
+      + (tieneSemana ? '<span class="loc-semana-badge">⚡</span>' : '')
+      + '</div>';
+    visitas.forEach(function(v) {
+      html += '<div class="vis-row' + (v.semana ? ' esta-semana' : '') + '">'
+        + '<div class="vis-fecha">' + fmtFecha(v.fecha) + '</div>'
+        + '<span class="vis-dia">' + v.dia + '</span>'
+        + '<span class="vis-resp">👤 ' + v.resp + '</span>'
+        + '</div>';
+    });
+    html += '</div>';
+  });
+  html += '</div>';
+
+  document.getElementById('visitasList').innerHTML = html;
+}
+
 function showSection(s) {
   document.getElementById('hero').classList.add('hidden');
   document.getElementById('equipo-section').classList.add('hidden');
   document.getElementById('nav-wrap').classList.remove('hidden');
   document.getElementById('main-content').classList.remove('hidden');
-  ['tutoriales', 'detail', 'novedades', 'calendario'].forEach(function(x) {
+  ['tutoriales','detail','novedades','visitas','calendario'].forEach(function(x) {
     document.getElementById('sec-' + x).classList.add('hidden');
   });
   document.getElementById('sec-' + s).classList.remove('hidden');
   document.querySelectorAll('.nav-btn').forEach(function(b, i) {
-    b.classList.toggle('active', ['tutoriales', 'novedades', 'calendario'][i] === s);
+    b.classList.toggle('active', ['tutoriales','novedades','visitas','calendario'][i] === s);
   });
-  if (s === 'novedades') { renderNovedades(); }
-  if (s === 'calendario') { renderCalendario(); }
-  if (s === 'tutoriales') { renderTutorials(''); }
+  if (s === 'novedades') renderNovedades();
+  if (s === 'calendario') renderCalendario();
+  if (s === 'tutoriales') renderTutorials('');
+  if (s === 'visitas') renderVisitas();
   window.scrollTo(0, 0);
 }
 
