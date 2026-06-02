@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Productores — Organización Chialvo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --maiz: #E8B84B;
+  --maiz-dark: #C9991E;
+  --maiz-light: #FDF3D9;
+  --black: #111111;
+  --gray-900: #1C1C1E;
+  --gray-700: #3A3A3C;
+  --gray-500: #636366;
+  --gray-300: #C7C7CC;
+  --gray-100: #F2F2F7;
+  --white: #FFFFFF;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-100); color: var(--black); -webkit-font-smoothing: antialiased; }
+
+/* ── TOPBAR ── */
+.topbar { background: var(--black); padding: 0 24px; height: 60px; display: flex; align-items: center; position: sticky; top: 0; z-index: 100; }
+.topbar-inner { max-width: 900px; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 12px; }
+.topbar-logo { width: 36px; height: 36px; border-radius: 10px; background: var(--maiz); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.topbar-text h1 { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.2; }
+.topbar-text p { font-size: 11px; color: var(--gray-300); }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 3px solid var(--maiz);
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('img_oficina.png');
+  background-size: cover;
+  background-position: center top;
+  filter: brightness(0.38);
+  z-index: 0;
+}
+.hero-inner {
+  position: relative; z-index: 1;
+  max-width: 900px; margin: 0 auto; width: 100%;
+  padding: 36px 24px 32px;
+}
+.hero-chip { display: inline-flex; align-items: center; background: rgba(232,184,75,0.18); border: 1px solid rgba(232,184,75,0.4); color: var(--maiz); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; }
+.hero h2 { font-size: 26px; font-weight: 700; color: var(--white); margin-bottom: 8px; line-height: 1.25; }
+.hero p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.7; max-width: 520px; margin-bottom: 28px; }
+
+/* Quick-access cards */
+.hero-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 620px; }
+@media (max-width: 500px) { .hero-cards { grid-template-columns: 1fr; max-width: 100%; } }
+.hero-card {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 14px;
+  padding: 18px 18px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, border-color 0.2s;
+  text-align: left;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.hero-card:hover { background: rgba(232,184,75,0.22); border-color: var(--maiz); transform: translateY(-2px); }
+.hero-card.span2 { grid-column: span 2; }
+@media (max-width: 500px) { .hero-card.span2 { grid-column: span 1; } }
+.hero-card-icon { font-size: 24px; }
+.hero-card-title { font-size: 14px; font-weight: 700; color: var(--white); }
+.hero-card-desc { font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+/* Mini calendario en hero */
+.cal-mini-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; margin-top: 10px; }
+.cal-mini-name { font-size: 9px; color: rgba(255,255,255,0.4); text-align: center; padding: 2px 0; }
+.cal-mini-day { height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: rgba(255,255,255,0.45); }
+.cal-mini-day.event { background: var(--maiz); color: var(--black); font-weight: 700; }
+.cal-mini-event { margin-top: 8px; display: flex; align-items: center; gap: 7px; }
+.cal-mini-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--maiz); flex-shrink: 0; }
+.cal-mini-label { font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.4; }
+
+/* ── EQUIPO ── */
+.equipo-section { background: var(--white); border-bottom: 1px solid var(--gray-100); }
+.equipo-inner { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+.equipo-title { font-size: 18px; font-weight: 700; color: var(--black); margin-bottom: 4px; }
+.equipo-subtitle { font-size: 13px; color: var(--gray-500); margin-bottom: 24px; }
+.equipo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+@media (max-width: 480px) { .equipo-grid { grid-template-columns: repeat(2, 1fr); } }
+.miembro-card {
+  background: var(--gray-100);
+  border-radius: var(--radius);
+  padding: 18px 12px 14px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+.miembro-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.miembro-avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--maiz);
+  background: var(--gray-300);
+  flex-shrink: 0;
+}
+.miembro-avatar-placeholder {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--maiz-light);
+  border: 3px solid var(--maiz);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; font-weight: 700; color: var(--maiz-dark);
+  flex-shrink: 0;
+}
+.miembro-nombre { font-size: 13px; font-weight: 700; color: var(--black); text-align: center; line-height: 1.3; }
+.miembro-area { font-size: 11px; color: var(--gray-500); text-align: center; margin-top: -4px; margin-bottom: 2px; }
+.miembro-btns { display: flex; flex-direction: column; gap: 5px; width: 100%; }
+.miembro-wa {
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  background: #25D366; color: var(--white);
+  font-size: 11px; font-weight: 700;
+  padding: 5px 8px; border-radius: 20px;
+  text-decoration: none; transition: opacity 0.2s;
+}
+.miembro-wa:hover { opacity: 0.85; }
+.miembro-mail {
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  background: #6366F1; color: var(--white);
+  font-size: 11px; font-weight: 700;
+  padding: 5px 8px; border-radius: 20px;
+  text-decoration: none; transition: opacity 0.2s;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.miembro-mail:hover { opacity: 0.85; }
+
+/* ── NAV ── */
+.nav-wrap { background: var(--white); border-bottom: 1px solid var(--gray-100); box-shadow: var(--shadow-sm); }
+.nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; display: flex; overflow-x: auto; }
+.nav-btn { padding: 16px 20px; font-size: 13px; font-weight: 500; color: var(--gray-500); border: none; background: transparent; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; font-family: inherit; }
+.nav-btn.active { color: var(--black); border-bottom-color: var(--maiz); font-weight: 700; }
+.nav-btn:hover:not(.active) { color: var(--black); }
+
+/* ── CONTENT ── */
+.content { padding: 24px; max-width: 900px; margin: 0 auto; }
+.search-wrap { margin-bottom: 20px; }
+.search-box { display: flex; align-items: center; gap: 12px; background: var(--white); border: 1.5px solid var(--gray-300); border-radius: var(--radius); padding: 13px 18px; box-shadow: var(--shadow-sm); transition: border-color 0.2s, box-shadow 0.2s; }
+.search-box:focus-within { border-color: var(--maiz); box-shadow: 0 0 0 3px rgba(232,184,75,0.15); }
+.search-box input { border: none; background: transparent; font-size: 15px; color: var(--black); flex: 1; outline: none; font-family: inherit; }
+.search-box input::placeholder { color: var(--gray-300); }
+.results-label { font-size: 12px; color: var(--gray-500); margin-bottom: 12px; font-weight: 500; min-height: 18px; }
+.camila-banner { background: var(--white); border-radius: var(--radius); padding: 18px 22px; margin-bottom: 20px; box-shadow: var(--shadow-sm); border: 1.5px solid var(--maiz-light); display: flex; align-items: center; gap: 16px; }
+.camila-avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid var(--maiz); flex-shrink: 0; }
+.camila-text { flex: 1; }
+.camila-text p { font-size: 14px; color: var(--gray-700); line-height: 1.6; }
+.camila-text strong { color: var(--black); }
+.camila-wa { display: inline-flex; align-items: center; gap: 7px; margin-top: 8px; background: #25D366; color: white; font-size: 13px; font-weight: 700; padding: 7px 14px; border-radius: 20px; text-decoration: none; transition: opacity 0.2s; }
+.camila-wa:hover { opacity: 0.85; }
+.sec-header { display: flex; align-items: center; gap: 10px; margin: 24px 0 12px; }
+.sec-header-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.sec-header-icon.fin { background: var(--maiz-light); }
+.sec-header-icon.sin { background: #EEF2FF; }
+.sec-header-text h3 { font-size: 14px; font-weight: 700; color: var(--black); }
+.sec-header-text p { font-size: 12px; color: var(--gray-500); }
+.card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 8px; }
+@media (max-width: 580px) { .card-grid { grid-template-columns: 1fr; } }
+.tcard { background: var(--white); border-radius: var(--radius); padding: 18px; cursor: pointer; transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s; box-shadow: var(--shadow-sm); border: 1.5px solid transparent; display: flex; flex-direction: column; gap: 10px; }
+.tcard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--maiz); }
+.tcard-top { display: flex; align-items: flex-start; gap: 12px; }
+.tcard-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.tcard-icon.fin { background: var(--maiz-light); }
+.tcard-icon.sin { background: #EEF2FF; }
+.tcard-info { flex: 1; min-width: 0; }
+.tcard-title { font-size: 14px; font-weight: 700; color: var(--black); line-height: 1.4; margin-bottom: 4px; }
+.tcard-badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 20px; letter-spacing: 0.3px; }
+.tcard-badge.fin { background: var(--maiz-light); color: var(--maiz-dark); }
+.tcard-badge.sin { background: #EEF2FF; color: #3730A3; }
+.tcard-desc { font-size: 12px; color: var(--gray-500); line-height: 1.55; }
+.tcard-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.tcard-tag { font-size: 10px; padding: 2px 7px; border-radius: 20px; background: var(--gray-100); color: var(--gray-500); border: 1px solid var(--gray-300); }
+.tcard-tag.match { background: var(--maiz-light); color: var(--maiz-dark); border-color: var(--maiz); font-weight: 600; }
+.tcard-share { display: inline-flex; align-items: center; gap: 5px; margin-top: 4px; background: #25D366; color: white; font-size: 11px; font-weight: 700; padding: 5px 11px; border-radius: 20px; text-decoration: none; transition: opacity 0.2s; align-self: flex-start; }
+.tcard-share:hover { opacity: 0.85; }
+.detail-share { display: inline-flex; align-items: center; gap: 7px; background: #25D366; color: white; font-size: 13px; font-weight: 700; padding: 9px 18px; border-radius: 20px; text-decoration: none; transition: opacity 0.2s, transform 0.15s; margin-top: 20px; }
+.detail-share:hover { opacity: 0.85; transform: translateY(-1px); }
+.back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--gray-500); background: var(--white); border: 1.5px solid var(--gray-300); border-radius: var(--radius-sm); padding: 8px 14px; cursor: pointer; margin-bottom: 18px; transition: all 0.15s; font-family: inherit; }
+.back-btn:hover { color: var(--black); border-color: var(--black); }
+.detail-card { background: var(--white); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-sm); }
+.detail-top { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--gray-100); }
+.detail-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+.detail-icon.fin { background: var(--maiz-light); }
+.detail-icon.sin { background: #EEF2FF; }
+.detail-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; margin-bottom: 4px; }
+.detail-badge.fin { background: var(--maiz-light); color: var(--maiz-dark); }
+.detail-badge.sin { background: #EEF2FF; color: #3730A3; }
+.detail-title { font-size: 20px; font-weight: 700; color: var(--black); line-height: 1.3; }
+.step { display: flex; gap: 14px; margin-bottom: 16px; }
+.step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--black); color: var(--white); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.step-text { font-size: 14px; color: var(--gray-700); line-height: 1.7; flex: 1; }
+.step-text strong { color: var(--black); font-weight: 600; }
+.step-img { width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--gray-100); margin: 8px 0 18px; display: block; box-shadow: var(--shadow-sm); }
+.info-box { background: #EEF2FF; border-left: 3px solid #6366F1; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 16px; margin: 12px 0; font-size: 13px; color: #3730A3; line-height: 1.6; }
+.warn-box { background: var(--maiz-light); border-left: 3px solid var(--maiz); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 16px; margin: 12px 0; font-size: 13px; color: var(--maiz-dark); line-height: 1.6; }
+.data-box { background: var(--gray-100); border: 1px solid var(--gray-300); border-radius: var(--radius-sm); padding: 14px 16px; margin: 10px 0; font-size: 13px; line-height: 1.8; }
+.data-box strong { font-weight: 700; }
+.infografia { width: 100%; border-radius: var(--radius-sm); margin: 16px 0; display: block; box-shadow: var(--shadow-sm); }
+.divider { border: none; border-top: 1px solid var(--gray-100); margin: 20px 0; }
+.sub-section { background: var(--gray-100); border-radius: var(--radius-sm); padding: 18px 20px; margin: 18px 0; }
+.sub-section-title { font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+.sub-section-desc { font-size: 13px; color: var(--gray-700); line-height: 1.6; margin-bottom: 12px; }
+.novedades-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 8px; }
+.novedad-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); border: 1.5px solid transparent; transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s; cursor: default; }
+.novedad-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--maiz); }
+.novedad-header { height: 90px; display: flex; align-items: center; justify-content: center; font-size: 36px; }
+.novedad-header.color-1 { background: var(--maiz); }
+.novedad-header.color-2 { background: var(--gray-900); }
+.novedad-header.color-3 { background: #2D6A4F; }
+.novedad-header.color-4 { background: #3A3A3C; }
+.novedad-body-wrap { padding: 16px; }
+.novedad-date { font-size: 11px; color: var(--maiz-dark); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.novedad-title { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 6px; line-height: 1.4; }
+.novedad-body { font-size: 12px; color: var(--gray-500); line-height: 1.6; }
+.novedad-reqs { margin: 8px 0 0 16px; }
+.novedad-reqs li { font-size: 12px; color: var(--gray-700); margin-bottom: 4px; line-height: 1.5; }
+.novedad-img { width: 100%; display: block; margin-top: 10px; border-radius: var(--radius-sm); }
+.novedad-extra { font-size: 12px; color: var(--gray-700); line-height: 1.6; margin-top: 8px; }
+.cal-header { margin-bottom: 16px; }
+.cal-month-badge { display: inline-block; background: var(--black); color: var(--maiz); font-size: 15px; font-weight: 700; padding: 6px 14px; border-radius: var(--radius-sm); }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 24px; background: var(--white); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow-sm); }
+.cal-day-name { font-size: 11px; color: var(--gray-500); text-align: center; padding: 6px 0; font-weight: 700; text-transform: uppercase; }
+.cal-day { min-height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--gray-500); font-weight: 500; }
+.cal-day.other { color: var(--gray-300); }
+.cal-day.has-event { background: var(--maiz); color: var(--black); font-weight: 700; }
+.event-item { background: var(--white); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 10px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-sm); }
+.event-date-badge { background: var(--black); color: var(--maiz); border-radius: 10px; padding: 8px 12px; text-align: center; font-size: 13px; font-weight: 700; min-width: 50px; line-height: 1.4; flex-shrink: 0; }
+.event-title { font-size: 14px; font-weight: 700; }
+.event-desc { font-size: 12px; color: var(--gray-500); margin-top: 3px; }
+.empty-state { padding: 3rem 0; text-align: center; font-size: 14px; color: var(--gray-300); }
+.hidden { display: none !important; }
+.nav-btn.nav-home { border-right: 1px solid var(--gray-100); margin-right: 4px; padding-right: 20px; }
+
+/* ── PRÓXIMAS VISITAS ── */
+.visitas-header { display: flex; align-items: flex-start; gap: 20px; background: var(--black); border-radius: var(--radius); padding: 24px 28px; margin-bottom: 20px; }
+.visitas-header-text { flex: 1; }
+.visitas-chip { display: inline-flex; align-items: center; gap: 6px; background: rgba(232,184,75,0.18); border: 1px solid rgba(232,184,75,0.4); color: var(--maiz); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; letter-spacing: 0.5px; text-transform: uppercase; }
+.visitas-header h3 { font-size: 20px; font-weight: 700; color: var(--white); margin: 0 0 6px; }
+.visitas-header p { font-size: 13px; color: rgba(255,255,255,0.6); margin: 0; line-height: 1.6; }
+.visitas-semana-pill { display: inline-flex; align-items: center; gap: 5px; background: var(--maiz); color: var(--black); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-top: 12px; }
+.huinca-viaje-img { width: 130px; height: 130px; object-fit: contain; flex-shrink: 0; }
+.loc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.loc-card { background: var(--white); border-radius: var(--radius); border: 1.5px solid transparent; box-shadow: var(--shadow-sm); overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+.loc-card:hover { border-color: var(--maiz); box-shadow: var(--shadow-md); }
+.loc-head { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: var(--gray-100); border-bottom: 1px solid rgba(0,0,0,0.05); }
+.loc-pin { color: var(--maiz-dark); font-size: 15px; flex-shrink: 0; }
+.loc-name { font-size: 13px; font-weight: 700; color: var(--black); flex: 1; }
+.loc-count { font-size: 11px; font-weight: 600; color: var(--gray-500); background: var(--white); border: 1px solid var(--gray-300); border-radius: 20px; padding: 2px 8px; flex-shrink: 0; }
+.loc-semana-badge { font-size: 10px; font-weight: 700; color: var(--black); background: var(--maiz); border-radius: 20px; padding: 2px 8px; flex-shrink: 0; }
+.vis-row { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-bottom: 1px solid var(--gray-100); transition: background 0.15s; }
+.vis-row:last-child { border-bottom: none; }
+.vis-row.esta-semana { background: var(--maiz-light); }
+.vis-row:hover { background: rgba(232,184,75,0.07); }
+.vis-row.esta-semana:hover { background: rgba(232,184,75,0.2); }
+.vis-fecha { background: var(--black); color: var(--maiz); border-radius: 7px; padding: 3px 8px; font-size: 11px; font-weight: 700; min-width: 42px; text-align: center; flex-shrink: 0; }
+.vis-row.esta-semana .vis-fecha { background: var(--maiz); color: var(--black); }
+.vis-dia { font-size: 11px; color: var(--gray-500); min-width: 28px; flex-shrink: 0; }
+.vis-resp { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--gray-700); background: var(--gray-100); border-radius: 20px; padding: 3px 9px; flex-shrink: 0; }
+.vis-row.esta-semana .vis-resp { background: rgba(232,184,75,0.3); color: var(--maiz-dark); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-logo">🤝</div>
+    <div class="topbar-text">
+      <h1>Organización Chialvo</h1>
+      <p>Portal Productores</p>
+    </div>
+  </div>
+</div>
+
+<!-- HERO RENOVADO -->
+<div class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-chip">Portal Productores</div>
+    <h2>¡Hola! Bienvenido/a a tu portal</h2>
+    <p>Todo lo que necesitás para trabajar mejor, en un solo lugar. Tutoriales, novedades y el calendario de tu equipo.</p>
+    <div class="hero-cards">
+      <div class="hero-card" onclick="showSection('tutoriales')">
+        <div class="hero-card-icon">🎓</div>
+        <div class="hero-card-title">Tutoriales</div>
+        <div class="hero-card-desc">Guías paso a paso de Finanzas y Siniestros</div>
+      </div>
+      <div class="hero-card" onclick="showSection('novedades')">
+        <div class="hero-card-icon">📢</div>
+        <div class="hero-card-title">Novedades</div>
+        <div class="hero-card-desc">Últimas noticias y actualizaciones</div>
+      </div>
+      <!-- HUINCA: oculto temporalmente hasta finalizar testing
+      <div class="hero-card" onclick="window.location.href='huinca.html'">
+        <div class="hero-card-icon">🐱</div>
+        <div class="hero-card-title">Huinca</div>
+        <div class="hero-card-desc">Asesor virtual de productos Sancor</div>
+      </div>
+      -->
+      <div class="hero-card" onclick="showSection('visitas')">
+        <div class="hero-card-icon">🗺️</div>
+        <div class="hero-card-title">Próximas Visitas</div>
+        <div class="hero-card-desc">Visitas de junio organizadas por localidad</div>
+      </div>
+      <div class="hero-card span2" onclick="showSection('calendario')">
+        <div class="hero-card-title">📅 Calendario — Julio 2026</div>
+        <div id="hero-cal-mini"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap hidden" id="nav-wrap">
+  <div class="nav-inner">
+    <button class="nav-btn nav-home" onclick="showHome()">← Inicio</button>
+    <button class="nav-btn" onclick="showSection('tutoriales')">Tutoriales</button>
+    <button class="nav-btn" onclick="showSection('novedades')">Novedades</button>
+    <button class="nav-btn" onclick="showSection('visitas')">Visitas</button>
+    <button class="nav-btn" onclick="showSection('calendario')">Calendario</button>
+  </div>
+</div>
+
+<div class="content hidden" id="main-content">
+  <div id="sec-tutoriales">
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="#C7C7CC" stroke-width="1.5"/><path d="M10.5 10.5L14 14" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <input type="text" id="searchInput" placeholder="Buscá por tema: transferencia, choque, factura..." oninput="renderTutorials(this.value)"/>
+      </div>
+    </div>
+    <div class="results-label" id="resultsLabel"></div>
+    <div id="tutorialList"></div>
+  </div>
+  <div id="sec-detail" class="hidden">
+    <button class="back-btn" onclick="backToList()">← Volver</button>
+    <div class="detail-card" id="detailContent"></div>
+  </div>
+  <div id="sec-novedades" class="hidden"><div id="novedadesList"></div></div>
+  <div id="sec-visitas" class="hidden"><div id="visitasList"></div></div>
+  <div id="sec-calendario" class="hidden"><div id="calendarioContent"></div></div>
+</div>
+
+<!-- SECCIÓN EQUIPO (al final de la página) -->
+<div class="equipo-section" id="equipo-section">
+  <div class="equipo-inner">
+    <div class="equipo-title">Tu equipo</div>
+    <div class="equipo-subtitle">Estamos para ayudarte. Contactanos directamente por WhatsApp o mail.</div>
+    <div class="equipo-grid">
+
+      <div class="miembro-card">
+        <img src="img_equipo_marcelo.png" class="miembro-avatar" alt="Marcelo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">M</div>
+        <div class="miembro-nombre">Marcelo</div>
+        <div class="miembro-area">Gerencia</div>
+        <div class="miembro-btns">
+          <a class="miembro-mail" href="mailto:marcelo@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_equipo_gerardo.png" class="miembro-avatar" alt="Gerardo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">G</div>
+        <div class="miembro-nombre">Gerardo</div>
+        <div class="miembro-area">Gerencia</div>
+        <div class="miembro-btns">
+          <a class="miembro-mail" href="mailto:gerardo@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_camila.png" class="miembro-avatar" alt="Camila" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">C</div>
+        <div class="miembro-nombre">Camila</div>
+        <div class="miembro-area">Finanzas</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491691674" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:camila@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_mauricio.png" class="miembro-avatar" alt="Mauricio" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">M</div>
+        <div class="miembro-nombre">Mauricio</div>
+        <div class="miembro-area">Siniestros</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491465674" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:mauricio@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_horacio.png" class="miembro-avatar" alt="Horacio" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">H</div>
+        <div class="miembro-nombre">Horacio</div>
+        <div class="miembro-area">Siniestros</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491465671" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:horacio@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_equipo_mileva.png" class="miembro-avatar" alt="Mileva" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">Mi</div>
+        <div class="miembro-nombre">Mileva</div>
+        <div class="miembro-area">Asistencia técnica</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491431515" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:mileva@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_equipo_ludmila.png" class="miembro-avatar" alt="Ludmila" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">L</div>
+        <div class="miembro-nombre">Ludmila</div>
+        <div class="miembro-area">Suscripción</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491457648" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:ludmila@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_equipo_angelica.png" class="miembro-avatar" alt="Angélica" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">A</div>
+        <div class="miembro-nombre">Angélica</div>
+        <div class="miembro-area">Comercial</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493408572530" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:angelica@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_equipo_fernando.png" class="miembro-avatar" alt="Fernando" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">F</div>
+        <div class="miembro-nombre">Fernando</div>
+        <div class="miembro-area">Comercial</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491465672" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:fernando@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+      <div class="miembro-card">
+        <img src="img_equipo_javier.png" class="miembro-avatar" alt="Javier" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="miembro-avatar-placeholder" style="display:none">J</div>
+        <div class="miembro-nombre">Javier</div>
+        <div class="miembro-area">Contabilidad</div>
+        <div class="miembro-btns">
+          <a class="miembro-wa" href="https://wa.me/5493491465673" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="miembro-mail" href="mailto:javier@orgchialvo.com.ar">✉ Mail</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const WA_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.836L.057 23.487a.5.5 0 0 0 .609.61l5.76-1.505A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.001-1.371l-.358-.213-3.718.971.999-3.62-.234-.373A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>';
+
+const MAURICIO_BANNER = `<div class="camila-banner" style="margin-top:14px">
+  <img src="img_mauricio.png" class="camila-avatar" alt="Mauricio"/>
+  <div class="camila-text">
+    <p>¡Hola! Soy <strong>Mauricio</strong>. Recordá que estoy para ayudarte ante cualquier consulta.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+      <a class="camila-wa" href="https://wa.me/5493491465674" target="_blank">
+        ${WA_SVG}
+        (3491) 465674
+      </a>
+      <a class="camila-wa" href="mailto:mauricio@orgchialvo.com.ar" target="_blank" style="background:#6366F1">
+        ✉ mauricio@orgchialvo.com.ar
+      </a>
+    </div>
+  </div>
+</div>`;
+
+const HORACIO_BANNER = `<div class="camila-banner" style="margin-top:14px">
+  <img src="img_horacio.png" class="camila-avatar" alt="Horacio"/>
+  <div class="camila-text">
+    <p>¡Hola! Soy <strong>Horacio</strong>. Recordá que estoy para ayudarte ante cualquier consulta.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+      <a class="camila-wa" href="https://wa.me/5493491465671" target="_blank">
+        ${WA_SVG}
+        (3491) 465671
+      </a>
+      <a class="camila-wa" href="mailto:horacio@orgchialvo.com.ar" target="_blank" style="background:#6366F1">
+        ✉ horacio@orgchialvo.com.ar
+      </a>
+    </div>
+  </div>
+</div>`;
+
+const CAMILA_BANNER = `<div class="camila-banner">
+  <img src="img_camila.png" class="camila-avatar" alt="Camila"/>
+  <div class="camila-text">
+    <p>¡Hola! Soy <strong>Camila</strong>. Recordá que estoy para ayudarte ante cualquier consulta.</p>
+    <a class="camila-wa" href="https://wa.me/5493491691674" target="_blank">
+      ${WA_SVG}
+      (3491) 691674
+    </a>
+  </div>
+</div>`;
+
+const TUTORIALES = [
+  {
+    id: 1, icon: '🏦',
+    title: "Datos para pagar por transferencia",
+    section: "Finanzas",
+    desc: "CBU y alias habilitados para abonar seguros por transferencia bancaria.",
+    tags: ["transferencia", "CBU", "alias", "pago", "banco", "cheque", "depósito"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon fin">🏦</div><div><div class="detail-badge fin">Finanzas</div><div class="detail-title">Datos para pagar seguros por transferencia</div></div></div>
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:16px">Recordá que los medios habilitados para abonar los seguros mediante transferencias son los siguientes:</p>
+      <div class="data-box"><strong>🏦 Banco Macro</strong><br>Sancor Cooperativa de Seguros Limitada<br>CBU: 2850376730000059607406<br>Alias: JAGUAR.RUINA.MECHA</div>
+      <div class="data-box"><strong>🏦 Banco del Sol</strong><br>Sancor Cooperativa de Seguros Limitada<br>CBU: 3100003900020001619984<br>Alias: SANCORSEGUROS.BDS.AR</div>
+      <div class="warn-box"><strong>⚠️ Atención:</strong> NO está habilitada la vieja cuenta del Banco de Santa Fe.</div>
+      <hr class="divider">
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:10px"><strong>Pago con cheque:</strong> El nombre correcto de la empresa para la emisión es:</p>
+      <div class="data-box" style="font-size:15px;text-align:center;font-weight:700">"Sancor Cooperativa de Seguros Ltda."</div>
+      <div class="warn-box"><strong>⚠️ No utilizar:</strong> Sancor Seguros, Sancor Seguros SA, Sancor SA, ni cualquier otra variante — el banco rechazará el pago.</div>`; }
+  },
+  {
+    id: 2, icon: '🔄',
+    title: "Recuperar clientes por falta de pago",
+    section: "Finanzas",
+    desc: "Guía para evitar que tus clientes se queden sin seguro por deuda pendiente.",
+    tags: ["deuda", "falta de pago", "anulada", "recuperar", "débito automático", "cuota", "reactivar"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon fin">🔄</div><div><div class="detail-badge fin">Finanzas</div><div class="detail-title">Recuperar clientes por falta de pago</div></div></div>
+      <div class="info-box"><strong>Requisito central:</strong> Todo beneficio exige adhesión a Débito Automático y despacho por WhatsApp.</div>
+      <img src="img_recuperar_clientes.jpeg" class="infografia" alt="Guía recuperar clientes"/>
+      <hr class="divider">
+      <p style="font-size:14px;font-weight:700;margin-bottom:12px;color:#111">Clientes con póliza vigente (deuda pendiente)</p>
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Condonación de 1 cuota:</strong> Aplicable si el cliente adeuda 2 cuotas y adhiere a Débito Automático.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Deuda mayor a 2 cuotas:</strong> Consultar opciones para evaluar excepciones antes de proceder.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Sin adhesión a Débito:</strong> El cliente debe abonar la deuda completa para mantener la cobertura.</div></div>
+      <hr class="divider">
+      <p style="font-size:14px;font-weight:700;margin-bottom:12px;color:#111">Pólizas ya anuladas (recuperación)</p>
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Reactivación con solo 1 cuota:</strong> Permite cambiar la causa de anulación cobrando una única cuota pendiente.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Requisitos de reingreso:</strong> Nueva póliza con Débito Automático y sin reincidencias en el último año.</div></div>`; }
+  },
+  {
+    id: 3, icon: '📅',
+    title: "Eliminar interés por desfasaje administrativo",
+    section: "Finanzas",
+    desc: "Cómo usar el campo Fecha de Pago para omitir intereses cuando el cliente pagó antes del vencimiento.",
+    tags: ["interés", "desfasaje", "fecha de pago", "vencimiento", "lote", "cobranzas", "recibo", "remesa"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon fin">📅</div><div><div class="detail-badge fin">Finanzas</div><div class="detail-title">Eliminar interés por desfasaje administrativo</div></div></div>
+      <div class="info-box"><strong>Ejemplo:</strong> Póliza 30110387 — primer vencimiento adicional al 05/01/2024 (vencimiento original 22/12/2023).</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Ingresá al Portal de Cobranzas y generá un lote. El sistema devuelve el premio original más el importe del interés generado.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Moviéndote hacia la derecha vas a ver la columna <strong>INTERÉS</strong> con el total generado.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Si el cliente abonó antes del vencimiento adicional, una vez que agregás el recibo al lote, volvé a seleccionarlo. Eso habilita el campo <strong>FECHA DE PAGO</strong>.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Colocá la fecha en que el cliente efectivamente pagó. El sistema modifica el importe y coloca el premio original sin interés.</div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-text">Verificá que la columna INTERÉS muestre cero y que la fecha de pago sea la correcta.</div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-text">Confirmá el lote y remesalo. El pago impacta en la póliza y bloquea la NC generada por el interés.</div></div>
+      <div class="warn-box"><strong>Medios válidos:</strong> boletas de depósito, transferencias, e-cheq corriente y certificados de retención. La fecha del medio debe coincidir con la indicada en la carga del recibo.</div>`; }
+  },
+  {
+    id: 4, icon: '📄',
+    title: "Descarga de comprobantes por envío digital",
+    section: "Finanzas",
+    desc: "Cómo descargar facturas y comprobantes desde el portal de cobranzas.",
+    tags: ["factura", "comprobante", "descarga", "envío digital", "intermediarios", "refacturación"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon fin">📄</div><div><div class="detail-badge fin">Finanzas</div><div class="detail-title">Descarga de comprobantes por envío digital</div></div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Ingresá al Portal de Cobranzas.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Seleccioná <strong>Intermediarios → Gestión de Envíos Digitales</strong>.</div></div>
+      <img src="img_descarga_1.png" class="step-img" alt="Gestión de envíos digitales"/>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Andá al final de la página, buscá <strong>Documentación</strong> y hacé click en <strong>Descarga Individual</strong>.</div></div>
+      <img src="img_descarga_2.png" class="step-img" alt="Descarga individual"/>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Buscá por número de referencia, seleccioná <strong>Factura</strong> y hacé click en <strong>Ver</strong>.</div></div>
+      <img src="img_descarga_3.png" class="step-img" alt="Buscar por referencia"/>
+      <div class="step"><div class="step-num">5</div><div class="step-text">Seleccioná la <strong>última refacturación</strong> y elegí como documento <strong>Factura</strong>.</div></div>
+      <img src="img_descarga_4.png" class="step-img" alt="Última refacturación"/>
+      <div class="info-box">Siempre seleccioná la refacturación más reciente para obtener el comprobante actualizado.</div>`; }
+  },
+  {
+    id: 7, icon: '🔍',
+    title: "Búsqueda por número de comprobante",
+    section: "Finanzas",
+    desc: "Cómo encontrar una póliza desde el número de recibo, factura o comprobante.",
+    tags: ["comprobante", "recibo", "factura", "nota de débito", "SICORE", "ARCA", "consultar saldos"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon fin">🔍</div><div><div class="detail-badge fin">Finanzas</div><div class="detail-title">Búsqueda por número de comprobante</div></div></div>
+      <div class="info-box">Podés buscar por: recibos, facturas, notas de débito, notas de crédito, facturas electrónicas (caución, ej: 000500075733) y comprobantes SICORE-ARCA.</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Ingresá al Portal de Cobranzas.</div></div>
+      <img src="img_cobranzas_3.png" class="step-img" alt="Portal Cobranzas"/>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Seleccioná <strong>Consultar Saldos</strong>.</div></div>
+      <img src="img_cobranzas_2.png" class="step-img" alt="Consultar Saldos"/>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Filtrá por cliente y desplegá las <strong>opciones avanzadas</strong>.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Ingresá el número en el campo <strong>Nro. Comprobante</strong>. El sistema indica a qué póliza pertenece.</div></div>
+      <img src="img_cobranzas_1.png" class="step-img" alt="Campo Nro. Comprobante"/>`; }
+  },
+  {
+    id: 8, icon: '📋',
+    title: "Búsqueda de deuda — pólizas anuladas",
+    section: "Finanzas",
+    desc: "Cómo buscar pólizas anuladas por falta de pago y cargar recibos para reactivar.",
+    tags: ["anulada", "deuda", "falta de pago", "reactivar", "cobranza", "referencia", "DNI", "CUIT"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon fin">📋</div><div><div class="detail-badge fin">Finanzas</div><div class="detail-title">Búsqueda de deuda — pólizas anuladas</div></div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Ingresá al Portal de Cobranzas y seleccioná <strong>Pago Sancor</strong>.</div></div>
+      <img src="img_cobranzas_3.png" class="step-img" alt="Portal Cobranzas"/>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Hacé click en la pestaña <strong>Pólizas Anuladas</strong>.</div></div>
+      <img src="img_cobranzas_2.png" class="step-img" alt="Pólizas Anuladas"/>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Por referencia: seleccioná ramo, elegí <strong>Referencia</strong> e ingresá el número.<br>Por cliente: dejá <strong>Cliente</strong> e ingresá el DNI o CUIT.</div></div>
+      <img src="img_cobranzas_1.png" class="step-img" alt="Búsqueda"/>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Seleccioná <strong>2 cuotas</strong> para cambiar la causa de anulación.</div></div>
+      <div class="warn-box">La búsqueda aplica solo a pólizas anuladas por falta de pago.</div>`; }
+  },
+
+  // ── SINIESTROS ──────────────────────────────────────────────
+
+  {
+    id: 5, icon: '📺',
+    title: "Aparatos y equipos electrónicos",
+    section: "Siniestros",
+    desc: "Documentación necesaria para gestionar siniestros de aparatos y equipos electrónicos.",
+    tags: ["heladera", "televisor", "aire acondicionado", "electrodoméstico", "pantalla", "daño", "reparación", "presupuesto", "informe técnico"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon sin">📺</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Aparatos y equipos electrónicos</div></div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Informe técnico</strong> donde se detallen las causas del daño, junto con el <strong>presupuesto de reparación</strong>. Si el equipo no tiene reparación posible, debe constar en el Informe Técnico.<br><br><em>Ejemplo:</em></div></div>
+      <img src="img_sin_elec_presupuesto.png" class="step-img" alt="Ejemplo informe técnico y presupuesto"/>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Fotos del aparato dañado</strong> donde se pueda ver marca, modelo y estado del equipo.<br><br><em>Ejemplo:</em></div></div>
+      <img src="img_sin_elec_fotos_tv.png" class="step-img" alt="Ejemplo fotos del equipo dañado"/>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Fotos de los componentes dañados desmontados.</strong> El técnico puede incluirlas dentro del Informe Técnico.<br><br><em>Ejemplo:</em></div></div>
+      <img src="img_sin_elec_componentes.png" class="step-img" alt="Ejemplo componentes desmontados"/>
+      <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Fotos de los componentes nuevos montados</strong> una vez realizada la reparación.</div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Comprobante de CBU</strong> del titular de la póliza. Si el titular no tiene cuenta bancaria, ofrecerle la alternativa de abrir una en <strong>Banco del Sol</strong>.<br><br><em>Ejemplo:</em></div></div>
+      <img src="img_sin_elec_cbu.png" class="step-img" alt="Ejemplo constancia CBU Banco del Sol"/>
+      <div class="warn-box"><strong>Aclaraciones importantes:</strong> Cada siniestro es diferente y en algunos casos puede solicitarse documentación extra, acreditar daños o retirar los equipos para verificación con los técnicos de la compañía. <strong>Recordá no descartar los equipos y elementos dañados hasta el momento de la liquidación del siniestro.</strong></div>`; }
+  },
+  {
+    id: 6, icon: '🩹',
+    title: "Accidentes personales",
+    section: "Siniestros",
+    desc: "Coberturas disponibles para accidentes personales: en ocasión del trabajo, Íntegro Max y Eventos.",
+    tags: ["accidente", "accidente laboral", "lesión", "fractura", "AP", "reintegro", "prestacional", "rehabilitación", "traslado"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon sin">🩹</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Accidentes personales</div></div></div>
+      <div class="sub-section">
+        <div class="sub-section-title">1. AP en Ocasión del Trabajo</div>
+        <div class="sub-section-desc">Cobertura diseñada para particulares que contraten tareas puntuales o quienes se dediquen a manejar servicios con personal eventual.</div>
+        <img src="img_sin_ap_coberturas1.png" class="step-img" alt="Coberturas AP"/>
+        <img src="img_sin_ap_coberturas2.png" class="step-img" alt="Asistencia médica y gastos de sepelio"/>
+        <div class="info-box"><strong>Importante:</strong> La cobertura es <strong>POR REINTEGRO</strong>, no prestacional. El asegurado deberá pagar y luego la aseguradora le reintegrará el monto que corresponda.</div>
+        <div class="step"><div class="step-num">→</div><div class="step-text">Los reintegros se pueden cargar por sistema o adelantar vía mail. Si son por estudios médicos (RMN, Ecografías), también se debe aportar el informe.</div></div>
+        <div class="step"><div class="step-num">→</div><div class="step-text"><strong>No posee cobertura de reintegro de jornales.</strong></div></div>
+        <div class="step"><div class="step-num">→</div><div class="step-text"><strong>Rehabilitación:</strong> enviar pedido vía mail informando qué profesional realizará las sesiones.</div></div>
+        <div class="step"><div class="step-num">→</div><div class="step-text"><strong>Traslados:</strong> gastos reintegrables hasta el 10% de la suma asegurada de AMF.</div></div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-section-title">2. AP Íntegro Max</div>
+        <div class="sub-section-desc">Máxima cobertura para trabajadores y profesionales independientes, con atención médica a través de la red de prestadores.</div>
+        <img src="img_sin_ap_integro1.png" class="step-img" alt="Coberturas AP Íntegro Max"/>
+        <img src="img_sin_ap_integro2.png" class="step-img" alt="Asistencia médica farmacéutica y subsidio"/>
+      </div>
+      <div class="sub-section">
+        <div class="sub-section-title">3. AP Eventos</div>
+        <div class="sub-section-desc">No hay certificado por cada asegurado. Los datos del accidentado se ingresan al momento de la denuncia.</div>
+        <div class="data-box"><strong>Datos requeridos:</strong><br><br>1. Nombre y apellido<br>2. DNI<br>3. Fecha de nacimiento<br>4. Forma de ocurrencia</div>
+        <img src="img_sin_ap_eventos.png" class="step-img" alt="AP Eventos"/>
+        <div class="warn-box"><strong>Importante:</strong> La cobertura NO es prestacional, es por reintegro.</div>
+      </div>
+      <hr class="divider"/>
+      <div class="sub-section">
+        <div class="sub-section-title">🧲 Turnos para Resonancia Magnética (AP)</div>
+        <div class="sub-section-desc">Al solicitar autorización para una RMN, el asegurado puede gestionar el turno por su cuenta. Si prefiere que sea gestionado desde Sancor, es fundamental que nos indiquen los siguientes datos para evitar demoras:</div>
+        <div class="data-box">
+          <strong>Datos requeridos para gestión del turno desde Sancor:</strong><br><br>
+          • Peso<br>
+          • Altura<br>
+          • Número de teléfono<br>
+          • Lugar donde desea el turno
+        </div>
+        <div class="info-box">Sin estos datos no es posible gestionar el turno desde la compañía. Pedirlos desde el inicio evita demoras.</div>
+      </div>`; }
+  },
+  {
+    id: 9, icon: '🏗️',
+    title: "ART — Aseguradora de Riesgos del Trabajo",
+    section: "Siniestros",
+    desc: "Funciones de la ART, coberturas, gestión de siniestros, traslados y reintegros.",
+    tags: ["ART", "accidente de trabajo", "enfermedad profesional", "ILT", "jornal", "reintegro", "PreveNET", "traslado", "incapacidad"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon sin">🏗️</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">ART — Aseguradora de Riesgos del Trabajo</div></div></div>
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:16px">La ART se encarga de reparar los daños económicos en casos de accidentes de trabajo o enfermedades profesionales. Se hace cargo de la atención médica inmediata, el pago del sueldo durante el tratamiento (los primeros 10 días a cargo del empleador) y las indemnizaciones que correspondan.</p>
+      <hr class="divider"/>
+      <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">✅ Situaciones que están cubiertas</p>
+      <img src="img_sin_art_cubiertas.png" class="step-img" alt="Situaciones cubiertas por la ART"/>
+      <p style="font-size:15px;font-weight:700;color:#111;margin:16px 0 12px">❌ Situaciones que NO están cubiertas</p>
+      <img src="img_sin_art_nocubiertas.png" class="step-img" alt="Situaciones no cubiertas por la ART"/>
+      <hr class="divider"/>
+      <div class="sub-section">
+        <div class="sub-section-title">Incapacidad Laboral Temporal (ILT)</div>
+        <div class="sub-section-desc">Comienza en la fecha de la primera manifestación invalidante y finaliza con el alta médica, declaración de ILP, a los 2 años, o por fallecimiento. Los primeros 10 días los paga el empleador; desde el día 11 la ART.</div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-section-title">Incapacidad Laboral Permanente (ILP)</div>
+        <div class="sub-section-desc">Cuando el daño ocasiona una disminución de la capacidad de trabajo permanente. El grado es determinado por las Comisiones Médicas.</div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-section-title">Muerte del trabajador</div>
+        <div class="sub-section-desc">El Art. 248 de la LCT obliga al empleador a indemnizar a los derechohabientes, independientemente de las indemnizaciones por ley de accidentes de trabajo.</div>
+      </div>
+      <hr class="divider"/>
+      <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">📥 Ingreso de siniestros</p>
+      <div class="data-box">• Datos personales del accidentado (nombre, domicilio, teléfono).<br>• Fecha, hora, lugar y forma de ocurrencia.<br>• Datos adicionales en observaciones (ej: primera atención recibida).</div>
+      <div class="info-box">Ingresar desde <strong>PreveNET</strong> o llamar al <strong>0800-4444-278</strong>.</div>
+      <hr class="divider"/>
+      <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">🚗 Gestión de traslados</p>
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:12px">Gestionar vía mail informando fecha y horario del turno, o llamar al <strong>0800-5555-078</strong>.</p>
+      <hr class="divider"/>
+      <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">💰 Reintegro de gastos</p>
+      <div class="data-box">• Factura y/o comprobante válido.<br>• Pedido médico (prestaciones y/o medicamentos).<br>• Informe del estudio realizado.<br>• CBU del tomador o accidentado.</div>
+      <hr class="divider"/>
+      <p style="font-size:15px;font-weight:700;color:#111;margin-bottom:12px">📋 Reintegro de jornales</p>
+      <div class="data-box">• Recibo de sueldo firmado por el trabajador.<br>• Nota de solicitud si el empleador prefiere que el jornal se abone directamente al trabajador.</div>`; }
+  },
+  {
+    id: 10, icon: '🚗',
+    title: "Automotor",
+    section: "Siniestros",
+    desc: "Documentación por tipo de siniestro, sistema CLEAS, seguimiento de pericias, NEO y reporte de pagos.",
+    tags: ["choque", "robo", "hurto", "destrucción total", "granizo", "cristales", "incendio", "CLEAS", "pericia", "NEO", "Ceibo", "denuncia", "automotor", "tercero", "deducible", "acuerdo", "firma digital", "F04D", "indemnización"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon sin">🚗</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Automotor</div></div></div>
+      <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:20px">Aquí encontrarás la documentación a presentar en cada tipo de siniestro de automotor.</p>
+      <img src="img_auto_cristales.png" class="step-img" alt="Rotura o Reparación de Cristales"/>
+      <img src="img_auto_incendio_parcial.png" class="step-img" alt="Incendio Parcial"/>
+      <img src="img_auto_robo_hurto_parcial.png" class="step-img" alt="Robo y/o Hurto Parcial"/>
+      <img src="img_auto_danio_parcial_robo.png" class="step-img" alt="Daño Parcial sin Deducible al amparo de Robo Total"/>
+      <img src="img_auto_rotura_cerraduras.png" class="step-img" alt="Rotura de Cerraduras"/>
+      <img src="img_auto_accidente_parcial.png" class="step-img" alt="Accidente Parcial con Deducible"/>
+      <img src="img_auto_destruccion_total.png" class="step-img" alt="Destrucción Total"/>
+      <div class="info-box"><strong>Importante:</strong> En siniestros donde se encuentren involucradas dos unidades es importante contar con los datos del tercero. Puede suceder que el siniestro ingrese al sistema <strong>CLEAS</strong>.</div>
+      <hr class="divider"/>
+      <div class="sub-section">
+        <div class="sub-section-title">¿Qué es el sistema CLEAS?</div>
+        <div class="sub-section-desc">Es un sistema de compensación de siniestros entre compañías de seguros. Con CLEAS, si tenés un choque y no sos responsable, la aseguradora se encarga de todo: las compañías adheridas trabajan entre sí.</div>
+        <img src="img_auto_cleas_mapa.png" class="step-img" alt="Compañías adheridas al sistema CLEAS"/>
+        <p style="font-size:14px;font-weight:700;color:#111;margin:14px 0 8px">¿Cómo funciona?</p>
+        <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:12px">Cuando chocan dos vehículos asegurados en las compañías adheridas al sistema, entra en funcionamiento el CLEAS. El asegurado no responsable del siniestro sólo tiene que hacer la denuncia a su propia compañía, que se encargará de reparar el auto y hacer todos los trámites con la otra compañía.</p>
+        <p style="font-size:14px;font-weight:700;color:#111;margin:14px 0 8px">¿Qué tipos de choques entran en CLEAS?</p>
+        <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin-bottom:12px">Choques leves entre dos vehículos con seguro vigente en alguna de las compañías adheridas. Quedan excluidos motos y vehículos de más de 9 toneladas de peso bruto total (ómnibus y camiones).</p>
+        <p style="font-size:14px;font-weight:700;color:#111;margin:14px 0 8px">¿Qué casos están excluidos de este sistema?</p>
+        <div class="data-box">• Motos, máquinas agrícolas, vehículos de más de 9 toneladas de peso bruto total (ómnibus y camiones), casas rodantes, acoplados, furgones y semirremolques.<br>• Los siniestros entre vehículos de la misma Compañía.<br>• Vehículos que hayan sufrido destrucción total.<br>• Los siniestros con lesiones y/o muertes.</div>
+        <div class="warn-box">Existe un tope máximo que se actualiza con los meses. <strong>CONSULTAR antes de gestionar.</strong></div>
+      </div>
+      <hr class="divider"/>
+      <div class="sub-section">
+        <div class="sub-section-title">✍️ Firma de acuerdos — Destrucción Total (nuevo proceso)</div>
+        <div class="sub-section-desc">Se implementó un nuevo proceso de cierre para siniestros de destrucción total. Desde el inicio del trámite se solicita documentación adicional para agilizar el acuerdo.</div>
+        <div class="data-box">
+          <strong>Documentación adicional requerida desde el inicio:</strong><br><br>
+          • Documentación de baja (habitual)<br>
+          • <strong>Mail del asegurado</strong> (el que usa en el teléfono)<br>
+          • <strong>CBU</strong> del asegurado
+        </div>
+        <p style="font-size:14px;color:#3A3A3C;line-height:1.7;margin:12px 0 8px">Una vez completa la documentación de baja, se envía al asegurado el acuerdo por mail para que lo <strong>firme digitalmente</strong>. Si no está conforme con la indemnización, se informa al PAS y se plantea al gestor.</p>
+        <div class="warn-box">
+          <strong>¿Cuándo aplica este proceso?</strong><br>
+          Indemnizaciones <strong>menores a $40.000.000</strong> y cuando el beneficiario sea <strong>persona física</strong>.<br><br>
+          Para <strong>personas jurídicas</strong> o indemnizaciones <strong>mayores a $40.000.000</strong>: se envía acuerdo físico para firma y certificación ante juez o escribano.
+        </div>
+        <div class="info-box">
+          <strong>F04D digital:</strong> Se implementará el F04D en formato digital. El formulario físico se seguirá usando hasta agotar el stock en los registros automotor.
+        </div>
+      </div>
+      <hr class="divider"/>
+      <div class="sub-section">
+        <div class="sub-section-title">Seguimiento de pericias</div>
+        <div class="sub-section-desc">En Ceibo podemos verificar si la pericia ya fue realizada y su fecha de finalización, como así también si ya se enviaron las órdenes a los talleres, proveedores de repuestos, su fecha, etc.</div>
+        <p style="font-size:13px;color:#3A3A3C;line-height:1.7;margin-bottom:10px">Se debe ingresar a consultar el siniestro, luego al reclamo del <strong>ASEGURADO</strong> o <strong>TERCERO</strong>, según de quien se pretenda dar seguimiento, y allí se podrá observar la opción <strong>LINK DE SEGUIMIENTO DE PERICIA</strong>.</p>
+        <img src="img_auto_consulta_reclamo.png" class="step-img" alt="Consulta de Reclamo — Link seguimiento de pericia"/>
+        <p style="font-size:13px;color:#3A3A3C;line-height:1.7;margin-bottom:10px">Al ingresar se podrá ver la siguiente pantalla, con toda la información respecto de la pericia, órdenes de mano de obra para el taller y gestión de los repuestos.</p>
+        <img src="img_auto_pericia_gestion.png" class="step-img" alt="Pantalla seguimiento — peritación y gestión de repuestos"/>
+      </div>`; }
+  },
+  {
+    id: 11, icon: '💼',
+    title: "Seguros de vida — Siniestros por fallecimiento e incapacidad",
+    section: "Siniestros",
+    desc: "Documentación para seguros de vida individuales, colectivos y obligatorio por fallecimiento e incapacidad.",
+    tags: ["vida", "fallecimiento", "incapacidad", "sepelio", "beneficiario", "acta de defunción", "historia clínica", "CBU", "Vida Pyme", "Dec. 1567"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon sin">💼</div><div><div class="detail-badge sin">Siniestros</div><div class="detail-title">Seguros de vida — Siniestros por fallecimiento e incapacidad</div></div></div>
+      <div class="sub-section">
+        <div class="sub-section-title">Seguro de Vida Individual</div>
+        <div class="step"><div class="step-num">1</div><div class="step-text">Denuncia de Fallecimiento <strong>(F25/30)</strong>.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Copia de <strong>Acta de Defunción</strong> emitida por Registro Civil.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Copia de <strong>historia clínica completa</strong> e informes de estudios complementarios <em>(solo si la póliza tiene menos de un año de vigencia)</em>.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Constancia de CBU</strong> del/los beneficiario/s.</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text">Copia de <strong>DNI</strong> del/los beneficiario/s.</div></div>
+        <div class="step"><div class="step-num">6</div><div class="step-text">Copia de un <strong>recibo de haberes firmado</strong> por el empleado fallecido (cualquier período) y/o documento donde conste su firma (ej. copia del DNI).</div></div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-section-title">Seguro de Vida Colectivo — Vida Pyme</div>
+        <div class="step"><div class="step-num">1</div><div class="step-text">Denuncia de Fallecimiento <strong>(F25/30)</strong>.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Copia de <strong>Acta de Defunción</strong> emitida por Registro Civil.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Copia de <strong>historia clínica completa</strong> e informes de estudios complementarios <em>(solo si la póliza tiene menos de un año de vigencia)</em>.</div></div>
+        <div class="info-box">Aportar número de póliza y/o referencia, ya que de acuerdo con esta puede variar la documentación a presentar.</div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-section-title">Seguro de Vida Colectivo — Contrato de Trabajo</div>
+        <div class="step"><div class="step-num">1</div><div class="step-text">Denuncia de Fallecimiento <strong>(F25/30)</strong>.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Copia de <strong>Acta de Defunción</strong> emitida por Registro Civil.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Copia del recibo de liquidación final <strong>(Liquidación Ley Contrato de Trabajo Art. 248)</strong>, suscripta por los beneficiarios como constancia de percepción.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">Copia de <strong>historia clínica completa</strong> e informes de estudios complementarios <em>(solo si la póliza tiene menos de un año de vigencia)</em>.</div></div>
+        <p style="font-size:14px;font-weight:700;color:#111;margin:16px 0 10px">Para siniestros de Incapacidad Total y Permanente presentar además:</p>
+        <div class="step"><div class="step-num">1</div><div class="step-text">Denuncia de Fallecimiento <strong>(F25/30)</strong>.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Copia de Dictamen de Comisión Médica o informe de SRT donde se determine la incapacidad total, con el % de incapacidad y documentación médica de las patologías incapacitantes.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Copia del recibo de liquidación final <strong>(Art. 212)</strong>, firmada por el empleado como constancia de percepción.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">Copia de <strong>baja ante AFIP</strong>.</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text">Copia del <strong>telegrama de renuncia</strong>.</div></div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-section-title">Seguro de Vida Obligatorio — Dec. 1567/74</div>
+        <div class="step"><div class="step-num">1</div><div class="step-text">Denuncia de Fallecimiento <strong>(F1720/19)</strong>.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Copia de <strong>Acta de Defunción</strong> emitida por Registro Civil.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Constancia de CUIL</strong> del empleado fallecido.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">Copia del <strong>último recibo de haberes</strong> firmado por el empleado fallecido.</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text">Copia de <strong>Alta y Baja ante AFIP</strong>.</div></div>
+        <div class="step"><div class="step-num">6</div><div class="step-text">Copia del <strong>recibo de liquidación final</strong>.</div></div>
+        <div class="step"><div class="step-num">7</div><div class="step-text"><strong>Nómina de empleados ingresados al SUSS</strong> en el mes del fallecimiento.</div></div>
+        <div class="step"><div class="step-num">8</div><div class="step-text"><strong>Formulario 931</strong> del mes del fallecimiento, adjuntando la constancia de pago ante AFIP.</div></div>
+        <div class="step"><div class="step-num">9</div><div class="step-text">Original o copia del <strong>formulario de designación de beneficiarios</strong>. Si no posee designación expresa, remitir elementos que acrediten herederos (esposa/concubina, hijos, padres) y Declaración de derechohabientes expedida por ANSeS o similar.</div></div>
+      </div>
+      <div class="warn-box"><strong>Tener en cuenta</strong> que cada caso es diferente y, de acuerdo con las particularidades que estos presenten, puede ser solicitada documentación extra, lo que nos será informado durante las gestiones.</div>`; }
+  },
+];
+
+const NOVEDADES = [
+  { fecha: "1 de junio de 2026", titulo: "Actualización de tarifas RC, Casco y AP",
+    cuerpo: "Con el objeto de compensar el impacto de la inflación en los componentes del costo siniestral de Automotores y Motovehículos, y mantener la sustentabilidad técnica de los productos, se implementan las siguientes medidas a partir del 01-06-2026:",
+    requisitos: [
+      "🚗 <strong>Responsabilidad Civil:</strong> Actualización de tarifa según tipo de cobertura contratada y zona de riesgo, para todos los tipos de vehículos.",
+      "🛡️ <strong>Coberturas de Casco:</strong> Actualización en los coeficientes de Accidente Parcial y Accidente Total según tipo de unidad, manteniendo las sumas aseguradas actuales.",
+      "👨‍👩‍👧 <strong>AP Familiares (cobertura adicional):</strong> Actualización de la suma asegurada y su costo correspondiente."
+    ],
+    extra: "Ante cualquier duda, consultar con el equipo." },
+  { fecha: "20 de abril de 2026", titulo: "Descuentos en autos y pick-ups",
+    cuerpo: "Más herramientas para que tus clientes accedan a mejores condiciones.",
+    requisitos: [
+      "15% de descuento base + adicional promocional (cuando el cotizador lo habilite)",
+      "+30% por captación",
+      "🏠 Reintegro Banco del Sol: 25% de reintegro en las primeras 4 cuotas para pólizas adheridas al débito automático de Banco del Sol. Tope: $12.000 por cliente."
+    ],
+    extra: "Ejemplo práctico — Auto con prima mensual base $80.000: luego del descuento base (−$12.000) y captación (−$20.400), la prima final es $47.600/mes. Con Banco del Sol: reintegro del 25% = $11.900 por cuota → prima efectiva primeras 4 cuotas: $35.700/mes. *Los montos son ilustrativos." },
+  { fecha: "20 de abril de 2026", titulo: "Beneficios del débito automático",
+    cuerpo: "¿Por qué te conviene tener tu seguro con débito?",
+    requisitos: [
+      "✅ Te asegurás que pagaste en tiempo y forma — evitás suspensiones y deudas acumuladas.",
+      "✅ Te mandamos un mensajito todos los meses con cuánto y cuándo te vamos a debitar.",
+      "✅ Si no tenés plata, se hacen otros intentos en diferentes días."
+    ],
+    imagen: "img_novedad_debito.jpeg",
+    extra: "Y además, si tenés cuenta en Banco del Sol recibís un 25% de reintegro en tus 4 primeras cuotas. ¡Consultanos para adherirte hoy mismo — es simple y rápido!" },
+  { fecha: "20 de abril de 2026", titulo: "Cursos Obligatorios 2026",
+    cuerpo: "Estimados/as, les informamos que desde el 16 de marzo hasta el 17 de julio podrán realizar:",
+    requisitos: [
+      "📝 Curso Obligatorio E-Learning 2026 del primer cuatrimestre.",
+      "🧑‍💻 Curso E-learning: \"Actualización Normativa SSN 2024-2025 y su impacto en la Actividad del PAS\".",
+      "➡️ En el Entorno Virtual de la página del Ente Ley: www.enteley22400.org.ar"
+    ],
+    extra: "🚦 Recordamos que esta capacitación es gratuita y de carácter obligatorio, realizada dentro del plazo correspondiente." },
+  { fecha: "27 de enero de 2026", titulo: "Nuevas condiciones de motos — MAX 3",
+    cuerpo: "A partir del 1/2/2026 se implementará una mejora de condiciones de contratación en el segmento de motos de hasta 350 cc en la cobertura Max 3.",
+    requisitos: ["Operaciones nuevas","Zona de Riesgo 1.0","Solo para clientes con cobertura/s vigentes","Tomador debe tener la titularidad del vehículo","Emisiones anuales con facturación mensual o semestral en cuotas","Cobranza electrónica exclusivamente"],
+    extra: "Motos hasta 350 cc — Cobertura Max 3: se habilita el módulo RC + Incendio Total y Parcial + Robo Total para los intermediarios asociados." },
+];
+
+const EVENTOS = [
+  { dia: 17, mes: 6, anio: 2026, titulo: "Cursos Obligatorios 2026 — fecha límite", desc: "Vencimiento para completar el Curso Obligatorio E-Learning 2026 y el curso de Actualización Normativa SSN 2024-2025" },
+];
+
+function matches(t, q) {
+  return t.title.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q) ||
+    t.tags.some(function(tg) { return tg.toLowerCase().includes(q); }) || t.section.toLowerCase().includes(q);
+}
+
+function waShareUrl(id, title) {
+  var url = 'https://orgchialvo.github.io/portal-chialvo/#tutorial-' + id;
+  var msg = '¡Hola! Te comparto este tutorial de Organización Chialvo: *' + title + '* 👉 ' + url;
+  return 'https://wa.me/?text=' + encodeURIComponent(msg);
+}
+
+function cardHtml(t, q) {
+  var isFin = t.section === 'Finanzas';
+  var tags = t.tags.map(function(tg) {
+    return '<span class="tcard-tag ' + (q && tg.toLowerCase().includes(q) ? 'match' : '') + '">' + tg + '</span>';
+  }).join('');
+  var waUrl = waShareUrl(t.id, t.title);
+  return '<div class="tcard" onclick="showDetail(' + t.id + ')">' +
+    '<div class="tcard-top">' +
+    '<div class="tcard-icon ' + (isFin ? 'fin' : 'sin') + '">' + t.icon + '</div>' +
+    '<div class="tcard-info">' +
+    '<div class="tcard-title">' + t.title + '</div>' +
+    '<span class="tcard-badge ' + (isFin ? 'fin' : 'sin') + '">' + t.section + '</span>' +
+    '</div></div>' +
+    '<div class="tcard-desc">' + t.desc + '</div>' +
+    '<div class="tcard-tags">' + tags + '</div>' +
+    '<a class="tcard-share" href="' + waUrl + '" target="_blank" onclick="event.stopPropagation()">📲 Compartir</a>' +
+    '</div>';
+}
+
+function renderTutorials(q) {
+  q = (q || '').toLowerCase().trim();
+  var fins = TUTORIALES.filter(function(t) { return t.section === 'Finanzas' && (!q || matches(t, q)); });
+  var sins = TUTORIALES.filter(function(t) { return t.section === 'Siniestros' && (!q || matches(t, q)); });
+  var total = fins.length + sins.length;
+  document.getElementById('resultsLabel').textContent = q ? (total + ' resultado' + (total !== 1 ? 's' : '') + ' para "' + q + '"') : '';
+  var html = '';
+  if (fins.length) {
+    html += '<div class="sec-header"><div class="sec-header-icon fin">💰</div><div class="sec-header-text"><h3>Finanzas</h3>' + (!q ? '<p>Orden financiero y salud de la cartera</p>' : '') + '</div></div>';
+    html += '<div class="card-grid">' + fins.map(function(t) { return cardHtml(t, q); }).join('') + '</div>';
+    html += CAMILA_BANNER;
+  }
+  if (sins.length) {
+    html += '<div class="sec-header"><div class="sec-header-icon sin">🚨</div><div class="sec-header-text"><h3>Siniestros</h3>' + (!q ? '<p>Toda la información que necesitás sobre la gestión de siniestros.</p>' : '') + '</div></div>';
+    html += '<div class="card-grid">' + sins.map(function(t) { return cardHtml(t, q); }).join('') + '</div>';
+    html += MAURICIO_BANNER;
+    html += HORACIO_BANNER;
+  }
+  if (!total) { html = '<div class="empty-state">No se encontraron tutoriales para esa búsqueda.</div>'; }
+  document.getElementById('tutorialList').innerHTML = html;
+}
+
+function showDetail(id) {
+  var t = TUTORIALES.find(function(x) { return x.id === id; });
+  if (!t) { return; }
+  history.pushState(null, '', '#tutorial-' + id);
+  var waUrl = waShareUrl(t.id, t.title);
+  document.getElementById('detailContent').innerHTML = t.renderDetail() +
+    '<a class="detail-share" href="' + waUrl + '" target="_blank">📲 Compartir por WhatsApp</a>';
+  document.getElementById('sec-tutoriales').classList.add('hidden');
+  document.getElementById('sec-detail').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+
+function backToList() {
+  history.pushState(null, '', window.location.pathname);
+  document.getElementById('sec-detail').classList.add('hidden');
+  document.getElementById('sec-tutoriales').classList.remove('hidden');
+}
+
+// ── PRÓXIMAS VISITAS ──
+var VISITAS = [
+  // Semana 1
+  { fecha: '2026-06-04', dia: 'Jue', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Fernando' },
+  { fecha: '2026-06-04', dia: 'Jue', locs: ['Arrufó','Villa Trinidad'], resp: 'Gerardo' },
+  { fecha: '2026-06-04', dia: 'Jue', locs: ['Ceres','Selva'], resp: 'Marcelo' },
+  // Semana 2
+  { fecha: '2026-06-09', dia: 'Mar', locs: ['Bandera','Añatuya','Fernandez','Pinto','Selva'], resp: 'Fernando' },
+  { fecha: '2026-06-10', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Mauricio' },
+  { fecha: '2026-06-11', dia: 'Jue', locs: ['Arrufó','Villa Trinidad'], resp: 'Marcelo' },
+  { fecha: '2026-06-11', dia: 'Jue', locs: ['Ceres'], resp: 'Javier' },
+  // Semana 3
+  { fecha: '2026-06-17', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Javier' },
+  { fecha: '2026-06-18', dia: 'Jue', locs: ['Arrufó','Villa Trinidad'], resp: 'Fernando' },
+  { fecha: '2026-06-19', dia: 'Vie', locs: ['Ceres','Selva'], resp: 'Mauricio' },
+  // Semana 4
+  { fecha: '2026-06-23', dia: 'Mar', locs: ['Bandera','Añatuya','Fernandez','Pinto','Selva'], resp: 'Marcelo' },
+  { fecha: '2026-06-24', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Gerardo' },
+  { fecha: '2026-06-24', dia: 'Mié', locs: ['Arrufó','Villa Trinidad'], resp: 'Mauricio' },
+  { fecha: '2026-06-25', dia: 'Jue', locs: ['Ceres'], resp: 'Fernando' }
+];
+
+function getSemanaBounds() {
+  var hoy = new Date();
+  var dow = hoy.getDay();
+  var lunes = new Date(hoy);
+  lunes.setDate(hoy.getDate() - (dow === 0 ? 6 : dow - 1));
+  lunes.setHours(0,0,0,0);
+  var viernes = new Date(lunes);
+  viernes.setDate(lunes.getDate() + 4);
+  viernes.setHours(23,59,59,999);
+  return { desde: lunes, hasta: viernes };
+}
+
+function esSemanaActual(fechaStr) {
+  var s = getSemanaBounds();
+  var f = new Date(fechaStr + 'T00:00:00');
+  return f >= s.desde && f <= s.hasta;
+}
+
+function fmtFecha(fechaStr) {
+  var p = fechaStr.split('-');
+  return p[2] + '/' + p[1];
+}
+
+function renderVisitas() {
+  var mapa = {};
+  VISITAS.forEach(function(v) {
+    v.locs.forEach(function(loc) {
+      if (!mapa[loc]) mapa[loc] = [];
+      mapa[loc].push({ fecha: v.fecha, dia: v.dia, resp: v.resp, semana: esSemanaActual(v.fecha) });
+    });
+  });
+  var locs = Object.keys(mapa).sort();
+  locs.forEach(function(loc) {
+    mapa[loc].sort(function(a, b) { return a.fecha.localeCompare(b.fecha); });
+  });
+
+  var semana = getSemanaBounds();
+  var opts = { day: 'numeric', month: 'long' };
+  var semanaLabel = semana.desde.toLocaleDateString('es-AR', opts) + ' – ' + semana.hasta.toLocaleDateString('es-AR', opts);
+  var hayEstaSemana = VISITAS.some(function(v) { return esSemanaActual(v.fecha); });
+
+  var html = '<div class="visitas-header">'
+    + '<div class="visitas-header-text">'
+    + '<div class="visitas-chip">🗺️ Próximas visitas</div>'
+    + '<h3>Junio 2026</h3>'
+    + '<p>Visitas del equipo organizadas por localidad.</p>'
+    + (hayEstaSemana ? '<div class="visitas-semana-pill">⚡ Esta semana: ' + semanaLabel + '</div>' : '')
+    + '</div>'
+    + '<img class="huinca-viaje-img" src="huinca_viaje.png" alt="Huinca viajando" onerror="this.style.display=\'none\'"/>'
+    + '</div>';
+
+  html += '<div class="loc-grid">';
+  locs.forEach(function(loc) {
+    var visitas = mapa[loc];
+    var tieneSemana = visitas.some(function(v) { return v.semana; });
+    html += '<div class="loc-card">'
+      + '<div class="loc-head">'
+      + '<span class="loc-pin">📍</span>'
+      + '<span class="loc-name">' + loc + '</span>'
+      + '<span class="loc-count">' + visitas.length + ' visita' + (visitas.length > 1 ? 's' : '') + '</span>'
+      + (tieneSemana ? '<span class="loc-semana-badge">⚡</span>' : '')
+      + '</div>';
+    visitas.forEach(function(v) {
+      html += '<div class="vis-row' + (v.semana ? ' esta-semana' : '') + '">'
+        + '<div class="vis-fecha">' + fmtFecha(v.fecha) + '</div>'
+        + '<span class="vis-dia">' + v.dia + '</span>'
+        + '<span class="vis-resp">👤 ' + v.resp + '</span>'
+        + '</div>';
+    });
+    html += '</div>';
+  });
+  html += '</div>';
+
+  document.getElementById('visitasList').innerHTML = html;
+}
+
+function showSection(s) {
+  document.getElementById('hero').classList.add('hidden');
+  document.getElementById('equipo-section').classList.add('hidden');
+  document.getElementById('nav-wrap').classList.remove('hidden');
+  document.getElementById('main-content').classList.remove('hidden');
+  ['tutoriales','detail','novedades','visitas','calendario'].forEach(function(x) {
+    document.getElementById('sec-' + x).classList.add('hidden');
+  });
+  document.getElementById('sec-' + s).classList.remove('hidden');
+  document.querySelectorAll('.nav-btn').forEach(function(b, i) {
+    b.classList.toggle('active', ['tutoriales','novedades','visitas','calendario'][i] === s);
+  });
+  if (s === 'novedades') renderNovedades();
+  if (s === 'calendario') renderCalendario();
+  if (s === 'tutoriales') renderTutorials('');
+  if (s === 'visitas') renderVisitas();
+  window.scrollTo(0, 0);
+}
+
+function showHome() {
+  document.getElementById('hero').classList.remove('hidden');
+  document.getElementById('equipo-section').classList.remove('hidden');
+  document.getElementById('nav-wrap').classList.add('hidden');
+  document.getElementById('main-content').classList.add('hidden');
+  window.scrollTo(0, 0);
+}
+
+function renderNovedades() {
+  var iconos = ['🚗', '🏦', '📝', '🏍️'];
+  var colores = ['color-1', 'color-2', 'color-3', 'color-4'];
+  var html = '<div class="novedades-grid">';
+  NOVEDADES.forEach(function(n, i) {
+    var icono = iconos[i % iconos.length];
+    var color = colores[i % colores.length];
+    html += '<div class="novedad-card">' +
+      '<div class="novedad-header ' + color + '">' + icono + '</div>' +
+      '<div class="novedad-body-wrap">' +
+      '<div class="novedad-date">' + n.fecha + '</div>' +
+      '<div class="novedad-title">' + n.titulo + '</div>' +
+      '<div class="novedad-body">' + n.cuerpo + '</div>';
+    if (n.requisitos && n.requisitos.length) {
+      html += '<ul class="novedad-reqs">' + n.requisitos.map(function(r) { return '<li>' + r + '</li>'; }).join('') + '</ul>';
+    }
+    if (n.imagen) { html += '<img src="' + n.imagen + '" class="novedad-img" alt="' + n.titulo + '"/>'; }
+    if (n.extra) { html += '<div class="novedad-extra">' + n.extra + '</div>'; }
+    html += '</div></div>';
+  });
+  html += '</div>';
+  document.getElementById('novedadesList').innerHTML = html;
+}
+
+function renderCalendario() {
+  var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  var dias = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  if (!EVENTOS.length) {
+    document.getElementById('calendarioContent').innerHTML = '<div class="empty-state">No hay eventos cargados.</div>';
+    return;
+  }
+  var ref = EVENTOS[0];
+  var firstDay = new Date(ref.anio, ref.mes, 1).getDay();
+  var daysInMonth = new Date(ref.anio, ref.mes + 1, 0).getDate();
+  var eventDias = EVENTOS.map(function(e) { return e.dia; });
+  var html = '<div class="cal-header"><div class="cal-month-badge">' + meses[ref.mes] + ' ' + ref.anio + '</div></div>';
+  html += '<div class="cal-grid">' + dias.map(function(d) { return '<div class="cal-day-name">' + d + '</div>'; }).join('');
+  for (var i = 0; i < firstDay; i++) { html += '<div class="cal-day other"></div>'; }
+  for (var d = 1; d <= daysInMonth; d++) {
+    html += '<div class="cal-day' + (eventDias.includes(d) ? ' has-event' : '') + '">' + d + '</div>';
+  }
+  html += '</div><div class="sec-header"><div class="sec-header-icon fin">📅</div><div class="sec-header-text"><h3>Eventos del mes</h3></div></div>';
+  EVENTOS.forEach(function(e) {
+    html += '<div class="event-item"><div class="event-date-badge">' + e.dia + '<br>' + meses[e.mes].substring(0, 3).toUpperCase() + '</div><div><div class="event-title">' + e.titulo + '</div><div class="event-desc">' + e.desc + '</div></div></div>';
+  });
+  document.getElementById('calendarioContent').innerHTML = html;
+}
+
+function renderHeroCalendario() {
+  var el = document.getElementById('hero-cal-mini');
+  if (!el || !EVENTOS.length) { return; }
+  var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  var dias = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  var ref = EVENTOS[0];
+  var firstDay = new Date(ref.anio, ref.mes, 1).getDay();
+  var daysInMonth = new Date(ref.anio, ref.mes + 1, 0).getDate();
+  var eventDias = EVENTOS.map(function(e) { return e.dia; });
+  var html = '<div class="cal-mini-grid">';
+  dias.forEach(function(d) { html += '<div class="cal-mini-name">' + d + '</div>'; });
+  for (var i = 0; i < firstDay; i++) { html += '<div class="cal-mini-day"></div>'; }
+  for (var d = 1; d <= daysInMonth; d++) {
+    html += '<div class="cal-mini-day' + (eventDias.includes(d) ? ' event' : '') + '">' + d + '</div>';
+  }
+  html += '</div>';
+  EVENTOS.forEach(function(e) {
+    html += '<div class="cal-mini-event"><div class="cal-mini-dot"></div><span class="cal-mini-label">' + e.dia + ' ' + meses[e.mes].substring(0,3) + ' — ' + e.titulo + '</span></div>';
+  });
+  el.innerHTML = html;
+}
+
+// La página arranca en el inicio — el contenido se carga al hacer click en una card
+renderHeroCalendario();
+// Deep link: si la URL tiene #tutorial-ID, abrir ese tutorial directamente
+(function() {
+  var hash = window.location.hash;
+  var match = hash.match(/^#tutorial-(\d+)$/);
+  if (match) { showSection('tutoriales'); showDetail(parseInt(match[1])); }
+})();</script>
+</body>
+</html>
