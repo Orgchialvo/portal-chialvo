@@ -285,6 +285,8 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 .novedad-extra { font-size: 12px; color: var(--gray-700); line-height: 1.6; margin-top: 8px; }
 .novedad-pdf { display: inline-flex; align-items: center; gap: 6px; background: var(--black); color: var(--maiz); font-size: 12px; font-weight: 600; padding: 8px 14px; border-radius: 20px; margin-top: 10px; text-decoration: none; transition: opacity 0.15s; }
 .novedad-pdf:hover { opacity: 0.85; }
+.novedad-pdfs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.novedad-pdfs .novedad-pdf { margin-top: 0; }
 .cal-header { margin-bottom: 16px; }
 .cal-month-badge { display: inline-block; background: var(--black); color: var(--maiz); font-size: 15px; font-weight: 700; padding: 6px 14px; border-radius: var(--radius-sm); }
 .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 24px; background: var(--white); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow-sm); }
@@ -371,7 +373,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
         <div class="hero-card-desc">Visitas de octubre organizadas por localidad</div>
       </div>
       <div class="hero-card span2" onclick="showSection('calendario')">
-        <div class="hero-card-title">📅 Calendario — Agosto 2026</div>
+        <div class="hero-card-title" id="hero-cal-title">📅 Calendario</div>
         <div id="hero-cal-mini"></div>
       </div>
     </div>
@@ -968,8 +970,10 @@ const NOVEDADES = [
       "✅ <strong>Qué hacer hasta el 31/10:</strong> (1) revisar la cartera: clientes con empleados en relación de dependencia (ART, vida colectivo, integrales de comercio, agro), foco en PYMES de hasta 200 empleados y primero las de hasta 30; (2) hablar con los contadores de sus clientes y los estudios de la zona; (3) pedir la documentación digitalizada — persona humana: constancia de ARCA y DNI; sociedad: constancia de ARCA, estatuto y acta de designación de autoridades; (4) avanzar con el pre-onboarding en la <a href=\"https://www.bancodelsol.com/fondo-de-asistencia-laboral\" target=\"_blank\" rel=\"noopener\">cuenta FAL de Banco del Sol</a> (gratuita, 100% virtual, 5 a 10 minutos).",
       "⚠️ <strong>Importante:</strong> el pre-onboarding deja a la empresa lista, pero todavía no es el alta en el FAL. La suscripción final depende de una norma de ARCA que aún no salió. Adelantarlo es lo que nos pone primeros en la fila."
     ],
-    pdf: "comunicado_fal_pas.pdf",
-    pdfTexto: "Descargar comunicado completo para PAS (PDF)",
+    pdfs: [
+      { archivo: "comunicado_fal_pas.pdf", texto: "Comunicado completo para PAS (PDF)" },
+      { archivo: "guia_fal_estudios_contables.pdf", texto: "Guía para estudios contables (PDF)" }
+    ],
     extra: "Además, el Grupo está definiendo un reconocimiento por cuenta referida: les avisamos apenas esté confirmado. Consultas: Fernando (fernando@orgchialvo.com.ar · (3491) 465672) y Angélica (angelica@orgchialvo.com.ar · (3408) 572530)." },
   { fecha: "Agosto de 2026", titulo: "🚗 ¡Nuevas mejoras en el ramo automotor!",
     cuerpo: "Sancor Seguros amplió las condiciones de contratación del ramo automotor. Dos mejoras clave para potenciar tu cartera:",
@@ -1046,7 +1050,8 @@ const NOVEDADES = [
 ];
 
 const EVENTOS = [
-  { dia: 1, mes: 7, anio: 2026, titulo: "Entran en vigencia las actualizaciones de Salud y FFEP", desc: "Actualización de sumas y costos de Plan Familia y Adulto Mayor (Circular 2048) y nuevo valor del FFEP ($1.839 por empleado, F931 de julio)" },
+  { dia: 31, mes: 9, anio: 2026, titulo: "FAL — Último día para avanzar con el pre-onboarding", desc: "Relevar cartera, contactar contadores y completar el pre-onboarding en la cuenta FAL de Banco del Sol." },
+  { dia: 1, mes: 10, anio: 2026, titulo: "FAL — Entra en vigencia", desc: "Empiezan los aportes al Fondo de Asistencia Laboral. Noviembre es el mes para elegir administradora; en diciembre la CNV asigna de oficio a quienes no eligieron." },
 ];
 
 function matches(t, q) {
@@ -1227,7 +1232,7 @@ function showSection(s) {
     document.getElementById('sec-' + x).classList.add('hidden');
   });
   document.getElementById('sec-' + s).classList.remove('hidden');
-  document.querySelectorAll('.nav-btn').forEach(function(b, i) {
+  document.querySelectorAll('.nav-btn:not(.nav-home)').forEach(function(b, i) {
     b.classList.toggle('active', ['tutoriales','novedades','visitas','calendario'][i] === s);
   });
   if (s === 'novedades') renderNovedades();
@@ -1265,11 +1270,27 @@ function renderNovedades() {
     }
     if (n.imagen) { html += '<img src="' + n.imagen + '" class="novedad-img" alt="' + n.titulo + '"/>'; }
     if (n.pdf) { html += '<a class="novedad-pdf" href="' + n.pdf + '" target="_blank">📄 ' + (n.pdfTexto || 'Descargar circular completa (PDF)') + '</a>'; }
+    if (n.pdfs && n.pdfs.length) {
+      html += '<div class="novedad-pdfs">' + n.pdfs.map(function(f) { return '<a class="novedad-pdf" href="' + f.archivo + '" target="_blank">📄 ' + f.texto + '</a>'; }).join('') + '</div>';
+    }
     if (n.extra) { html += '<div class="novedad-extra">' + n.extra + '</div>'; }
     html += '</div></div>';
   });
   html += '</div>';
   document.getElementById('novedadesList').innerHTML = html;
+}
+
+function mesesDeEventos() {
+  var vistos = {}, lista = [];
+  EVENTOS.forEach(function(e) {
+    var k = e.anio * 12 + e.mes;
+    if (!vistos[k]) { vistos[k] = true; lista.push({ anio: e.anio, mes: e.mes }); }
+  });
+  return lista.sort(function(x, y) { return (x.anio * 12 + x.mes) - (y.anio * 12 + y.mes); });
+}
+
+function diasConEvento(m) {
+  return EVENTOS.filter(function(e) { return e.anio === m.anio && e.mes === m.mes; }).map(function(e) { return e.dia; });
 }
 
 function renderCalendario() {
@@ -1279,17 +1300,20 @@ function renderCalendario() {
     document.getElementById('calendarioContent').innerHTML = '<div class="empty-state">No hay eventos cargados.</div>';
     return;
   }
-  var ref = EVENTOS[0];
-  var firstDay = new Date(ref.anio, ref.mes, 1).getDay();
-  var daysInMonth = new Date(ref.anio, ref.mes + 1, 0).getDate();
-  var eventDias = EVENTOS.map(function(e) { return e.dia; });
-  var html = '<div class="cal-header"><div class="cal-month-badge">' + meses[ref.mes] + ' ' + ref.anio + '</div></div>';
-  html += '<div class="cal-grid">' + dias.map(function(d) { return '<div class="cal-day-name">' + d + '</div>'; }).join('');
-  for (var i = 0; i < firstDay; i++) { html += '<div class="cal-day other"></div>'; }
-  for (var d = 1; d <= daysInMonth; d++) {
-    html += '<div class="cal-day' + (eventDias.includes(d) ? ' has-event' : '') + '">' + d + '</div>';
-  }
-  html += '</div><div class="sec-header"><div class="sec-header-icon fin">📅</div><div class="sec-header-text"><h3>Eventos del mes</h3></div></div>';
+  var html = '';
+  mesesDeEventos().forEach(function(m) {
+    var firstDay = new Date(m.anio, m.mes, 1).getDay();
+    var daysInMonth = new Date(m.anio, m.mes + 1, 0).getDate();
+    var eventDias = diasConEvento(m);
+    html += '<div class="cal-header"><div class="cal-month-badge">' + meses[m.mes] + ' ' + m.anio + '</div></div>';
+    html += '<div class="cal-grid">' + dias.map(function(d) { return '<div class="cal-day-name">' + d + '</div>'; }).join('');
+    for (var i = 0; i < firstDay; i++) { html += '<div class="cal-day other"></div>'; }
+    for (var d = 1; d <= daysInMonth; d++) {
+      html += '<div class="cal-day' + (eventDias.includes(d) ? ' has-event' : '') + '">' + d + '</div>';
+    }
+    html += '</div>';
+  });
+  html += '<div class="sec-header"><div class="sec-header-icon fin">📅</div><div class="sec-header-text"><h3>Próximos eventos</h3></div></div>';
   EVENTOS.forEach(function(e) {
     html += '<div class="event-item"><div class="event-date-badge">' + e.dia + '<br>' + meses[e.mes].substring(0, 3).toUpperCase() + '</div><div><div class="event-title">' + e.titulo + '</div><div class="event-desc">' + e.desc + '</div></div></div>';
   });
@@ -1301,10 +1325,12 @@ function renderHeroCalendario() {
   if (!el || !EVENTOS.length) { return; }
   var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
   var dias = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-  var ref = EVENTOS[0];
+  var ref = mesesDeEventos()[0];
   var firstDay = new Date(ref.anio, ref.mes, 1).getDay();
   var daysInMonth = new Date(ref.anio, ref.mes + 1, 0).getDate();
-  var eventDias = EVENTOS.map(function(e) { return e.dia; });
+  var eventDias = diasConEvento(ref);
+  var titulo = document.getElementById('hero-cal-title');
+  if (titulo) { titulo.textContent = '📅 Calendario — ' + meses[ref.mes] + ' ' + ref.anio; }
   var html = '<div class="cal-mini-grid">';
   dias.forEach(function(d) { html += '<div class="cal-mini-name">' + d + '</div>'; });
   for (var i = 0; i < firstDay; i++) { html += '<div class="cal-mini-day"></div>'; }
