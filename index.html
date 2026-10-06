@@ -961,6 +961,29 @@ const TUTORIALES = [
 ];
 
 const NOVEDADES = [
+  { fecha: "Octubre de 2026", icono: "📲", color: "color-1", titulo: "📲 Encuestas por deuda en Autos y Motos",
+    cuerpo: "Con el objetivo de fortalecer la permanencia de nuestros asegurados, a partir de octubre la Compañía va a contactar a los clientes que registren recibos adeudados en los ramos <strong>autos y motos</strong>. Como la rapidez es fundamental, el contacto es mediante una breve encuesta para conocer el motivo de la deuda.",
+    requisitos: [
+      "1️⃣ <strong>Mensaje por WhatsApp:</strong> desde la cuenta oficial verificada “Grupo Sancor Seguros – Experiencia del Cliente”.",
+      "2️⃣ <strong>Encuesta breve:</strong> el asegurado indica el motivo — desconocía la deuda, costo de la cuota, problemas económicos, cobertura, medio de pago u otro.",
+      "3️⃣ <strong>Alternativas de pago:</strong> a partir de la respuesta se activan acciones conjuntas para regularizar su situación. El cliente también puede pagar desde la app de Sancor.",
+      "🤝 <strong>Complementa tu gestión:</strong> no reemplaza la cobranza que hacés vos; suma rapidez para retener clientes y proteger la cartera.",
+      "💬 <strong>Si tu cliente consulta:</strong> es un contacto oficial de la Compañía. Acompañalo para que mantenga su póliza vigente.",
+      "🚫 <strong>Excluir un caso puntual:</strong> envianos un correo con la solicitud, indicando el CUIT del asegurado."
+    ],
+    imagen: "img_encuestas_deuda.jpg",
+    extra: "Cualquier consulta, estamos a disposición." },
+  { fecha: "1 de octubre de 2026", icono: "🛡️", color: "color-2", titulo: "🛡️ ART: emisión masiva de coberturas complementarias",
+    cuerpo: "Novedad que impacta en sus carteras de ART: emitimos de forma masiva en Sancor Seguros las coberturas de <strong>Vida Obligatorio (Decreto 1567/74)</strong>, <strong>Ley 16.600</strong>, <strong>Convenio Mercantil</strong> y <strong>Contrato de Trabajo</strong>, para los contratos de ART que no tenían vigentes estas pólizas.",
+    requisitos: [
+      "📅 <strong>Vigencia:</strong> desde el 01/10/2026.",
+      "⏳ <strong>Anulación sin costo:</strong> hasta 60 días desde el inicio, solo si el Tomador lo pide expresamente.",
+      "⚠️ <strong>¿Por qué lo hicimos?</strong> Hubo siniestros en carteras sin cobertura vigente y los reclamos legales se dirigieron al PAS intermediario. Ante un fallecimiento o una invalidez total y permanente del empleado, aunque no ocurra en el trabajo, el empleador debe responder con o sin seguro. Por eso les sugerimos defender la cobertura emitida 💪",
+      "📝 <strong>Contrato de Trabajo:</strong> la fecha de ingreso de cada trabajador se estimó. Lo ideal es que el empleador nos informe la antigüedad reconocida de cada empleado, porque de ella depende su obligación de indemnizar.",
+      "🖊️ <strong>Si el cliente decide anular:</strong> en lo posible, que el Tomador firme el pedido de anulación o que la decisión quede respaldada por algún medio escrito (mail, WhatsApp, nota). Esa será su mejor prueba de que la cobertura se ofreció, se emitió y el cliente decidió anularla 🛡️",
+      "💼 <strong>Un consejo extra:</strong> revisen y actualicen su seguro de Responsabilidad Civil Profesional (Mala Praxis) como PAS. Como pasa en otras profesiones, es esperable que lleguen reclamos de este tipo."
+    ],
+    extra: "Quedamos a disposición para cualquier consulta. Saludos cordiales 🤝 — Organización Chialvo." },
   { fecha: "Octubre de 2026", icono: "🐄", color: "color-1", titulo: "🐄 Campaña RC Escape de Animales — ahora sin franquicia",
     cuerpo: "Lanzamos una propuesta puntual para reforzar la cartera con RC Escape de Animales, una cobertura especialmente relevante para nuestra zona ganadera. El diferencial: ahora contamos con un producto <strong>sin franquicia (sin deducible)</strong> y con tarifas muy competitivas. Es una muy buena oportunidad para volver a contactar a nuestros clientes y sumar esta cobertura a la cartera.",
     requisitos: [
@@ -1065,6 +1088,7 @@ const NOVEDADES = [
 const EVENTOS = [
   { dia: 31, mes: 9, anio: 2026, titulo: "FAL — Último día para avanzar con el pre-onboarding", desc: "Relevar cartera, contactar contadores y completar el pre-onboarding en la cuenta FAL de Banco del Sol." },
   { dia: 1, mes: 10, anio: 2026, titulo: "FAL — Entra en vigencia", desc: "Empiezan los aportes al Fondo de Asistencia Laboral. Noviembre es el mes para elegir administradora; en diciembre la CNV asigna de oficio a quienes no eligieron." },
+  { dia: 30, mes: 10, anio: 2026, titulo: "ART — Vence la anulación sin costo de las coberturas complementarias", desc: "Último día (60 días desde el 01/10) para anular sin costo Vida Obligatorio, Ley 16.600, Convenio Mercantil y Contrato de Trabajo, solo a pedido expreso del Tomador." },
 ];
 
 function matches(t, q) {
@@ -1281,7 +1305,7 @@ function renderNovedades() {
     if (n.requisitos && n.requisitos.length) {
       html += '<ul class="novedad-reqs">' + n.requisitos.map(function(r) { return '<li>' + r + '</li>'; }).join('') + '</ul>';
     }
-    if (n.imagen) { html += '<img src="' + n.imagen + '" class="novedad-img' + (n.descarga ? ' vertical' : '') + '" alt="' + n.titulo + '"/>'; }
+    if (n.imagen) { html += '<a href="' + n.imagen + '" target="_blank" rel="noopener"><img src="' + n.imagen + '" class="novedad-img' + (n.descarga ? ' vertical' : '') + '" alt="' + n.titulo + '"/></a>'; }
     if (n.pdf) { html += '<a class="novedad-pdf" href="' + n.pdf + '" target="_blank">📄 ' + (n.pdfTexto || 'Descargar circular completa (PDF)') + '</a>'; }
     if (n.descarga) { html += '<a class="novedad-pdf" href="' + n.descarga.archivo + '" download>⬇️ ' + n.descarga.texto + '</a>'; }
     if (n.pdfs && n.pdfs.length) {
