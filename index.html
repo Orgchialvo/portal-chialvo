@@ -958,6 +958,19 @@ const TUTORIALES = [
 ];
 
 const NOVEDADES = [
+  { fecha: "Octubre de 2026", icono: "💼", color: "color-2", titulo: "💼 FAL — Fondo de Asistencia Laboral: una oportunidad para nosotros",
+    cuerpo: "Desde el 1 de noviembre, todos los empleadores privados con personal registrado van a tener que aportar al Fondo de Asistencia Laboral (FAL), creado por la Ley 27.802. La mayoría de las empresas todavía no sabe de qué se trata y los bancos ya salieron a buscar clientes. Queremos que ningún cliente nuestro se entere del FAL por otro.",
+    requisitos: [
+      "📌 <strong>Qué es:</strong> un fondo para que el empleador pague indemnizaciones. Cada empresa tiene su propia cuenta y aporta todos los meses con las cargas sociales, vía ARCA. No es un seguro: es un Fondo Común de Inversión supervisado por la CNV.",
+      "💰 <strong>Cuánto aportan:</strong> 2,5% de la masa salarial las MiPyMEs y 1% las grandes empresas. No les cuesta nada adicional: las contribuciones patronales bajan en el mismo porcentaje.",
+      "🏦 <strong>Una sola administradora:</strong> cada empresa elige una. Si no elige en noviembre, la CNV le asigna una de oficio. El Grupo Sancor Seguros tiene el circuito completo: Grupo SS administra el fondo y Banco del Sol lo coloca, con alta 100% digital.",
+      "🤝 <strong>Nuestro rol es referenciar y acompañar, no asesorar:</strong> nada de “seguro de indemnización” ni de “vender el FAL”, y no prometemos rendimientos. Las consultas técnicas nos las pasan y las canalizamos.",
+      "✅ <strong>Qué hacer hasta el 31/10:</strong> (1) revisar la cartera: clientes con empleados en relación de dependencia (ART, vida colectivo, integrales de comercio, agro), foco en PYMES de hasta 200 empleados y primero las de hasta 30; (2) hablar con los contadores de sus clientes y los estudios de la zona; (3) pedir la documentación digitalizada — persona humana: constancia de ARCA y DNI; sociedad: constancia de ARCA, estatuto y acta de designación de autoridades; (4) avanzar con el pre-onboarding en la <a href=\"https://www.bancodelsol.com/fondo-de-asistencia-laboral\" target=\"_blank\" rel=\"noopener\">cuenta FAL de Banco del Sol</a> (gratuita, 100% virtual, 5 a 10 minutos).",
+      "⚠️ <strong>Importante:</strong> el pre-onboarding deja a la empresa lista, pero todavía no es el alta en el FAL. La suscripción final depende de una norma de ARCA que aún no salió. Adelantarlo es lo que nos pone primeros en la fila."
+    ],
+    pdf: "comunicado_fal_pas.pdf",
+    pdfTexto: "Descargar comunicado completo para PAS (PDF)",
+    extra: "Además, el Grupo está definiendo un reconocimiento por cuenta referida: les avisamos apenas esté confirmado. Consultas: Fernando (fernando@orgchialvo.com.ar · (3491) 465672) y Angélica (angelica@orgchialvo.com.ar · (3408) 572530)." },
   { fecha: "Agosto de 2026", titulo: "🚗 ¡Nuevas mejoras en el ramo automotor!",
     cuerpo: "Sancor Seguros amplió las condiciones de contratación del ramo automotor. Dos mejoras clave para potenciar tu cartera:",
     requisitos: [
@@ -1236,9 +1249,11 @@ function renderNovedades() {
   var iconos = ['🚗', '🏦', '📝', '🏍️'];
   var colores = ['color-1', 'color-2', 'color-3', 'color-4'];
   var html = '<div class="novedades-grid">';
-  NOVEDADES.forEach(function(n, i) {
-    var icono = iconos[i % iconos.length];
-    var color = colores[i % colores.length];
+  var j = 0;
+  NOVEDADES.forEach(function(n) {
+    var icono = n.icono || iconos[j % iconos.length];
+    var color = n.color || colores[j % colores.length];
+    if (!n.icono) { j++; }
     html += '<div class="novedad-card">' +
       '<div class="novedad-header ' + color + '">' + icono + '</div>' +
       '<div class="novedad-body-wrap">' +
@@ -1249,7 +1264,7 @@ function renderNovedades() {
       html += '<ul class="novedad-reqs">' + n.requisitos.map(function(r) { return '<li>' + r + '</li>'; }).join('') + '</ul>';
     }
     if (n.imagen) { html += '<img src="' + n.imagen + '" class="novedad-img" alt="' + n.titulo + '"/>'; }
-    if (n.pdf) { html += '<a class="novedad-pdf" href="' + n.pdf + '" target="_blank">📄 Descargar circular completa (PDF)</a>'; }
+    if (n.pdf) { html += '<a class="novedad-pdf" href="' + n.pdf + '" target="_blank">📄 ' + (n.pdfTexto || 'Descargar circular completa (PDF)') + '</a>'; }
     if (n.extra) { html += '<div class="novedad-extra">' + n.extra + '</div>'; }
     html += '</div></div>';
   });
