@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portal Productores — Organización Chialvo</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
 <style>
 :root {
   --maiz: #E8B84B;
@@ -139,7 +140,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 /* ── EQUIPO ── */
 .equipo-section { background: var(--white); border-bottom: 1px solid var(--gray-100); }
 .equipo-inner { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
-.equipo-title { font-size: 18px; font-weight: 700; color: var(--black); margin-bottom: 4px; }
+.equipo-title { font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 600; color: var(--black); margin-bottom: 4px; }
 .equipo-subtitle { font-size: 13px; color: var(--gray-500); margin-bottom: 24px; }
 .equipo-grid {
   display: grid;
@@ -185,7 +186,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 .miembro-wa:hover { opacity: 0.85; }
 .miembro-mail {
   display: flex; align-items: center; justify-content: center; gap: 5px;
-  background: #6366F1; color: var(--white);
+  background: var(--black); color: var(--maiz);
   font-size: 11px; font-weight: 700;
   padding: 5px 8px; border-radius: 20px;
   text-decoration: none; transition: opacity 0.2s;
@@ -329,6 +330,75 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 .vis-dia { font-size: 11px; color: var(--gray-500); min-width: 28px; flex-shrink: 0; }
 .vis-resp { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--gray-700); background: var(--gray-100); border-radius: 20px; padding: 3px 9px; flex-shrink: 0; }
 .vis-row.esta-semana .vis-resp { background: rgba(232,184,75,0.3); color: var(--maiz-dark); }
+
+/* ── PORTADA (rediseño) ── */
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; line-height: 1; }
+.home { --tinta: #121214; --carbon: #1E1E22; --linea: #2E2E33; --texto: #EDEDEE; --apagado: #9B9BA1; }
+.home-top { position: relative; background: var(--tinta); color: var(--texto); overflow: hidden; }
+.home-photo { position: absolute; inset: 0 0 auto 0; height: 340px; background: url('img_oficina_hero.jpg') center 35% / cover no-repeat; }
+.home-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,18,20,0.35) 0%, rgba(18,18,20,0.55) 45%, var(--tinta) 100%); }
+.home-inner { position: relative; max-width: 900px; margin: 0 auto; padding: 0 20px; }
+.home-top > .home-inner { padding-top: 120px; padding-bottom: 36px; }
+.home-date { font-size: 13px; color: var(--maiz); font-weight: 600; margin-bottom: 4px; }
+.home-date::first-letter { text-transform: uppercase; }
+.home-greet { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: clamp(32px, 7vw, 48px); line-height: 1.05; letter-spacing: -0.02em; color: #fff; }
+.home-lead { font-size: 15px; color: rgba(237,237,238,0.8); margin: 8px 0 22px; max-width: 46ch; }
+.home-search { display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 999px; padding: 6px 6px 6px 18px; max-width: 620px; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+.home-search .material-symbols-outlined { color: var(--gray-500); font-size: 22px; }
+.home-search input { flex: 1; min-width: 0; border: none; outline: none; font: 500 15px 'Inter', sans-serif; color: var(--black); background: transparent; padding: 10px 0; }
+.home-search input::-webkit-search-cancel-button { display: none; }
+.home-search button { border: none; background: var(--black); color: var(--maiz); font: 600 14px 'Inter', sans-serif; padding: 11px 18px; border-radius: 999px; cursor: pointer; }
+.home-search:focus-within { box-shadow: 0 0 0 3px rgba(232,184,75,0.6), 0 10px 30px rgba(0,0,0,0.35); }
+.home-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; max-width: 620px; }
+.home-chips button { border: 1px solid var(--linea); background: rgba(30,30,34,0.85); color: var(--texto); font: 500 13px 'Inter', sans-serif; padding: 7px 13px; border-radius: 999px; cursor: pointer; }
+.home-chips button:hover { border-color: var(--maiz); color: var(--maiz); }
+
+.ruta { margin-top: 34px; }
+.ruta-head, .panel-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.ruta-head h3, .panel-head h3 { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 19px; }
+.link-btn { border: none; background: none; color: var(--maiz); font: 600 13px 'Inter', sans-serif; cursor: pointer; padding: 4px 0; white-space: nowrap; }
+.link-btn.dark { color: var(--maiz-dark); }
+.link-btn:hover { text-decoration: underline; text-underline-offset: 3px; }
+.ruta-line { list-style: none; display: flex; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 20px; padding: 4px 0 8px; margin: 0 -20px; padding-left: 20px; padding-right: 20px; scrollbar-width: none; }
+.ruta-line::-webkit-scrollbar { display: none; }
+.ruta-stop { flex: 0 0 min(250px, 72vw); scroll-snap-align: start; position: relative; padding: 30px 18px 0 0; }
+.ruta-stop::before { content: ''; position: absolute; top: 9px; left: 0; right: 0; height: 2px; background: repeating-linear-gradient(90deg, var(--maiz) 0 10px, transparent 10px 18px); opacity: 0.55; }
+.ruta-stop:last-child::before { right: auto; width: 24px; }
+.ruta-dot { position: absolute; top: 2px; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--tinta); border: 3px solid var(--maiz); }
+.ruta-stop.hoy .ruta-dot { background: var(--maiz); box-shadow: 0 0 0 5px rgba(232,184,75,0.25); }
+.ruta-dia { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 15px; color: #fff; margin-bottom: 8px; }
+.ruta-dia small { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 11px; color: var(--tinta); background: var(--maiz); border-radius: 999px; padding: 2px 8px; margin-left: 6px; vertical-align: 2px; }
+.ruta-tramo { background: var(--carbon); border: 1px solid var(--linea); border-radius: 14px; padding: 11px 13px; margin-bottom: 8px; }
+.ruta-pueblos { font-size: 14px; font-weight: 600; color: var(--texto); line-height: 1.4; }
+.ruta-quien { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--apagado); margin-top: 4px; }
+.ruta-quien .material-symbols-outlined { font-size: 16px; }
+.ruta-vacia { color: var(--apagado); font-size: 14px; }
+
+.home-body { background: var(--gray-100); padding: 28px 0 8px; }
+.home-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; }
+@media (max-width: 720px) { .home-grid { grid-template-columns: 1fr; } }
+.panel { background: #fff; border-radius: 20px; padding: 20px; box-shadow: var(--shadow-sm); }
+.panel-head h3 { color: var(--black); }
+.ult-item { display: flex; gap: 12px; align-items: flex-start; width: 100%; text-align: left; background: none; border: none; border-top: 1px solid var(--gray-100); padding: 12px 0; cursor: pointer; font-family: 'Inter', sans-serif; }
+.ult-item:first-of-type { border-top: none; padding-top: 2px; }
+.ult-ico { flex: 0 0 40px; height: 40px; border-radius: 12px; background: var(--maiz-light); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.ult-tit { font-size: 14px; font-weight: 600; color: var(--black); line-height: 1.35; }
+.ult-fecha { font-size: 12px; color: var(--gray-500); margin-top: 3px; }
+.ult-item:hover .ult-tit { color: var(--maiz-dark); }
+.fecha-item { display: flex; gap: 12px; align-items: center; padding: 10px 0; border-top: 1px solid var(--gray-100); }
+.fecha-item:first-of-type { border-top: none; padding-top: 2px; }
+.fecha-badge { flex: 0 0 50px; text-align: center; background: var(--black); color: var(--maiz); border-radius: 12px; padding: 6px 0; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 18px; line-height: 1.05; }
+.fecha-badge span { display: block; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; color: #fff; }
+.fecha-txt { font-size: 13px; font-weight: 600; color: var(--black); line-height: 1.4; }
+.fecha-cuando { font-size: 12px; color: var(--gray-500); font-weight: 500; }
+.accesos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px; margin-bottom: 20px; }
+@media (max-width: 520px) { .accesos { grid-template-columns: repeat(2, 1fr); } }
+.accesos button { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--gray-300); border-radius: 14px; padding: 14px; font: 600 14px 'Inter', sans-serif; color: var(--black); cursor: pointer; }
+.accesos button .material-symbols-outlined { color: var(--maiz-dark); }
+.accesos button:hover { border-color: var(--maiz); }
+.home button:focus-visible, .home input:focus-visible, .home-chips button:focus-visible { outline: 3px solid var(--maiz); outline-offset: 2px; }
+@media (min-width: 900px) { .home-top > .home-inner { padding-top: 150px; } .home-photo { height: 400px; } }
+@media (prefers-reduced-motion: reduce) { .ruta-line { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
@@ -343,41 +413,55 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
   </div>
 </div>
 
-<!-- HERO RENOVADO -->
-<div class="hero" id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-inner">
-    <div class="hero-chip">Portal Productores</div>
-    <h2>¡Hola! Bienvenido/a a tu portal</h2>
-    <p>Todo lo que necesitás para trabajar mejor, en un solo lugar. Tutoriales, novedades y el calendario de tu equipo.</p>
-    <div class="hero-cards">
-      <div class="hero-card" onclick="showSection('tutoriales')">
-        <div class="hero-card-icon">🎓</div>
-        <div class="hero-card-title">Tutoriales</div>
-        <div class="hero-card-desc">Guías paso a paso de Finanzas y Siniestros</div>
-      </div>
-      <div class="hero-card" onclick="showSection('novedades')">
-        <div class="hero-card-icon">📢</div>
-        <div class="hero-card-title">Novedades</div>
-        <div class="hero-card-desc">Últimas noticias y actualizaciones</div>
-      </div>
-      <!-- HUINCA: oculto temporalmente hasta finalizar testing
-      <div class="hero-card" onclick="window.location.href='huinca.html'">
-        <div class="hero-card-icon">🐱</div>
-        <div class="hero-card-title">Huinca</div>
-        <div class="hero-card-desc">Asesor virtual de productos Sancor</div>
-      </div>
-      -->
-      <div class="hero-card" onclick="showSection('visitas')">
-        <div class="hero-card-icon">🗺️</div>
-        <div class="hero-card-title">Próximas Visitas</div>
-        <div class="hero-card-desc">Visitas de octubre organizadas por localidad</div>
-      </div>
-      <div class="hero-card span2" onclick="showSection('calendario')">
-        <div class="hero-card-title" id="hero-cal-title">📅 Calendario</div>
-        <div id="hero-cal-mini"></div>
-      </div>
+<!-- PORTADA -->
+<div class="home" id="hero">
+  <div class="home-top">
+    <div class="home-photo" role="img" aria-label="Oficina de Organización Chialvo"></div>
+    <div class="home-inner">
+      <p class="home-date" id="homeDate"></p>
+      <h2 class="home-greet" id="homeGreet">Buen día</h2>
+      <p class="home-lead">Lo que necesitás para tu cartera, al día.</p>
+
+      <form class="home-search" onsubmit="buscarDesdeInicio(event)">
+        <span class="material-symbols-outlined" aria-hidden="true">search</span>
+        <input type="search" id="homeSearch" placeholder="¿Qué necesitás resolver?" aria-label="Buscar en tutoriales"/>
+        <button type="submit">Buscar</button>
+      </form>
+      <div class="home-chips" id="homeChips"></div>
+
+      <section class="ruta" aria-labelledby="rutaTitle">
+        <div class="ruta-head">
+          <h3 id="rutaTitle">En la ruta esta semana</h3>
+          <button class="link-btn" onclick="showSection('visitas')">Ver todas</button>
+        </div>
+        <ol class="ruta-line" id="rutaLine"></ol>
+      </section>
     </div>
+  </div>
+
+  <div class="home-body">
+    <div class="home-inner home-grid">
+      <section class="panel" aria-labelledby="ultTitle">
+        <div class="panel-head">
+          <h3 id="ultTitle">Lo último</h3>
+          <button class="link-btn dark" onclick="showSection('novedades')">Ver novedades</button>
+        </div>
+        <div id="homeUltimo"></div>
+      </section>
+      <section class="panel" aria-labelledby="fechasTitle">
+        <div class="panel-head">
+          <h3 id="fechasTitle">Próximas fechas</h3>
+          <button class="link-btn dark" onclick="showSection('calendario')">Ver calendario</button>
+        </div>
+        <div id="homeFechas"></div>
+      </section>
+    </div>
+    <nav class="home-inner accesos" aria-label="Secciones">
+      <button onclick="showSection('tutoriales')"><span class="material-symbols-outlined" aria-hidden="true">menu_book</span>Tutoriales</button>
+      <button onclick="showSection('novedades')"><span class="material-symbols-outlined" aria-hidden="true">campaign</span>Novedades</button>
+      <button onclick="showSection('visitas')"><span class="material-symbols-outlined" aria-hidden="true">route</span>Visitas</button>
+      <button onclick="showSection('calendario')"><span class="material-symbols-outlined" aria-hidden="true">calendar_month</span>Calendario</button>
+    </nav>
   </div>
 </div>
 
@@ -1292,11 +1376,11 @@ function renderNovedades() {
   var colores = ['color-1', 'color-2', 'color-3', 'color-4'];
   var html = '<div class="novedades-grid">';
   var j = 0;
-  NOVEDADES.forEach(function(n) {
+  NOVEDADES.forEach(function(n, idx) {
     var icono = n.icono || iconos[j % iconos.length];
     var color = n.color || colores[j % colores.length];
     if (!n.icono) { j++; }
-    html += '<div class="novedad-card">' +
+    html += '<div class="novedad-card" id="nov-' + idx + '">' +
       '<div class="novedad-header ' + color + '">' + icono + '</div>' +
       '<div class="novedad-body-wrap">' +
       '<div class="novedad-date">' + n.fecha + '</div>' +
@@ -1382,8 +1466,92 @@ function renderHeroCalendario() {
   el.innerHTML = html;
 }
 
-// La página arranca en el inicio — el contenido se carga al hacer click en una card
-renderHeroCalendario();
+
+// ── PORTADA ──
+var ATAJOS = [
+  { txt: 'Certificado de pago', q: 'certificado de pago' },
+  { txt: 'CBU para transferir', q: 'transferencia' },
+  { txt: 'Denuncia de siniestro auto', q: 'automotor' },
+  { txt: 'Póliza anulada por deuda', q: 'anulada' }
+];
+
+function buscarDesdeInicio(ev, q) {
+  if (ev) { ev.preventDefault(); }
+  var texto = q !== undefined ? q : document.getElementById('homeSearch').value;
+  showSection('tutoriales');
+  var inp = document.getElementById('searchInput');
+  inp.value = texto;
+  renderTutorials(texto);
+}
+
+function abrirNovedad(i) {
+  showSection('novedades');
+  var el = document.getElementById('nov-' + i);
+  if (el) { el.scrollIntoView({ block: 'start' }); window.scrollBy(0, -70); }
+}
+
+function limpiarTitulo(t) {
+  return t.replace(/^[^A-Za-zÁÉÍÓÚÑáéíóúñ0-9¡¿]+/, '');
+}
+
+function renderPortada() {
+  var hoy = new Date(); hoy.setHours(0,0,0,0);
+  var h = new Date().getHours();
+  document.getElementById('homeGreet').textContent = h < 13 ? 'Buen día' : (h < 20 ? 'Buenas tardes' : 'Buenas noches');
+  document.getElementById('homeDate').textContent = hoy.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' });
+
+  document.getElementById('homeChips').innerHTML = ATAJOS.map(function(a, i) {
+    return '<button type="button" onclick="buscarDesdeInicio(null, ATAJOS[' + i + '].q)">' + a.txt + '</button>';
+  }).join('');
+
+  // Ruta: visitas de hoy en adelante, agrupadas por día (próximos 7 días; si no hay, las 3 próximas fechas)
+  var futuras = VISITAS.filter(function(v) { return new Date(v.fecha + 'T00:00:00') >= hoy; });
+  var porDia = {};
+  var orden = [];
+  futuras.forEach(function(v) { if (!porDia[v.fecha]) { porDia[v.fecha] = []; orden.push(v.fecha); } porDia[v.fecha].push(v); });
+  orden.sort();
+  var limite = new Date(hoy); limite.setDate(limite.getDate() + 7);
+  var semana = orden.filter(function(f) { return new Date(f + 'T00:00:00') < limite; });
+  var dias = semana.length ? semana : orden.slice(0, 3);
+  document.getElementById('rutaTitle').textContent = semana.length ? 'En la ruta esta semana' : 'Próximas salidas';
+  var html = '';
+  if (!dias.length) {
+    html = '<li class="ruta-vacia">Todavía no hay visitas cargadas para los próximos días.</li>';
+  }
+  dias.forEach(function(f) {
+    var d = new Date(f + 'T00:00:00');
+    var esHoy = d.getTime() === hoy.getTime();
+    var etiqueta = d.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric' });
+    etiqueta = etiqueta.charAt(0).toUpperCase() + etiqueta.slice(1);
+    html += '<li class="ruta-stop' + (esHoy ? ' hoy' : '') + '"><span class="ruta-dot" aria-hidden="true"></span>' +
+      '<div class="ruta-dia">' + etiqueta + (esHoy ? '<small>Hoy</small>' : '') + '</div>' +
+      porDia[f].map(function(v) {
+        return '<div class="ruta-tramo"><div class="ruta-pueblos">' + v.locs.join(', ') + '</div>' +
+          '<div class="ruta-quien"><span class="material-symbols-outlined" aria-hidden="true">person</span>' + v.resp + '</div></div>';
+      }).join('') + '</li>';
+  });
+  document.getElementById('rutaLine').innerHTML = html;
+
+  // Lo último: las 3 novedades más recientes
+  document.getElementById('homeUltimo').innerHTML = NOVEDADES.slice(0, 3).map(function(n, i) {
+    return '<button class="ult-item" onclick="abrirNovedad(' + i + ')"><span class="ult-ico" aria-hidden="true">' + (n.icono || '📢') + '</span>' +
+      '<span><span class="ult-tit">' + limpiarTitulo(n.titulo) + '</span><span class="ult-fecha" style="display:block">' + n.fecha + '</span></span></button>';
+  }).join('');
+
+  // Próximas fechas: eventos de hoy en adelante
+  var meses3 = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+  var prox = EVENTOS.filter(function(e) { return new Date(e.anio, e.mes, e.dia) >= hoy; })
+    .sort(function(a, b) { return new Date(a.anio, a.mes, a.dia) - new Date(b.anio, b.mes, b.dia); }).slice(0, 4);
+  document.getElementById('homeFechas').innerHTML = prox.length ? prox.map(function(e) {
+    var dias = Math.round((new Date(e.anio, e.mes, e.dia) - hoy) / 86400000);
+    var cuando = dias === 0 ? 'Hoy' : (dias === 1 ? 'Mañana' : 'En ' + dias + ' días');
+    return '<div class="fecha-item"><div class="fecha-badge">' + e.dia + '<span>' + meses3[e.mes] + '</span></div>' +
+      '<div><div class="fecha-txt">' + e.titulo + '</div><div class="fecha-cuando">' + cuando + '</div></div></div>';
+  }).join('') : '<p class="fecha-cuando">No hay fechas próximas cargadas.</p>';
+}
+
+// La página arranca en el inicio
+renderPortada();
 // Deep link: si la URL tiene #tutorial-ID, abrir ese tutorial directamente
 (function() {
   var hash = window.location.hash;
