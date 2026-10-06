@@ -399,17 +399,18 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 .home button:focus-visible, .home input:focus-visible, .home-chips button:focus-visible { outline: 3px solid var(--maiz); outline-offset: 2px; }
 @media (min-width: 900px) { .home-top > .home-inner { padding-top: 150px; } .home-photo { height: 400px; } }
 @media (prefers-reduced-motion: reduce) { .ruta-line { scroll-behavior: auto; } }
+.topbar-marca { height: 30px; width: auto; display: block; cursor: pointer; }
+.topbar-sep { width: 1px; height: 22px; background: rgba(255,255,255,0.25); }
+.topbar-portal { font-size: 13px; font-weight: 500; color: var(--maiz); }
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="topbar-inner">
-    <div class="topbar-logo">🤝</div>
-    <div class="topbar-text">
-      <h1>Organización Chialvo</h1>
-      <p>Portal Productores</p>
-    </div>
+    <img class="topbar-marca" onclick="showHome()" src="logo_chialvo_blanco.png" alt="Organización Chialvo" width="120" height="34"/>
+    <span class="topbar-sep" aria-hidden="true"></span>
+    <p class="topbar-portal">Portal Productores</p>
   </div>
 </div>
 
