@@ -368,7 +368,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
       <div class="hero-card" onclick="showSection('visitas')">
         <div class="hero-card-icon">🗺️</div>
         <div class="hero-card-title">Próximas Visitas</div>
-        <div class="hero-card-desc">Visitas de agosto organizadas por localidad</div>
+        <div class="hero-card-desc">Visitas de octubre organizadas por localidad</div>
       </div>
       <div class="hero-card span2" onclick="showSection('calendario')">
         <div class="hero-card-title">📅 Calendario — Agosto 2026</div>
@@ -705,6 +705,21 @@ const TUTORIALES = [
       <img src="img_cobranzas_1.png" class="step-img" alt="Búsqueda"/>
       <div class="step"><div class="step-num">4</div><div class="step-text">Seleccioná <strong>2 cuotas</strong> para cambiar la causa de anulación.</div></div>
       <div class="warn-box">La búsqueda aplica solo a pólizas anuladas por falta de pago.</div>`; }
+  },
+  {
+    id: 12, icon: '🧾',
+    title: "Descargar certificado de pago — Automotor (NEO)",
+    section: "Finanzas",
+    desc: "Cómo descargar el certificado de pago de una póliza de automotor desde NEO.",
+    tags: ["certificado de pago", "certificado", "pago", "NEO", "automotor", "envío digital", "descarga", "constancia de pago", "documentación"],
+    renderDetail: function() { return `
+      <div class="detail-top"><div class="detail-icon fin">🧾</div><div><div class="detail-badge fin">Finanzas</div><div class="detail-title">Descargar certificado de pago — Automotor (NEO)</div></div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Ingresá a <strong>NEO (Portal Intermediarios)</strong> y abrí el <strong>Detalle de póliza</strong> del automotor.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">En el panel de la derecha, hacé click en <strong>Ver documentación → En Gestión de Envíos Digitales</strong>.</div></div>
+      <img src="img_neo_certpago_1.png" class="step-img" alt="Ver documentación en Gestión de Envíos Digitales"/>
+      <div class="step"><div class="step-num">3</div><div class="step-text">En <strong>Búsqueda de póliza</strong>, verificá que aparezca la póliza (búsqueda por <strong>Referencia</strong>) y tildala.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">En el desplegable de <strong>Pólizas</strong> elegí <strong>Certificado de Pago</strong> y hacé click en <strong>Descargar</strong>.</div></div>
+      <img src="img_neo_certpago_2.png" class="step-img" alt="Certificado de Pago y Descargar"/>`; }
   },
 
   // ── SINIESTROS ──────────────────────────────────────────────
@@ -1093,26 +1108,25 @@ function backToList() {
 
 // ── PRÓXIMAS VISITAS ──
 var VISITAS = [
-  // Septiembre — Semana 1
-  { fecha: '2026-09-02', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Fernando' },
-  { fecha: '2026-09-02', dia: 'Mié', locs: ['Ceres'], resp: 'Gerardo' },
-  { fecha: '2026-09-03', dia: 'Jue', locs: ['Arrufó','Villa Trinidad'], resp: 'Javier' },
-  { fecha: '2026-09-03', dia: 'Jue', locs: ['Bandera','Añatuya','Pinto','Selva'], resp: 'Mauricio' },
-  // Septiembre — Semana 2
-  { fecha: '2026-09-09', dia: 'Mié', locs: ['Bandera','Añatuya','Fernandez','Pinto','Selva'], resp: 'Javier' },
-  { fecha: '2026-09-09', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Gerardo' },
-  { fecha: '2026-09-10', dia: 'Jue', locs: ['Ceres'], resp: 'Mauricio' },
-  { fecha: '2026-09-10', dia: 'Jue', locs: ['Arrufó','Villa Trinidad'], resp: 'Marcelo' },
-  // Septiembre — Semana 3
-  { fecha: '2026-09-15', dia: 'Mar', locs: ['Bandera','Añatuya','Fernandez','Pinto','Selva'], resp: 'Marcelo, Gerardo' },
-  { fecha: '2026-09-16', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Fernando' },
-  { fecha: '2026-09-17', dia: 'Jue', locs: ['Arrufó','Villa Trinidad','San Guillermo'], resp: 'Mauricio' },
-  { fecha: '2026-09-17', dia: 'Jue', locs: ['Ceres'], resp: 'Javier' },
-  // Septiembre — Semana 4
-  { fecha: '2026-09-25', dia: 'Vie', locs: ['Bandera','Añatuya','Fernandez','Pinto','Selva'], resp: 'Fernando' },
-  { fecha: '2026-09-25', dia: 'Vie', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Javier' },
-  { fecha: '2026-09-28', dia: 'Lun', locs: ['Arrufó','Villa Trinidad'], resp: 'Gerardo' },
-  { fecha: '2026-09-28', dia: 'Lun', locs: ['Ceres'], resp: 'Marcelo' }
+  // Octubre — Semana 2
+  { fecha: '2026-10-06', dia: 'Mar', locs: ['Bandera','Añatuya','Fernandez','Pinto','Selva'], resp: 'Fernando' },
+  { fecha: '2026-10-07', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Mauricio' },
+  { fecha: '2026-10-08', dia: 'Jue', locs: ['Ceres'], resp: 'Fernando' },
+  { fecha: '2026-10-08', dia: 'Jue', locs: ['Arrufó','Villa Trinidad'], resp: 'Javier' },
+  // Octubre — Semana 3
+  { fecha: '2026-10-14', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Marcelo' },
+  { fecha: '2026-10-14', dia: 'Mié', locs: ['Ceres','Selva'], resp: 'Gerardo' },
+  { fecha: '2026-10-15', dia: 'Jue', locs: ['Arrufó','Villa Trinidad'], resp: 'Mauricio' },
+  // Octubre — Semana 4
+  { fecha: '2026-10-20', dia: 'Mar', locs: ['Bandera','Añatuya','Fernandez','Pinto','Selva'], resp: 'Marcelo' },
+  { fecha: '2026-10-21', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Gerardo' },
+  { fecha: '2026-10-22', dia: 'Jue', locs: ['Ceres'], resp: 'Javier' },
+  { fecha: '2026-10-22', dia: 'Jue', locs: ['Arrufó','Villa Trinidad'], resp: 'Mauricio' },
+  // Octubre — Semana 5
+  { fecha: '2026-10-27', dia: 'Mar', locs: ['Bandera','Añatuya','Fernandez','Pinto','Selva'], resp: 'Javier' },
+  { fecha: '2026-10-28', dia: 'Mié', locs: ['Arrufó','Villa Trinidad','San Guillermo'], resp: 'Gerardo' },
+  { fecha: '2026-10-28', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Fernando' },
+  { fecha: '2026-10-28', dia: 'Mié', locs: ['Ceres'], resp: 'Marcelo' }
 ];
 
 function getSemanaBounds() {
@@ -1159,7 +1173,7 @@ function renderVisitas() {
   var html = '<div class="visitas-header">'
     + '<div class="visitas-header-text">'
     + '<div class="visitas-chip">🗺️ Próximas visitas</div>'
-    + '<h3>Septiembre 2026</h3>'
+    + '<h3>Octubre 2026</h3>'
     + '<p>Visitas del equipo organizadas por localidad.</p>'
     + (hayEstaSemana ? '<div class="visitas-semana-pill">⚡ Esta semana: ' + semanaLabel + '</div>' : '')
     + '</div>'
