@@ -282,6 +282,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--gray-1
 .novedad-reqs { margin: 8px 0 0 16px; }
 .novedad-reqs li { font-size: 12px; color: var(--gray-700); margin-bottom: 4px; line-height: 1.5; }
 .novedad-img { width: 100%; display: block; margin-top: 10px; border-radius: var(--radius-sm); }
+.novedad-img.vertical { max-width: 280px; margin-left: auto; margin-right: auto; }
 .novedad-extra { font-size: 12px; color: var(--gray-700); line-height: 1.6; margin-top: 8px; }
 .novedad-pdf { display: inline-flex; align-items: center; gap: 6px; background: var(--black); color: var(--maiz); font-size: 12px; font-weight: 600; padding: 8px 14px; border-radius: 20px; margin-top: 10px; text-decoration: none; transition: opacity 0.15s; }
 .novedad-pdf:hover { opacity: 0.85; }
@@ -966,9 +967,11 @@ const NOVEDADES = [
       "📊 <strong>Tu listado:</strong> por mail te enviamos un Excel con tus clientes que tienen ART Rural vigente. Usalo como guía de gestión: revisá si cada cliente ya cuenta con esta cobertura y, si no la tiene, contactalo para acercarle la propuesta.",
       "💰 <strong>Cotización de referencia:</strong> suma asegurada de $200.000.000. Si el cliente necesita otra suma asegurada, analizamos la alternativa correspondiente.",
       "🏡 <strong>Más de un establecimiento:</strong> consultanos cuánto corresponde adicionar por cada establecimiento que se incorpore, para cotizar correctamente.",
-      "📲 <strong>Placa promocional:</strong> enviala directamente a tus clientes o compartila en tus estados de WhatsApp y redes sociales para generar nuevas consultas.",
+      "📲 <strong>Placa promocional:</strong> enviala directamente a tus clientes o compartila en tus estados de WhatsApp y redes sociales para generar nuevas consultas. La tenés acá abajo para descargar.",
       "🚀 <strong>A la acción:</strong> identificá los clientes que todavía no tienen la cobertura y contactalos. Si alguno está interesado, pasanos el dato y te ayudamos con la cotización. Durante los próximos 30 días trabajamos activamente la campaña y después evaluamos juntos los resultados."
     ],
+    imagen: "img_placa_rc_escape.jpg",
+    descarga: { archivo: "img_placa_rc_escape.jpg", texto: "Descargar placa para WhatsApp y redes" },
     extra: "Ante cualquier duda sobre la cobertura, las tarifas, los establecimientos adicionales o cómo abordar la propuesta, estamos a disposición. ¡Aprovechemos este nuevo producto sin franquicia! — Fernando y Angélica." },
   { fecha: "Octubre de 2026", icono: "💼", color: "color-2", titulo: "💼 FAL — Fondo de Asistencia Laboral: una oportunidad para nosotros",
     cuerpo: "Desde el 1 de noviembre, todos los empleadores privados con personal registrado van a tener que aportar al Fondo de Asistencia Laboral (FAL), creado por la Ley 27.802. La mayoría de las empresas todavía no sabe de qué se trata y los bancos ya salieron a buscar clientes. Queremos que ningún cliente nuestro se entere del FAL por otro.",
@@ -1278,8 +1281,9 @@ function renderNovedades() {
     if (n.requisitos && n.requisitos.length) {
       html += '<ul class="novedad-reqs">' + n.requisitos.map(function(r) { return '<li>' + r + '</li>'; }).join('') + '</ul>';
     }
-    if (n.imagen) { html += '<img src="' + n.imagen + '" class="novedad-img" alt="' + n.titulo + '"/>'; }
+    if (n.imagen) { html += '<img src="' + n.imagen + '" class="novedad-img' + (n.descarga ? ' vertical' : '') + '" alt="' + n.titulo + '"/>'; }
     if (n.pdf) { html += '<a class="novedad-pdf" href="' + n.pdf + '" target="_blank">📄 ' + (n.pdfTexto || 'Descargar circular completa (PDF)') + '</a>'; }
+    if (n.descarga) { html += '<a class="novedad-pdf" href="' + n.descarga.archivo + '" download>⬇️ ' + n.descarga.texto + '</a>'; }
     if (n.pdfs && n.pdfs.length) {
       html += '<div class="novedad-pdfs">' + n.pdfs.map(function(f) { return '<a class="novedad-pdf" href="' + f.archivo + '" target="_blank">📄 ' + f.texto + '</a>'; }).join('') + '</div>';
     }
