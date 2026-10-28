@@ -1305,9 +1305,34 @@ function fmtFecha(fechaStr) {
   return p[2] + '/' + p[1];
 }
 
+var MESES_ES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+// Visitas vigentes: desde el lunes de la semana en curso en adelante (las anteriores se ocultan solas)
+function visitasVigentes() {
+  var desde = getSemanaBounds().desde;
+  return VISITAS.filter(function(v) { return new Date(v.fecha + 'T00:00:00') >= desde; });
+}
+
+// Título según los meses de las visitas vigentes, ej. "Octubre – Noviembre 2026"
+function tituloVisitas(lista) {
+  var meses = [];
+  lista.forEach(function(v) {
+    var k = v.fecha.slice(0, 7);
+    if (meses.indexOf(k) === -1) meses.push(k);
+  });
+  meses.sort();
+  if (!meses.length) return 'Próximas visitas';
+  var lbl = function(k) { return MESES_ES[parseInt(k.slice(5, 7), 10) - 1]; };
+  var ini = meses[0], fin = meses[meses.length - 1];
+  if (ini === fin) return lbl(ini) + ' ' + ini.slice(0, 4);
+  if (ini.slice(0, 4) === fin.slice(0, 4)) return lbl(ini) + ' – ' + lbl(fin) + ' ' + fin.slice(0, 4);
+  return lbl(ini) + ' ' + ini.slice(0, 4) + ' – ' + lbl(fin) + ' ' + fin.slice(0, 4);
+}
+
 function renderVisitas() {
   var mapa = {};
-  VISITAS.forEach(function(v) {
+  var vigentes = visitasVigentes();
+  vigentes.forEach(function(v) {
     v.locs.forEach(function(loc) {
       if (!mapa[loc]) mapa[loc] = [];
       mapa[loc].push({ fecha: v.fecha, dia: v.dia, resp: v.resp, semana: esSemanaActual(v.fecha) });
@@ -1321,18 +1346,19 @@ function renderVisitas() {
   var semana = getSemanaBounds();
   var opts = { day: 'numeric', month: 'long' };
   var semanaLabel = semana.desde.toLocaleDateString('es-AR', opts) + ' – ' + semana.hasta.toLocaleDateString('es-AR', opts);
-  var hayEstaSemana = VISITAS.some(function(v) { return esSemanaActual(v.fecha); });
+  var hayEstaSemana = vigentes.some(function(v) { return esSemanaActual(v.fecha); });
 
   var html = '<div class="visitas-header">'
     + '<div class="visitas-header-text">'
     + '<div class="visitas-chip">🗺️ Próximas visitas</div>'
-    + '<h3>Octubre – Noviembre 2026</h3>'
+    + '<h3>' + tituloVisitas(vigentes) + '</h3>'
     + '<p>Visitas del equipo organizadas por localidad.</p>'
     + (hayEstaSemana ? '<div class="visitas-semana-pill">⚡ Esta semana: ' + semanaLabel + '</div>' : '')
     + '</div>'
     + '<img class="huinca-viaje-img" src="huinca_viaje.png" alt="Huinca viajando" onerror="this.style.display=\'none\'"/>'
     + '</div>';
 
+  if (!locs.length) html += '<p class="ruta-vacia">Todavía no hay visitas cargadas para los próximos días.</p>';
   html += '<div class="loc-grid">';
   locs.forEach(function(loc) {
     var visitas = mapa[loc];
