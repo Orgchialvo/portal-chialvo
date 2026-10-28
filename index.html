@@ -1257,25 +1257,29 @@ function backToList() {
 
 // ── PRÓXIMAS VISITAS ──
 var VISITAS = [
-  // Octubre — Semana 2
-  { fecha: '2026-10-06', dia: 'Mar', locs: ['Bandera','Añatuya','Fernandez','Pinto','Selva'], resp: 'Fernando' },
-  { fecha: '2026-10-07', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Mauricio' },
-  { fecha: '2026-10-08', dia: 'Jue', locs: ['Ceres'], resp: 'Fernando' },
-  { fecha: '2026-10-08', dia: 'Jue', locs: ['Arrufó','Villa Trinidad'], resp: 'Javier' },
-  // Octubre — Semana 3
-  { fecha: '2026-10-14', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Marcelo' },
-  { fecha: '2026-10-14', dia: 'Mié', locs: ['Ceres','Selva'], resp: 'Gerardo' },
-  { fecha: '2026-10-15', dia: 'Jue', locs: ['Arrufó','Villa Trinidad'], resp: 'Mauricio' },
-  // Octubre — Semana 4
-  { fecha: '2026-10-20', dia: 'Mar', locs: ['Bandera','Añatuya','Fernandez','Pinto','Selva'], resp: 'Marcelo' },
-  { fecha: '2026-10-21', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Gerardo' },
-  { fecha: '2026-10-22', dia: 'Jue', locs: ['Ceres'], resp: 'Javier' },
-  { fecha: '2026-10-22', dia: 'Jue', locs: ['Arrufó','Villa Trinidad'], resp: 'Mauricio' },
-  // Octubre — Semana 5
+  // Octubre — Semana 5 (semana en curso)
   { fecha: '2026-10-27', dia: 'Mar', locs: ['Bandera','Añatuya','Fernandez','Pinto','Selva'], resp: 'Javier' },
   { fecha: '2026-10-28', dia: 'Mié', locs: ['Arrufó','Villa Trinidad','San Guillermo'], resp: 'Gerardo' },
   { fecha: '2026-10-28', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Fernando' },
-  { fecha: '2026-10-28', dia: 'Mié', locs: ['Ceres'], resp: 'Marcelo' }
+  { fecha: '2026-10-28', dia: 'Mié', locs: ['Ceres'], resp: 'Marcelo' },
+  // Noviembre — Semana 1
+  { fecha: '2026-11-04', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Marcelo' },
+  { fecha: '2026-11-05', dia: 'Jue', locs: ['Ceres','Selva'], resp: 'Fernando' },
+  { fecha: '2026-11-05', dia: 'Jue', locs: ['Arrufó','Villa Trinidad'], resp: 'Javier' },
+  // Noviembre — Semana 2
+  { fecha: '2026-11-10', dia: 'Mar', locs: ['Bandera','Añatuya','Fernandez','Pinto','Selva'], resp: 'Fernando' },
+  { fecha: '2026-11-10', dia: 'Mar', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Mauricio' },
+  { fecha: '2026-11-11', dia: 'Mié', locs: ['Ceres'], resp: 'Gerardo' },
+  { fecha: '2026-11-12', dia: 'Jue', locs: ['Arrufó','Villa Trinidad'], resp: 'Javier' },
+  // Noviembre — Semana 3
+  { fecha: '2026-11-18', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Javier' },
+  { fecha: '2026-11-19', dia: 'Jue', locs: ['Arrufó','Villa Trinidad','San Guillermo'], resp: 'Fernando' },
+  { fecha: '2026-11-19', dia: 'Jue', locs: ['Ceres','Selva'], resp: 'Marcelo' },
+  // Noviembre — Semana 4
+  { fecha: '2026-11-25', dia: 'Mié', locs: ['Bandera','Añatuya','Fernandez','Pinto','Selva'], resp: 'Gerardo' },
+  { fecha: '2026-11-25', dia: 'Mié', locs: ['Tostado','Pozo Borrado','Villa Minetti'], resp: 'Fernando' },
+  { fecha: '2026-11-26', dia: 'Jue', locs: ['Arrufó','Villa Trinidad'], resp: 'Javier' },
+  { fecha: '2026-11-26', dia: 'Jue', locs: ['Ceres'], resp: 'Mauricio' }
 ];
 
 function getSemanaBounds() {
@@ -1322,7 +1326,7 @@ function renderVisitas() {
   var html = '<div class="visitas-header">'
     + '<div class="visitas-header-text">'
     + '<div class="visitas-chip">🗺️ Próximas visitas</div>'
-    + '<h3>Octubre 2026</h3>'
+    + '<h3>Octubre – Noviembre 2026</h3>'
     + '<p>Visitas del equipo organizadas por localidad.</p>'
     + (hayEstaSemana ? '<div class="visitas-semana-pill">⚡ Esta semana: ' + semanaLabel + '</div>' : '')
     + '</div>'
